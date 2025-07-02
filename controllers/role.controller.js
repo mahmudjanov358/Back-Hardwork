@@ -18,8 +18,8 @@ exports.postRole = async (req, res) => {
       success: false,
       message: "Internal Server Error!"
     });
-  }
-}
+  };
+};
 
 // ----getRole
 exports.getRole = async (req, res) => {
@@ -35,9 +35,9 @@ exports.getRole = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Internal Server Error!"
-    })
-  }
-}
+    });
+  };
+};
 
 // ----getRoleById
 exports.getRoleById = async (req, res) => {
@@ -62,8 +62,8 @@ exports.getRoleById = async (req, res) => {
       success: false,
       message: "Internal Server Error!"
     });
-  }
-}
+  };
+};
 
 // ----updateRole
 exports.updateRole = async (req, res) => {
@@ -84,15 +84,15 @@ exports.updateRole = async (req, res) => {
         success: true,
         message: "Role updated successfully!",
       });
-    }
+    };
   } catch (error) {
     console.error("Error Role updated — ", error);
     return res.status(500).json({
       success: false,
       message: "Internal Server Error!"
     });
-  }
-}
+  };
+};
 
 // ----deleteRole
 exports.deleteRole = async (req, res) => {
@@ -110,12 +110,12 @@ exports.deleteRole = async (req, res) => {
         success: true,
         message: "Role deleted successfully!"
       });
-    }
+    };
   } catch (error) {
     console.error("Error Role deleted — ", error);
     return res.status(500).json({
       success: false,
       message: "Internal Server Error!"
     });
-  }
-}
+  };
+};

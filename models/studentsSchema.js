@@ -6,7 +6,7 @@ const studentsSchema = new Schema({
   first_name: { type: String, trim: true },
   last_name: { type: String, trim: true },
   phone_number: { type: String, },
-  bithday: { type: String, },
+  bithday: { type: Date, },
   gender: { type: String, enum: ['male', 'famale'] },
 });
 
