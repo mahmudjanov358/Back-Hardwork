@@ -1,0 +1,29 @@
+const express = require('express');
+const { connect } = require('mongoose');
+const cors = require('cors');
+require('dotenv').config();
+
+const app = express();
+
+app.use(express.json());
+app.use(cors());
+
+// ----Database connectToDB
+async function connectToDB() {
+  try {
+    await connect(process.env.MONGO_URL);
+    console.log("MongoDB is connected!");
+  } catch (error) {
+    console.error("mongoDB connected failed — ", error.message);
+  }
+}
+connectToDB();
+
+const { role } = require('./routers/role.routes');
+app.use('/role', role);
+
+// ----Server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running at http://localhost:${PORT}`);
+});
