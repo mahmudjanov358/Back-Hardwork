@@ -3,9 +3,9 @@ const { Stage } = require('../models/stageSchema');
 // ----postStage
 exports.postStage = async (req, res) => {
   try {
-    const { stage } = req.body;
+    const { name } = req.body;
     const newStage = new Stage({
-      stage,
+      name,
     });
     await newStage.save();
     return res.status(200).json({
@@ -71,10 +71,10 @@ exports.getStageById = async (req, res) => {
 exports.updateStage = async (req, res) => {
   try {
     const { id } = req.params;
-    const { stage } = req.body;
+    const { name } = req.body;
     const updatedStage = await Stage.findByIdAndUpdate(
       id, {
-      stage
+      name
     }, { new: true }
     );
 

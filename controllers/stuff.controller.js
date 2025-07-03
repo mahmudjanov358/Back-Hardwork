@@ -1,4 +1,6 @@
 const { Stuff } = require('../models/stuffSchema');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 // ----postStuff
 exports.postStuff = async (req, res) => {
@@ -11,12 +13,15 @@ exports.postStuff = async (req, res) => {
       parol,
       is_active
     } = req.body;
+
+    const hashParol = await bcrypt.hash(parol, 10);
+
     const newStuff = await Stuff({
       first_name,
       last_name,
       phone_number,
       login,
-      parol,
+      parol: hashParol,
       is_active,
     });
     await newStuff.save();
@@ -31,6 +36,41 @@ exports.postStuff = async (req, res) => {
       message: "Internal Server Error!"
     });
   };
+};
+
+// ----loginStuff
+exports.loginStuff = async (req, res) => {
+  try {
+    const { login, parol } = req.body;
+    const stuff = await Stuff.findOne({ login });
+    console.log(stuff);
+    if (!stuff) {
+      return res.status(404).json({
+        success: false,
+        message: "Stuff not found!"
+      });
+    }
+
+    const parolMatch = await bcrypt.compare(parol, stuff.parol);
+    if (!parolMatch) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid login or password!"
+      });
+    }
+
+    const token = jwt.sign({ login: stuff.login }, "secret");
+    return res.json({
+      message: "Token",
+      token: token,
+    });
+  } catch (error) {
+    console.error("Error Stuff login —", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error!"
+    });
+  }
 };
 
 // ----getStuff

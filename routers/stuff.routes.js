@@ -1,22 +1,25 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const stuff = Router();
 
 const {
   postStuff,
+  loginStuff,
   getStuff,
   getStuffById,
   updateStuff,
   deleteStuff,
-} = require('../controllers/stuff.controller');
+} = require("../controllers/stuff.controller");
 
 const {
   postStuffValidationSchema,
   updateStuffValidationSchema,
-} = require('../validations/stuffValidation.js');
-const stuffValidation = schema => (req, res, next) => {
+} = require("../validations/stuffValidation.js");
+const stuffValidation = (schema) => (req, res, next) => {
   const validationResult = schema.validate(req.body);
   if (validationResult.error) {
-    return res.status(400).json({ message: validationResult.error.details[0].message });
+    return res
+      .status(400)
+      .json({ message: validationResult.error.details[0].message });
   } else {
     next();
   }
@@ -59,10 +62,40 @@ const stuffValidation = schema => (req, res, next) => {
  *        description: Stuff item created successfully!
  *      500:
  *        description: Internal Server Error!
- */
-stuff.post('/post',
-  stuffValidation(postStuffValidationSchema),
-  postStuff);
+*/
+stuff.post("/post", stuffValidation(postStuffValidationSchema), postStuff);
+
+/**
+ * @swagger
+ * /stuff/login:
+ *  post:
+ *    summary: Login a Stuff item
+ *    tags: [Stuff]
+ *    description: Login a stuff item with the provided credentials.
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              login:
+ *                type: string
+ *                description: The login of the stuff item.
+ *              parol:
+ *                type: string
+ *                description: The parol of the stuff item.
+ *    responses:
+ *      200:
+ *        description: Login successful!
+ *      404:
+ *        description: Stuff not found!
+ *      401:
+ *        description: Invalid login or password!
+ *      500:
+ *        description: Internal Server Error!
+*/
+stuff.post("/login", loginStuff);
 
 /**
  * @swagger
@@ -76,8 +109,8 @@ stuff.post('/post',
  *        description: A list of stuff items!
  *      500:
  *        description: Internal Server Error!
- */
-stuff.get('/get', getStuff);
+*/
+stuff.get("/get", getStuff);
 
 /**
  * @swagger
@@ -98,8 +131,8 @@ stuff.get('/get', getStuff);
  *        description: Details of the stuff item!
  *      500:
  *        description: Internal Server Error!
- */
-stuff.get('/getById/:id', getStuffById);
+*/
+stuff.get("/getById/:id", getStuffById);
 
 /**
  * @swagger
@@ -146,9 +179,11 @@ stuff.get('/getById/:id', getStuffById);
  *      500:
  *        description: Internal Server Error!
  */
-stuff.put('/update/:id',
+stuff.put(
+  "/update/:id",
   stuffValidation(updateStuffValidationSchema),
-  updateStuff);
+  updateStuff
+);
 
 /**
  * @swagger
@@ -170,6 +205,6 @@ stuff.put('/update/:id',
  *      500:
  *        description: Internal Server Error!
  */
-stuff.delete('/delete/:id', deleteStuff);
+stuff.delete("/delete/:id", deleteStuff);
 
 module.exports = { stuff };
