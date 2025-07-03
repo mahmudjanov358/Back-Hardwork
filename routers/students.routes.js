@@ -9,10 +9,10 @@ const {
   deleteStudents,
 } = require('../controllers/students.controller');
 
-students.post('/postStudents', postStudents);
-students.get('/getStudents', getStudents);
-students.get('/getStudentsById/:id', getStudentsById);
-students.put('/updateStudents/:id', updateStudents);
-students.delete('/deleteStudents/:id', deleteStudents);
+students.post('/post', postStudents);
+students.get('/get', getStudents);
+students.get('/getById/:id', getStudentsById);
+students.patch('/update/:id', updateStudents);
+students.delete('/delete/:id', deleteStudents);
 
 module.exports = { students };

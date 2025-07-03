@@ -10,7 +10,7 @@ exports.postRole = async (req, res) => {
     await newRole.save();
     return res.status(200).json({
       success: true,
-      message: "Role created successfully!"
+      message: "Role created successfully!",
     });
   } catch (error) {
     console.error("Error created Role — ", error);
@@ -83,6 +83,7 @@ exports.updateRole = async (req, res) => {
       return res.status(200).json({
         success: true,
         message: "Role updated successfully!",
+        updatedRole: updatedRole
       });
     };
   } catch (error) {

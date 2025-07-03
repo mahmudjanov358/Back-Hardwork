@@ -1,61 +1,135 @@
 const { Branch } = require('../models/branchSchema');
 
-// ----postStuff
-exports.postStuff = async (req, res) => {
+// ----postBranch
+exports.postBranch = async (req, res) => {
   try {
+    const {
+      name,
+      address,
+      call_number,
+    } = req.body;
+    const newBranch = new Branch({
+      name,
+      address,
+      call_number,
+    });
+    await newBranch.save();
+    return res.status(200).json({
+      success: true,
+      message: "Branch created successfully!"
+    });
   } catch (error) {
-    console.error("Error Stuff created —", error);
+    console.error("Error Branch created —", error);
     return res.status(500).json({
       success: false,
       message: "Internal Server Error!"
     });
-  }
-}
+  };
+};
 
-// ----getStuff
-exports.getStuff = async (req, res) => {
+// ----getBranch
+exports.getBranch = async (req, res) => {
   try {
+    const branches = await Branch.find({});
+    return res.status(200).json({
+      success: true,
+      message: "Branches list!",
+      branches: branches
+    });
   } catch (error) {
-    console.error("Error Stuffs list — ", error);
+    console.error("Error Branches list — ", error);
     return res.status(500).json({
       success: false,
       message: "Internal Server Error!"
     });
-  }
-}
+  };
+};
 
-// ----getStuffById
-exports.getStuffById = async (req, res) => {
+// ----getBranchById
+exports.getBranchById = async (req, res) => {
   try {
-  } catch (error) {
-    console.error("Error is by ID Stuff — ", error);
-    return res.status(500).json({
-      success: false,
-      message: "Internal Server Error!"
-    });
-  }
-}
+    const branchId = req.params.id;
+    const branch = await Branch.findById(
+      branchId
+    ).populate(
+      'group_id stuff_id'
+    );
 
-// ----updateStuff
-exports.updateStuff = async (req, res) => {
-  try {
+    if (!branch) {
+      return res.status(404).json({
+        success: false,
+        message: "Branch not found!"
+      });
+    } else {
+      return res.status(200).json({
+        success: true,
+        message: "Branch details!",
+        branch: branch
+      });
+    }
   } catch (error) {
-    console.error("Error updated Stuff — ", error);
+    console.error("Error is by ID Branch — ", error);
     return res.status(500).json({
       success: false,
       message: "Internal Server Error!"
     });
-  }
-}
+  };
+};
 
-// ----deleteStuff
-exports.deleteStuff = async (req, res) => {
+// ----updateBranch
+exports.updateBranch = async (req, res) => {
   try {
+    const { id } = req.params;
+    const { name, address, call_number } = req.body;
+    const updatedBranch = await Branch.findByIdAndUpdate(id, {
+      name,
+      address,
+      call_number
+    }, { new: true });
+
+    if (!updatedBranch) {
+      return res.status(404).json({
+        success: false,
+        message: "Branch not found!"
+      });
+    } else {
+      return res.status(200).json({
+        success: true,
+        message: "Branch updated successfully!",
+        branch: updatedBranch
+      });
+    }
   } catch (error) {
-    console.error("Error deleted Stuff — ", error);
+    console.error("Error updated Branch — ", error);
     return res.status(500).json({
       success: false,
       message: "Internal Server Error!"
     });
-  }
-}
+  };
+};
+
+// ----deleteBranch
+exports.deleteBranch = async (req, res) => {
+  try {
+    const branchId = req.params.id;
+    const deletedBranch = await Branch.findByIdAndDelete(branchId);
+
+    if (!deletedBranch) {
+      return res.status(404).json({
+        success: false,
+        message: "Branch not found!"
+      });
+    } else {
+      return res.status(200).json({
+        success: true,
+        message: "Branch deleted successfully!"
+      });
+    }
+  } catch (error) {
+    console.error("Error deleted Branch — ", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error!"
+    });
+  };
+};

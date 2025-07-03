@@ -1,61 +1,127 @@
 const { Lid_Status } = require('../models/lid_statusSchema');
 
-// ----postStuff
-exports.postStuff = async (req, res) => {
+// ----postLid_Status
+exports.postLid_Status = async (req, res) => {
   try {
+    const { status } = req.body;
+    const newLid_Status = new Lid_Status({
+      status
+    });
+    await newLid_Status.save();
+    return res.status(200).json({
+      success: true,
+      message: "Lid_Status created successfully!"
+    });
   } catch (error) {
-    console.error("Error Stuff created —", error);
+    console.error("Error Lid_Status created —", error);
     return res.status(500).json({
       success: false,
       message: "Internal Server Error!"
     });
-  }
-}
+  };
+};
 
-// ----getStuff
-exports.getStuff = async (req, res) => {
+// ----getLid_Status
+exports.getLid_Status = async (req, res) => {
   try {
+    const lid_Statuss = await Lid_Status.find({});
+    return res.status(200).json({
+      success: true,
+      message: "Lid_Statuss list!",
+      lid_Statuss: lid_Statuss
+    });
   } catch (error) {
-    console.error("Error Stuffs list — ", error);
+    console.error("Error Lid_Statuss list — ", error);
     return res.status(500).json({
       success: false,
       message: "Internal Server Error!"
     });
-  }
-}
+  };
+};
 
-// ----getStuffById
-exports.getStuffById = async (req, res) => {
+// ----getLid_StatusById
+exports.getLid_StatusById = async (req, res) => {
   try {
-  } catch (error) {
-    console.error("Error is by ID Stuff — ", error);
-    return res.status(500).json({
-      success: false,
-      message: "Internal Server Error!"
-    });
-  }
-}
+    const lid_StatusId = req.params.id;
+    const lid_Status = await Lid_Status.findById(lid_StatusId);
 
-// ----updateStuff
-exports.updateStuff = async (req, res) => {
-  try {
+    if (!lid_Status) {
+      return res.status(404).json({
+        success: false,
+        message: "Lid_Status not found!"
+      });
+    } else {
+      return res.status(200).json({
+        success: true,
+        message: "Lid_Status found!",
+        lid_Status: lid_Status
+      });
+    };
   } catch (error) {
-    console.error("Error updated Stuff — ", error);
+    console.error("Error is by ID Lid_Status — ", error);
     return res.status(500).json({
       success: false,
       message: "Internal Server Error!"
     });
-  }
-}
+  };
+};
 
-// ----deleteStuff
-exports.deleteStuff = async (req, res) => {
+// ----updateLid_Status
+exports.updateLid_Status = async (req, res) => {
   try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    const updatedLid_Status = await Lid_Status.findByIdAndUpdate(
+      id, {
+      status
+    }, { new: true }
+    );
+
+    if (!updatedLid_Status) {
+      return res.status(404).json({
+        success: false,
+        message: "Lid_Status not found!"
+      });
+    } else {
+      return res.status(200).json({
+        success: true,
+        message: "Lid_Status updated successfully!",
+        updatedLid_Status: updatedLid_Status
+      });
+    };
   } catch (error) {
-    console.error("Error deleted Stuff — ", error);
+    console.error("Error updated Lid_Status — ", error);
     return res.status(500).json({
       success: false,
       message: "Internal Server Error!"
     });
-  }
-}
+  };
+};
+
+// ----deleteLid_Status
+exports.deleteLid_Status = async (req, res) => {
+  try {
+    const lid_StatusId = req.params.id;
+    const deletedLid_Status = await Lid_Status.findByIdAndDelete(lid_StatusId);
+
+    if (!deletedLid_Status) {
+      return res.status(404).json({
+        success: false,
+        message: "Lid_Status not found!"
+      });
+    } else {
+      return res.status(200).json({
+        success: true,
+        message: "Lid_Status deleted successfully!",
+        deletedLid_Status: deletedLid_Status
+      });
+    };
+  } catch (error) {
+    console.error("Error deleted Lid_Status — ", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error!"
+    });
+  };
+};

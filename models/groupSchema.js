@@ -11,7 +11,7 @@ const groupSchema = new Schema({
   room_number: { type: String, required: true },
   room_floor: { type: String, required: true },
   branch_id: { type: Schema.Types.ObjectId, ref: Branch, required: true },
-  lesson_quant: { type: String, required: true },
+  lessons_quant: { type: String, required: true },
   is_active: { type: Boolean }
 });
 

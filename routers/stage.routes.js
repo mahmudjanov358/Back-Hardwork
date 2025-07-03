@@ -9,10 +9,10 @@ const {
   deleteStage,
 } = require('../controllers/stage.controller');
 
-stage.post('/postStage', postStage);
-stage.get('/getStage', getStage);
-stage.get('/getStageById/:id', getStageById);
-stage.put('/updateStage/:id', updateStage);
-stage.delete('/deleteStage/:id', deleteStage);
+stage.post('/post', postStage);
+stage.get('/get', getStage);
+stage.get('/getById/:id', getStageById);
+stage.put('/update/:id', updateStage);
+stage.delete('/delete/:id', deleteStage);
 
 module.exports = { stage };

@@ -8,9 +8,9 @@ const {
   deleteStudent_Group,
 } = require('../controllers/student_group.controller');
 
-student_group.post('/postStudent_Group', postStudent_Group);
-student_group.get('/getStudent_Group', getStudent_Group);
-student_group.get('/getStudent_GroupById/:id', getStudent_GroupById);
-student_group.delete('/deleteStudent_Group/:id', deleteStudent_Group);
+student_group.post('/post', postStudent_Group);
+student_group.get('/get', getStudent_Group);
+student_group.get('/getById/:id', getStudent_GroupById);
+student_group.delete('/delete/:id', deleteStudent_Group);
 
 module.exports = { student_group };
