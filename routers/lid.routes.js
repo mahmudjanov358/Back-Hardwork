@@ -78,17 +78,17 @@ const lidValidation = (schema) => (req, res, next) => {
 lid.post('/post', lidValidation(postLidValidationSchema), postLid);
 
 /**
-  * @swagger
-  * /lid/get:
-  *   get:
-  *     summary: Retrieve all Lid items
-  *     tags: [Lid]
-  *     description: Get a list of all lid items.
-  *     responses:
-  *       200:
-  *         description: Successfully retrieved lid items.
-  *       500:
-  *         description: Internal Server Error!
+ * @swagger
+ * /lid/get:
+ *   get:
+ *     summary: Retrieve all Lid items
+ *     tags: [Lid]
+ *     description: Get a list of all lid items.
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved lid items.
+ *       500:
+ *         description: Internal Server Error!
 */
 lid.get('/get', getLid);
 
@@ -109,6 +109,8 @@ lid.get('/get', getLid);
  *     responses:
  *       200:
  *         description: Details of the lid item found!
+ *       404:
+ *         description: Lid not found!
  *       500:
  *         description: Internal Server Error!
 */
@@ -154,28 +156,37 @@ lid.get('/getById/:id', getLidById);
  *               trial_lesson_time:
  *                 type: string
  *                 description: The trial lesson time of the lid item.
+ *     responses:
+ *       200:
+ *         description: Lid item updated successfully!
+ *       404:
+ *         description: Lid not found!
+ *       500:
+ *         description: Internal Server Error!
 */
 lid.patch('/update/:id', lidValidation(updateLidValidationSchema), updateLid);
 
 /**
-  * @swagger
-  * /lid/delete/{id}:
-  *   delete:
-  *     summary: Delete a Lid item by ID
-  *     tags: [Lid]
-  *     description: Delete a specific lid item by its ID.
-  *     parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         schema:
-  *           type: string
-  *         description: The ID of the lid item to delete.
-  *     responses:
-  *       200:
-  *         description: Lid item deleted successfully!
-  *       500:
-  *         description: Internal Server Error!
+ * @swagger
+ * /lid/delete/{id}:
+ *   delete:
+ *     summary: Delete a Lid item by ID
+ *     tags: [Lid]
+ *     description: Delete a specific lid item by its ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the lid item to delete.
+ *     responses:
+ *       200:
+ *         description: Lid item deleted successfully!
+ *       404:
+ *         description: Lid item not found! 
+ *       500:
+ *         description: Internal Server Error!
 */
 lid.delete('/delete/:id', deleteLid);
 

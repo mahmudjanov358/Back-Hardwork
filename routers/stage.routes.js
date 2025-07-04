@@ -61,7 +61,7 @@ stage.post("/post", stageValidation(postStageValidationSchema), postStage);
  *         description: A list of stages.
  *       500:
  *         description: Internal server error.
- */
+*/
 stage.get("/get", getStage);
 
 /**
@@ -85,7 +85,7 @@ stage.get("/get", getStage);
  *         description: Stage not found.
  *       500:
  *         description: Internal server error.
- */
+*/
 stage.get("/getById/:id", getStageById);
 
 /**
@@ -119,7 +119,7 @@ stage.get("/getById/:id", getStageById);
  *         description: Stage not found.
  *       500:
  *         description: Internal server error.
- */
+*/
 stage.put(
   "/update/:id",
   stageValidation(updateStageValidationSchema),
@@ -147,7 +147,7 @@ stage.put(
  *         description: Stage not found.
  *       500:
  *         description: Internal server error.
- */
+*/
 stage.delete("/delete/:id", deleteStage);
 
 module.exports = { stage };

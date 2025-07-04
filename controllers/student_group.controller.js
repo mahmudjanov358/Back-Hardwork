@@ -4,11 +4,11 @@ const { Student_Group } = require('../models/student_groupSchema');
 exports.postStudent_Group = async (req, res) => {
   try {
     const {
-      student_id,
+      students_id,
       group_id,
     } = req.body;
     const newStudentGroup = new Student_Group({
-      student_id,
+      students_id,
       group_id,
     });
     await newStudent_Group.save();

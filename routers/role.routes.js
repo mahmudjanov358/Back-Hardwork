@@ -85,7 +85,7 @@ role.get('/get', getRole);
  *        description: Role not found!
  *      500:
  *        description: Internal Server Error!
- */
+*/
 role.get('/getById/:id', getRoleById);
 
 /**
@@ -119,7 +119,7 @@ role.get('/getById/:id', getRoleById);
  *        description: Role not found!
  *      500:
  *        description: Internal Server Error!
- */
+*/
 role.put('/update/:id',
   roleValidation(updateRoleValidationSchema),
   updateRole);
@@ -145,7 +145,7 @@ role.put('/update/:id',
  *        description: Role not found!
  *      500:
  *        description: Internal Server Error!
- */
+*/
 role.delete('/delete/:id', deleteRole);
 
 module.exports = { role };

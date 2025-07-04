@@ -49,7 +49,7 @@ const groupStuffValidation = (schema) => (req, res, next) => {
  *         description: Invalid request body.
  *       500:
  *         description: Internal server error.
- */
+*/
 group_stuff.post('/post', groupStuffValidation(postGroupStuffValidationSchema), postGroup_Stuff);
 
 /**
@@ -64,7 +64,7 @@ group_stuff.post('/post', groupStuffValidation(postGroupStuffValidationSchema), 
  *         description: A list of group stuff.
  *       500:
  *         description: Internal server error.
- */
+*/
 group_stuff.get('/get', getGroup_Stuff);
 
 /**
@@ -88,7 +88,7 @@ group_stuff.get('/get', getGroup_Stuff);
  *         description: Group stuff not found.
  *       500:
  *         description: Internal server error.
- */
+*/
 group_stuff.get('/getById/:id', getGroup_StuffById);
 
 /**
@@ -112,7 +112,7 @@ group_stuff.get('/getById/:id', getGroup_StuffById);
  *         description: Group stuff not found.
  *       500:
  *         description: Internal server error.
- */
+*/
 group_stuff.delete('/delete/:id', deleteGroup_Stuff);
 
 module.exports = { group_stuff };

@@ -47,7 +47,7 @@ const stuffRoleValidation = schema => (req, res, next) => {
  *        description: Stuff Role created successfully!
  *      500:
  *        description: Internal server error.
- */
+*/
 stuff_role.post('/post',
   stuffRoleValidation(postStuff_RoleValidationSchema),
   postStuff_Role
@@ -65,7 +65,7 @@ stuff_role.post('/post',
  *        description: List of stuff roles retrieved successfully.
  *      500:
  *        description: Internal server error.
- */
+*/
 stuff_role.get('/get', getStuff_Role);
 
 /**
@@ -89,7 +89,7 @@ stuff_role.get('/get', getStuff_Role);
  *        description: Stuff Role not found.
  *      500:
  *        description: Internal server error.
- */
+*/
 stuff_role.get('/getById/:id', getStuff_RoleById);
 
 /**
@@ -113,7 +113,7 @@ stuff_role.get('/getById/:id', getStuff_RoleById);
  *        description: Stuff Role not found.
  *      500:
  *        description: Internal server error.
- */
+*/
 stuff_role.delete('/delete/:id', deleteStuff_Role);
 
 module.exports = { stuff_role };

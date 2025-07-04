@@ -49,11 +49,7 @@ exports.getBranch = async (req, res) => {
 exports.getBranchById = async (req, res) => {
   try {
     const branchId = req.params.id;
-    const branch = await Branch.findById(
-      branchId
-    ).populate(
-      'group_id stuff_id'
-    );
+    const branch = await Branch.findById(branchId);
 
     if (!branch) {
       return res.status(404).json({

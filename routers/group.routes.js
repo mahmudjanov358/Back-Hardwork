@@ -71,11 +71,9 @@ const groupValidation = (schema) => (req, res, next) => {
  *     responses:
  *       201:
  *         description: Group created successfully.
- *       400:
- *         description: Invalid request body.
  *       500:
  *         description: Internal server error.
- */
+*/
 group.post('/post', groupValidation(postGroupValidationSchema), postGroup);
 
 /**
@@ -90,7 +88,7 @@ group.post('/post', groupValidation(postGroupValidationSchema), postGroup);
  *         description: A list of groups.
  *       500:
  *         description: Internal server error.
- */
+*/
 group.get('/get', getGroup);
 
 /**
@@ -114,7 +112,7 @@ group.get('/get', getGroup);
  *         description: Group not found.
  *       500:
  *         description: Internal server error.
- */
+*/
 group.get('/getById/:id', getGroupById);
 
 /**
@@ -169,7 +167,7 @@ group.get('/getById/:id', getGroupById);
  *         description: Group not found.
  *       500:
  *         description: Internal server error.
- */
+*/
 group.patch('/update/:id', groupValidation(updateGroupValidationSchema), updateGroup);
 
 /**
@@ -193,7 +191,7 @@ group.patch('/update/:id', groupValidation(updateGroupValidationSchema), updateG
  *         description: Group not found.
  *       500:
  *         description: Internal server error.
- */
+*/
 group.delete('/delete/:id', deleteGroup);
 
 module.exports = { group };

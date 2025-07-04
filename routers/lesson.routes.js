@@ -56,7 +56,7 @@ const lessonValidation = (schema) => (req, res, next) => {
  *         description: Lesson created successfully.
  *       500:
  *         description: Internal server error.
- */
+*/
 lesson.post('/post', lessonValidation(postLessonValidationSchema), postLesson);
 
 /**
@@ -71,7 +71,7 @@ lesson.post('/post', lessonValidation(postLessonValidationSchema), postLesson);
  *         description: A list of lessons.
  *       500:
  *         description: Internal server error.
- */
+*/
 lesson.get('/get', getLesson);
 
 /**
@@ -95,51 +95,51 @@ lesson.get('/get', getLesson);
  *         description: Lesson not found.
  *       500:
  *         description: Internal server error.
- */
+*/
 lesson.get('/getById/:id', getLessonById);
 
 /**
-  * @swagger
-  * /lesson/update/{id}:
-  *   patch:
-  *     summary: Update lesson by ID
-  *     tags: [Lesson]
-  *     description: Update a lesson by its ID with the provided details.
-  *     parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         schema:
-  *           type: string
-  *         description: The ID of the lesson to update.
-  *     requestBody:
-  *       required: true
-  *       content:
-  *         application/json:
-  *           schema:
-  *             type: object
-  *             properties:
-  *               lesson_theme:
-  *                 type: string
-  *                 description: The theme of the lesson.
-  *               lesson_number:
-  *                 type: string
-  *                 description: The number of the lesson.
-  *               group_id:
-  *                 type: string
-  *                 description: The ID of the group associated with the lesson.
-  *               lesson_date:
-  *                 type: string
-  *                 format: date
-  *                 description: The date of the lesson.
-  *     responses:
-  *       200:
-  *         description: Lesson updated successfully.
-  *       404:
-  *         description: Lesson not found.
-  *       500:
-  *         description: Internal server error.
-  */
+ * @swagger
+ * /lesson/update/{id}:
+ *   patch:
+ *     summary: Update lesson by ID
+ *     tags: [Lesson]
+ *     description: Update a lesson by its ID with the provided details.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the lesson to update.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               lesson_theme:
+ *                 type: string
+ *                 description: The theme of the lesson.
+ *               lesson_number:
+ *                 type: string
+ *                 description: The number of the lesson.
+ *               group_id:
+ *                 type: string
+ *                 description: The ID of the group associated with the lesson.
+ *               lesson_date:
+ *                 type: string
+ *                 format: date
+ *                 description: The date of the lesson.
+ *     responses:
+ *       200:
+ *         description: Lesson updated successfully.
+ *       404:
+ *         description: Lesson not found.
+ *       500:
+ *         description: Internal server error.
+*/
 lesson.patch('/update/:id', lessonValidation(updateLessonValidationSchema), updateLesson);
 
 /**
@@ -163,7 +163,7 @@ lesson.patch('/update/:id', lessonValidation(updateLessonValidationSchema), upda
  *         description: Lesson not found.
  *       500:
  *         description: Internal server error.
- */
+*/
 lesson.delete('/delete/:id', deleteLesson);
 
 module.exports = { lesson };

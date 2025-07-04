@@ -125,7 +125,7 @@ stuff.get("/get", getStuff);
  *        required: true
  *        schema:
  *          type: string
- *        description: The ID of the stuff item.
+ *          description: The ID of the stuff item.
  *    responses:
  *      200:
  *        description: Details of the stuff item!
@@ -137,7 +137,7 @@ stuff.get("/getById/:id", getStuffById);
 /**
  * @swagger
  * /stuff/update/{id}:
- *  patch:
+ *  put:
  *    summary: Update a Stuff item by ID
  *    tags: [Stuff]
  *    description: Update details of a specific stuff item by its ID.
@@ -176,9 +176,11 @@ stuff.get("/getById/:id", getStuffById);
  *    responses:
  *      200:
  *        description: Stuff item updated successfully!
+ *      404:
+ *        description: Stuff not found!
  *      500:
  *        description: Internal Server Error!
- */
+*/
 stuff.put(
   "/update/:id",
   stuffValidation(updateStuffValidationSchema),
@@ -202,9 +204,11 @@ stuff.put(
  *    responses:
  *      200:
  *        description: Stuff item deleted successfully!
+ *      404:
+ *        description: Students not found!
  *      500:
  *        description: Internal Server Error!
- */
+*/
 stuff.delete("/delete/:id", deleteStuff);
 
 module.exports = { stuff };
