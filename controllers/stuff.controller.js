@@ -13,9 +13,7 @@ exports.postStuff = async (req, res) => {
       parol,
       is_active
     } = req.body;
-
     const hashParol = await bcrypt.hash(parol, 10);
-
     const newStuff = await Stuff({
       first_name,
       last_name,
@@ -42,16 +40,16 @@ exports.postStuff = async (req, res) => {
 exports.loginStuff = async (req, res) => {
   try {
     const { login, parol } = req.body;
-    const stuff = await Stuff.findOne({ login });
-    console.log(stuff);
-    if (!stuff) {
+    const loginName = await Stuff.findOne({ login });
+    console.log(loginName);
+    if (!loginName) {
       return res.status(404).json({
         success: false,
-        message: "Stuff not found!"
+        message: "Login not found!"
       });
     }
 
-    const parolMatch = await bcrypt.compare(parol, stuff.parol);
+    const parolMatch = await bcrypt.compare(parol, loginName.parol);
     if (!parolMatch) {
       return res.status(401).json({
         success: false,
@@ -59,7 +57,7 @@ exports.loginStuff = async (req, res) => {
       });
     }
 
-    const token = jwt.sign({ login: stuff.login }, "secret");
+    const token = jwt.sign({ login: loginName.login }, "secret");
     return res.json({
       message: "Token",
       token: token,
