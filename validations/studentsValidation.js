@@ -17,23 +17,29 @@ exports.postStudentsValidationSchema = JOI.object({
     "string.min": "Familiya kamida 2 ta belgidan iborat bo'lishi kerak",
     "string.max": "Familiya eng ko'p 50 ta belgidan iborat bo'lishi kerak",
   }),
-  phone_number: JOI.string().pattern(/^\+998\d[9]$/).required().messages({
-    "string.base": "Telefon raqami qator boʻlishi kerak!",
-    "string.empty": "Telefon raqami kiritilishi shart!",
-    "string.pattern.base": "Telefon raqami to'g'ri formatda bo'lishi kerak (masalan, +998901234567)",
-  }),
-  birthday: JOI.date().required().messages({
+  phone_number: JOI.string()
+    .pattern(/^\+998\d{9}$/)
+    .required()
+    .messages({
+      "string.base": "Telefon raqami qator boʻlishi kerak!",
+      "string.empty": "Telefon raqami kiritilishi shart!",
+      "string.pattern.base":
+        "Telefon raqami to'g'ri formatda bo'lishi kerak (masalan, +998901234567)",
+    }),
+  bithday: JOI.date().required().messages({
     "date.base": "Tug'ilgan sana to'g'ri sana bo'lishi kerak",
     "date.empty": "Tug'ilgan sana kiritilishi shart!",
   }),
   gender: JOI.string().valid("male", "female").required().messages({
     "string.base": "Jins qator boʻlishi kerak!",
     "string.empty": "Jins kiritilishi shart!",
-    "any.only": "Jins quyidagi qiymatlardan biri bo'lishi kerak: male, female, other",
+    "any.only":
+      "Jins quyidagi qiymatlardan biri bo'lishi kerak: male, female, other",
   }),
 }); // ----postStudentsValidationSchema
 
-exports.updateStudentsValidationSchema = exports.postStudentsValidationSchema.fork(
-  Object.keys(exports.postStudentsValidationSchema.describe().keys),
-  (schema) => schema.optional()
-);
+exports.updateStudentsValidationSchema =
+  exports.postStudentsValidationSchema.fork(
+    Object.keys(exports.postStudentsValidationSchema.describe().keys),
+    (schema) => schema.optional()
+  );
