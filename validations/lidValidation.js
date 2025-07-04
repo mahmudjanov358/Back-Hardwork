@@ -13,7 +13,7 @@ exports.postLidValidationSchema = JOI.object({
     "string.min": "Familiya kamida 2 ta belgidan iborat bo'lishi kerak!",
     "string.max": "Familiya eng ko'p 50 ta belgidan iborat bo'lishi kerak!",
   }),
-  phone_number: JOI.string().pattern(/^\+998\d[9]$/).required().messages({
+  phone_number: JOI.string().pattern(/^\+998\d{9}$/).required().messages({
     "string.base": "Telefon raqami qator bo'lishi kerak!",
     "string.empty": "Telefon raqami kiritilishi shart!",
     "string.pattern.base": "Telefon raqami to'g'ri formatda bo'lishi kerak (masalan, +998901234567)",
@@ -26,11 +26,9 @@ exports.postLidValidationSchema = JOI.object({
     "date.base": "Test sanasi to'g'ri sana bo'lishi kerak!",
     "date.empty": "Test sanasi kiritilishi shart!",
   }),
-  trial_lesson_date: JOI.number().integer().min(1).max(100).required().messages({
-    "number.base": "Trial lesson date raqam bo'lishi kerak!",
+  trial_lesson_date: JOI.date().required().messages({
+    "number.base": "Trial lesson date date bo'lishi kerak!",
     "number.empty": "Trial lesson date kiritilishi shart!",
-    "number.min": "Trial lesson date kamida 1 bo'lishi kerak!",
-    "number.max": "Trial lesson date eng ko'p 100 bo'lishi kerak!",
   }),
   trial_lesson_time: JOI.string().required().messages({
     "string.base": "Trial lesson time qator bo'lishi kerak!",

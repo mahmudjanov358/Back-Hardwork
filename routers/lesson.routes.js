@@ -42,7 +42,7 @@ const lessonValidation = (schema) => (req, res, next) => {
  *                 type: string
  *                 description: The theme of the lesson.
  *               lesson_number:
- *                 type: string
+ *                 type: number
  *                 description: The number of the lesson.
  *               group_id:
  *                 type: string
@@ -87,7 +87,7 @@ lesson.get('/get', getLesson);
  *         required: true
  *         schema:
  *           type: string
- *         description: The ID of the lesson.
+ *           description: The ID of the lesson.
  *     responses:
  *       200:
  *         description: Lesson retrieved successfully.
@@ -111,7 +111,7 @@ lesson.get('/getById/:id', getLessonById);
  *         required: true
  *         schema:
  *           type: string
- *         description: The ID of the lesson to update.
+ *           description: The ID of the lesson to update.
  *     requestBody:
  *       required: true
  *       content:
@@ -123,7 +123,7 @@ lesson.get('/getById/:id', getLessonById);
  *                 type: string
  *                 description: The theme of the lesson.
  *               lesson_number:
- *                 type: string
+ *                 type: number
  *                 description: The number of the lesson.
  *               group_id:
  *                 type: string

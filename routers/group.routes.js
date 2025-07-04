@@ -149,10 +149,10 @@ group.get('/getById/:id', getGroupById);
  *                 type: string
  *                 description: The week day of the lesson.
  *               room_number:
- *                 type: string
+ *                 type: number
  *                 description: The room number of the group.
  *               room_floor:
- *                 type: string
+ *                 type: number
  *                 description: The floor of the room of the group.
  *               lessons_quant:
  *                 type: string

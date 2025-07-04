@@ -7,7 +7,7 @@ const studentsSchema = new Schema({
   last_name: { type: String, trim: true },
   phone_number: { type: String, },
   bithday: { type: Date, },
-  gender: { type: String, enum: ['male', 'famale'] },
+  gender: { type: String, enum: ['male', 'famale', 'other'] },
 });
 
 const Students = model('Students', studentsSchema);
