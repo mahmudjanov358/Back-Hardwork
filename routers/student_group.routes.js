@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const student_group = Router();
 
 const {
@@ -6,11 +6,12 @@ const {
   getStudent_Group,
   getStudent_GroupById,
   deleteStudent_Group,
-} = require('../controllers/student_group.controller');
+} = require("../controllers/student_group.controller");
 
 const {
   postStudentGroupValidationSchema,
-} = require('../validations/student_groupValidation');
+} = require("../validations/student_groupValidation");
+
 const studentGroupValidation = (schema) => (req, res, next) => {
   const validationResult = schema.validate(req.body);
   if (validationResult.error) {
@@ -26,9 +27,9 @@ const studentGroupValidation = (schema) => (req, res, next) => {
  * @swagger
  * /student_group/post:
  *   post:
- *     summary: Create a new Student Group
+ *     summary: Yangi Student Group yaratish
  *     tags: [Student_Group]
- *     description: Create a new student group item with the provided details.
+ *     description: Kiritilgan ma'lumotlar asosida yangi Student Group (talaba va guruh orasidagi bog‘lanish) yozuvini yaratish.
  *     requestBody:
  *       required: true
  *       content:
@@ -38,79 +39,87 @@ const studentGroupValidation = (schema) => (req, res, next) => {
  *             properties:
  *               students_id:
  *                 type: string
- *                 description: The cancel reason ID of the Students item.
+ *                 description: Talabaga tegishli ID (student hujjatining ID raqami).
  *               group_id:
  *                 type: string
- *                 description: The cancel reason ID of the Group item.
+ *                 description: Guruhga tegishli ID (group hujjatining ID raqami).
  *     responses:
  *       201:
- *         description: Student Group item created successfully!
+ *         description: Student Group muvaffaqiyatli yaratildi.
+ *       400:
+ *         description: Noto‘g‘ri yoki to‘liq ma'lumot yuborildi.
  *       500:
- *         description: Internal Server Error!
-*/
-student_group.post('/post', studentGroupValidation(postStudentGroupValidationSchema), postStudent_Group);
+ *         description: Ichki server xatosi yuz berdi.
+ */
+student_group.post(
+  "/post",
+  studentGroupValidation(postStudentGroupValidationSchema),
+  postStudent_Group
+);
 
 /**
  * @swagger
  * /student_group/get:
  *   get:
- *     summary: Retrieve all student group statuses
+ *     summary: Barcha Student Group yozuvlarini olish
  *     tags: [Student_Group]
- *     description: Get a list of all student group statuses.
+ *     description: Tizimdagi barcha Student Group (talaba-guruh bog‘lanishlari) yozuvlarini olish.
  *     responses:
  *       200:
- *         description: List of student group statuses retrieved successfully.
+ *         description: Student Group ro‘yxati muvaffaqiyatli olindi.
  *       500:
- *         description: Internal server error.
-*/
-student_group.get('/get', getStudent_Group);
+ *         description: Ichki server xatosi yuz berdi.
+ */
+student_group.get("/get", getStudent_Group);
 
 /**
  * @swagger
  * /student_group/getById/{id}:
  *   get:
- *     summary: Retrieve a student group status by ID
+ *     summary: ID orqali Student Group yozuvini olish
  *     tags: [Student_Group]
- *     description: Get a student group status by its ID.
+ *     description: Ko‘rsatilgan ID asosida aniq bir Student Group yozuvini olish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
+ *         description: Olish kerak bo‘lgan Student Group yozuvining ID raqami.
  *         schema:
  *           type: string
- *         description: The ID of the student group status to retrieve.
+ *           description: Student Group yozuvining noyob identifikatori.
  *     responses:
  *       200:
- *         description: Student Group status retrieved successfully.
+ *         description: Student Group yozuvi muvaffaqiyatli topildi.
  *       404:
- *         description: Student Group status not found.
+ *         description: Student Group yozuvi topilmadi.
  *       500:
- *         description: Internal server error.
-*/
-student_group.get('/getById/:id', getStudent_GroupById);
+ *         description: Ichki server xatosi yuz berdi.
+ */
+student_group.get("/getById/:id", getStudent_GroupById);
 
 /**
  * @swagger
  * /student_group/delete/{id}:
  *   delete:
- *     summary: Delete a student group status by ID
+ *     summary: ID orqali Student Group yozuvini o‘chirish
  *     tags: [Student_Group]
- *     description: Delete a student group status by its ID.
+ *     description: Ko‘rsatilgan ID asosida Student Group yozuvini tizimdan o‘chirish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
+ *         description: O‘chiriladigan Student Group yozuvining ID raqami.
  *         schema:
  *           type: string
- *         description: The ID of the student group status to delete.
+ *           description: Student Group yozuvining noyob identifikatori.
  *     responses:
  *       200:
- *         description: Student Group status deleted successfully.
+ *         description: Student Group yozuvi muvaffaqiyatli o‘chirildi.
  *       404:
- *         description: Student Group status not found.
+ *         description: Student Group yozuvi topilmadi.
  *       500:
- *         description: Internal server error.
-*/
-student_group.delete('/delete/:id', deleteStudent_Group);
+ *         description: Ichki server xatosi yuz berdi.
+ */
+student_group.delete("/delete/:id", deleteStudent_Group);
 
 module.exports = { student_group };

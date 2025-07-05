@@ -1,3 +1,4 @@
+// ----Librarys
 const express = require("express");
 const { connect, version } = require("mongoose");
 const cors = require("cors");
@@ -5,6 +6,7 @@ require("dotenv").config();
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 
+// ----Middleware
 const app = express();
 
 app.use(express.json());
@@ -14,9 +16,12 @@ app.use(cors());
 async function connectToDB() {
   try {
     await connect(process.env.MONGO_URL);
-    console.log("MongoDB is connected!");
+    console.log("Ma'lumotlar bazasi ulandi!");
   } catch (error) {
-    console.error("mongoDB connected failed — ", error.message);
+    console.error(
+      "Ma'lumotlar bazasiga ulanish muvaffaqiyatsiz — ",
+      error.message
+    );
   }
 }
 connectToDB();
@@ -28,7 +33,7 @@ const swaggerOptions = {
     info: {
       title: "Express API with Swagger",
       version: "1.0.0",
-      description: "API documentation using Swagger",
+      description: "Swagger yordamida API hujjatlari",
     },
     servers: [
       {
@@ -36,27 +41,33 @@ const swaggerOptions = {
       },
     ],
     tags: [
-      { name: "Role", description: "Role bo'limi bilan jarayon" },
-      { name: "Stuff", description: " Stuff bo'limi bilan jarayon" },
-      { name: "Stuff_Role", description: "Stuff_Role bo'limi bilan jarayon" },
-      { name: "Stage", description: "Stage bo'limi bilan jarayon" },
-      { name: "Branch", description: "Branch bo'limi bilan jarayon" },
-      { name: "Group", description: "Group bo'limi bilan jarayon" },
-      { name: "Group_Stuff", description: "Group_Stuff bo'limi bilan jarayon" },
-      { name: "Lesson", description: "Lesson bo'limi bilan jarayon" },
-      { name: "Lid_Status", description: "Lid_Status bo'limi bilan jarayon" },
-      { name: "Reason_Lid", description: "Reason_Lid bo'limi bilan jarayon" },
-      { name: "Lid", description: "Lid bo'limi bilan jarayon" },
-      { name: "Students", description: "Students bo'limi bilan jarayon" },
+      { name: "Role", description: "Rol bo‘limi bilan ishlash" },
+      { name: "Stuff", description: "Xodimlar bo‘limi bilan ishlash" },
+      {
+        name: "Stuff_Role",
+        description: "Xodimlar roli bo‘limi bilan ishlash",
+      },
+      { name: "Stage", description: "Bosqich bo‘limi bilan ishlash" },
+      { name: "Branch", description: "Filial bo‘limi bilan ishlash" },
+      { name: "Group", description: "Guruh bo‘limi bilan ishlash" },
+      {
+        name: "Group_Stuff",
+        description: "Guruh xodimlari bo‘limi bilan ishlash",
+      },
+      { name: "Lesson", description: "Dars bo‘limi bilan ishlash" },
+      { name: "Lid_Status", description: "Lid holati bo‘limi bilan ishlash" },
+      { name: "Reason_Lid", description: "Lid sababi bo‘limi bilan ishlash" },
+      { name: "Lid", description: "Lid bo‘limi bilan ishlash" },
+      { name: "Students", description: "Talabalar bo‘limi bilan ishlash" },
       {
         name: "Student_Group",
-        description: "Student_Group bo'limi bilan jarayon",
+        description: "Talaba guruhi bo‘limi bilan ishlash",
       },
       {
         name: "Student_Lesson",
-        description: "Student_Lesson bo'limi bilan jarayon",
+        description: "Talaba darsi bo‘limi bilan ishlash",
       },
-      { name: "Payment", description: "Payment bo'limi bilan jarayon" },
+      { name: "Payment", description: "To‘lov bo‘limi bilan ishlash" },
     ],
   },
   apis: ["./routers/*.js"],
@@ -99,5 +110,5 @@ app.use("/payment", payment);
 // ----Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
+  console.log(`Server http://localhost:${PORT} da ishga tushdi`);
 });

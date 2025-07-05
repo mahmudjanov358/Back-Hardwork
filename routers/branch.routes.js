@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const branch = Router();
 
 const {
@@ -7,12 +7,12 @@ const {
   getBranchById,
   updateBranch,
   deleteBranch,
-} = require('../controllers/branch.controller');
+} = require("../controllers/branch.controller");
 
 const {
   postBranchValidationSchema,
   updateBranchValidationSchema,
-} = require('../validations/branchValidation');
+} = require("../validations/branchValidation");
 const branchValidation = (schema) => (req, res, next) => {
   const validationResult = schema.validate(req.body);
   if (validationResult.error) {
@@ -28,9 +28,9 @@ const branchValidation = (schema) => (req, res, next) => {
  * @swagger
  * /branch/post:
  *   post:
- *     summary: Create a new branch
+ *     summary: Yangi Branch yaratish
  *     tags: [Branch]
- *     description: Create a new branch with the provided details.
+ *     description: Yangi Branch ni berilgan ma'lumotlar bilan yaratish.
  *     requestBody:
  *       required: true
  *       content:
@@ -40,74 +40,74 @@ const branchValidation = (schema) => (req, res, next) => {
  *             properties:
  *               name:
  *                 type: string
- *                 description: The name of the branch.
+ *                 description: Branch ning nomi.
  *               address:
  *                 type: string
- *                 description: The address of the branch.
+ *                 description: Branch ning manzili.
  *               call_number:
  *                 type: string
- *                 description: The call number of the branch.
+ *                 description: Branch ning telefon raqami.
  *     responses:
  *       201:
- *         description: Branch created successfully.
+ *         description: Branch muvaffaqiyatli yaratildi.
  *       500:
- *         description: Internal server error.
-*/
-branch.post('/post', branchValidation(postBranchValidationSchema), postBranch);
+ *         description: Ichki server xatosi.
+ */
+branch.post("/post", branchValidation(postBranchValidationSchema), postBranch);
 
 /**
  * @swagger
  * /branch/get:
  *   get:
- *     summary: Get all branches
+ *     summary: Barcha Branch larni olish
  *     tags: [Branch]
- *     description: Retrieve a list of all branches.
+ *     description: Barcha Branch lar ro‘yxatini olish.
  *     responses:
  *       200:
- *         description: Branches retrieved successfully.
+ *         description: Branch lar muvaffaqiyatli olindi.
  *       500:
- *         description: Internal server error.
-*/
-branch.get('/get', getBranch);
+ *         description: Ichki server xatosi.
+ */
+branch.get("/get", getBranch);
 
 /**
  * @swagger
  * /branch/getById/{id}:
  *   get:
- *     summary: Get a branch by ID
+ *     summary: Branch ni ID bo‘yicha olish
  *     tags: [Branch]
- *     description: Retrieve a branch by its ID.
+ *     description: Branch ni uning ID si bo‘yicha olish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *           description: The ID of the branch to retrieve.
+ *           description: Olinadigan Branch ning ID si.
  *     responses:
  *       200:
- *         description: Branch found successfully.
+ *         description: Branch muvaffaqiyatli topildi.
  *       404:
- *         description: Branch not found.
+ *         description: Branch topilmadi.
  *       500:
- *         description: Internal server error.
-*/
-branch.get('/getById/:id', getBranchById);
+ *         description: Ichki server xatosi.
+ */
+branch.get("/getById/:id", getBranchById);
 
 /**
  * @swagger
  * /branch/update/{id}:
  *   put:
- *     summary: Update a branch by ID
+ *     summary: Branch ni ID bo‘yicha yangilash
  *     tags: [Branch]
- *     description: Update the details of a branch by its ID.
+ *     description: Branch ma'lumotlarini uning ID si bo‘yicha yangilash.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: The ID of the branch to update.
+ *         description: Yangilanadigan Branch ning ID si.
  *     requestBody:
  *       required: true
  *       content:
@@ -117,45 +117,49 @@ branch.get('/getById/:id', getBranchById);
  *             properties:
  *               name:
  *                 type: string
- *                 description: The name of the branch.
+ *                 description: Branch ning nomi.
  *               address:
  *                 type: string
- *                 description: The address of the branch.
+ *                 description: Branch ning manzili.
  *               call_number:
  *                 type: string
- *                 description: The call number of the branch.
+ *                 description: Branch ning telefon raqami.
  *     responses:
  *       200:
- *         description: Branch updated successfully.
+ *         description: Branch muvaffaqiyatli yangilandi.
  *       404:
- *         description: Branch not found.
+ *         description: Branch topilmadi.
  *       500:
- *         description: Internal server error.
-*/
-branch.put('/update/:id', branchValidation(updateBranchValidationSchema), updateBranch);
+ *         description: Ichki server xatosi.
+ */
+branch.put(
+  "/update/:id",
+  branchValidation(updateBranchValidationSchema),
+  updateBranch
+);
 
 /**
  * @swagger
  * /branch/delete/{id}:
  *   delete:
- *     summary: Delete a branch by ID
+ *     summary: Branch ni ID bo‘yicha o‘chirish
  *     tags: [Branch]
- *     description: Delete a branch by its ID.
+ *     description: Branch ni uning ID si bo‘yicha o‘chirish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: The ID of the branch to delete.
+ *           description: O‘chiriladigan Branch ning ID si.
  *     responses:
  *       200:
- *         description: Branch deleted successfully.
+ *         description: Branch muvaffaqiyatli o‘chirildi.
  *       404:
- *         description: Branch not found.
+ *         description: Branch topilmadi.
  *       500:
- *         description: Internal server error.
-*/
-branch.delete('/delete/:id', deleteBranch);
+ *         description: Ichki server xatosi.
+ */
+branch.delete("/delete/:id", deleteBranch);
 
 module.exports = { branch };

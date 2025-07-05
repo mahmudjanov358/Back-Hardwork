@@ -13,6 +13,7 @@ const {
   postStageValidationSchema,
   updateStageValidationSchema,
 } = require("../validations/stageValidation");
+
 const stageValidation = (schema) => (req, res, next) => {
   const validationResult = schema.validate(req.body);
   if (validationResult.error) {
@@ -28,9 +29,9 @@ const stageValidation = (schema) => (req, res, next) => {
  * @swagger
  * /stage/post:
  *   post:
- *     summary: Create a new stage
+ *     summary: Yangi Stage yaratish
  *     tags: [Stage]
- *     description: Create a new stage with the provided details.
+ *     description: Berilgan ma'lumotlar asosida yangi stage (bosqich) yaratish.
  *     requestBody:
  *       required: true
  *       content:
@@ -40,68 +41,70 @@ const stageValidation = (schema) => (req, res, next) => {
  *             properties:
  *               name:
  *                 type: string
- *                 description: The name of the stage.
+ *                 description: Stage nomi (bosqich nomi).
  *     responses:
  *       201:
- *         description: Stage created successfully.
+ *         description: Stage muvaffaqiyatli yaratildi.
  *       500:
- *         description: Internal server error.
-*/
+ *         description: Serverda ichki xatolik yuz berdi.
+ */
 stage.post("/post", stageValidation(postStageValidationSchema), postStage);
 
 /**
  * @swagger
  * /stage/get:
  *   get:
- *     summary: Get all stages
+ *     summary: Barcha Stage larni olish
  *     tags: [Stage]
- *     description: Retrieve a list of all stages.
+ *     description: Tizimdagi barcha stage (bosqich) lar ro'yxatini olish.
  *     responses:
  *       200:
- *         description: A list of stages.
+ *         description: Stage lar ro'yxati muvaffaqiyatli olindi.
  *       500:
- *         description: Internal server error.
-*/
+ *         description: Serverda ichki xatolik yuz berdi.
+ */
 stage.get("/get", getStage);
 
 /**
  * @swagger
  * /stage/getById/{id}:
  *   get:
- *     summary: Get a stage by ID
+ *     summary: Stage ni ID orqali olish
  *     tags: [Stage]
- *     description: Retrieve a stage by its ID.
+ *     description: Ko‘rsatilgan ID orqali stage (bosqich) ma'lumotlarini olish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: The ID of the stage to retrieve.
+ *         description: Olish kerak bo‘lgan stage'ning ID raqami.
  *         schema:
  *           type: string
+ *           description: Stage'ning noyob ID qiymati (masalan, MongoDB ObjectId).
  *     responses:
  *       200:
- *         description: The requested stage.
+ *         description: So‘ralgan stage ma'lumotlari qaytarildi.
  *       404:
- *         description: Stage not found.
+ *         description: Stage topilmadi.
  *       500:
- *         description: Internal server error.
-*/
+ *         description: Serverda ichki xatolik yuz berdi.
+ */
 stage.get("/getById/:id", getStageById);
 
 /**
  * @swagger
  * /stage/update/{id}:
  *   put:
- *     summary: Update a stage by ID
+ *     summary: Stage ni ID orqali yangilash
  *     tags: [Stage]
- *     description: Update the details of a stage by its ID.
+ *     description: Berilgan ID asosida stage (bosqich) ma'lumotlarini yangilash.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: The ID of the stage to update.
+ *         description: Yangilanadigan stage'ning ID raqami.
  *         schema:
  *           type: string
+ *           description: Yangilanadigan stage'ning noyob identifikatori.
  *     requestBody:
  *       required: true
  *       content:
@@ -111,15 +114,15 @@ stage.get("/getById/:id", getStageById);
  *             properties:
  *               name:
  *                 type: string
- *                 description: The new name of the stage.
+ *                 description: Stage'ning yangi nomi.
  *     responses:
  *       200:
- *         description: Stage updated successfully.
+ *         description: Stage muvaffaqiyatli yangilandi.
  *       404:
- *         description: Stage not found.
+ *         description: Stage topilmadi.
  *       500:
- *         description: Internal server error.
-*/
+ *         description: Serverda ichki xatolik yuz berdi.
+ */
 stage.put(
   "/update/:id",
   stageValidation(updateStageValidationSchema),
@@ -130,24 +133,25 @@ stage.put(
  * @swagger
  * /stage/delete/{id}:
  *   delete:
- *     summary: Delete a stage by ID
+ *     summary: Stage ni ID orqali o‘chirish
  *     tags: [Stage]
- *     description: Delete a stage by its ID.
+ *     description: Ko‘rsatilgan ID orqali stage'ni tizimdan o‘chirish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: The ID of the stage to delete.
+ *         description: O‘chiriladigan stage'ning ID raqami.
  *         schema:
  *           type: string
+ *           description: O‘chirilayotgan stage'ning noyob identifikatori.
  *     responses:
  *       200:
- *         description: Stage deleted successfully.
+ *         description: Stage muvaffaqiyatli o‘chirildi.
  *       404:
- *         description: Stage not found.
+ *         description: Stage topilmadi.
  *       500:
- *         description: Internal server error.
-*/
+ *         description: Serverda ichki xatolik yuz berdi.
+ */
 stage.delete("/delete/:id", deleteStage);
 
 module.exports = { stage };

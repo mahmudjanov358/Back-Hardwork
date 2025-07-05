@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const lid_status = Router();
 
 const {
@@ -7,12 +7,12 @@ const {
   getLid_StatusById,
   updateLid_Status,
   deleteLid_Status,
-} = require('../controllers/lid_status.controller');
+} = require("../controllers/lid_status.controller");
 
 const {
   postLidStatusValidationSchema,
   updateLidStatusValidationSchema,
-} = require('../validations/lid_statusValidation');
+} = require("../validations/lid_statusValidation");
 const lidStatusValidation = (schema) => (req, res, next) => {
   const validationResult = schema.validate(req.body);
   if (validationResult.error) {
@@ -28,9 +28,9 @@ const lidStatusValidation = (schema) => (req, res, next) => {
  * @swagger
  * /lid_status/post:
  *   post:
- *     summary: Create a new lid status
+ *     summary: Yangi Lid_Status yaratish
  *     tags: [Lid_Status]
- *     description: Create a new lid status with the provided details.
+ *     description: Yangi Lid_Status ni berilgan ma'lumotlar bilan yaratish.
  *     requestBody:
  *       required: true
  *       content:
@@ -40,68 +40,72 @@ const lidStatusValidation = (schema) => (req, res, next) => {
  *             properties:
  *               status:
  *                 type: string
- *                 description: The name of the lid status.
+ *                 description: Lid_Status ning nomi.
  *     responses:
  *       201:
- *         description: Lid status created successfully.
+ *         description: Lid_Status muvaffaqiyatli yaratildi.
  *       500:
- *         description: Internal server error.
-*/
-lid_status.post('/post', lidStatusValidation(postLidStatusValidationSchema), postLid_Status);
+ *         description: Ichki server xatosi.
+ */
+lid_status.post(
+  "/post",
+  lidStatusValidation(postLidStatusValidationSchema),
+  postLid_Status
+);
 
 /**
  * @swagger
  * /lid_status/get:
  *   get:
- *     summary: Retrieve all lid statuses
+ *     summary: Barcha Lid_Status larni olish
  *     tags: [Lid_Status]
- *     description: Get a list of all lid statuses.
+ *     description: Barcha Lid_Status lar ro‘yxatini olish.
  *     responses:
  *       200:
- *         description: List of lid statuses retrieved successfully.
+ *         description: Lid_Status lar ro‘yxati muvaffaqiyatli olindi.
  *       500:
- *         description: Internal server error.
-*/
-lid_status.get('/get', getLid_Status);
+ *         description: Ichki server xatosi.
+ */
+lid_status.get("/get", getLid_Status);
 
 /**
  * @swagger
  * /lid_status/getById/{id}:
  *   get:
- *     summary: Retrieve a lid status by ID
+ *     summary: Lid_Status ni ID bo‘yicha olish
  *     tags: [Lid_Status]
- *     description: Get a lid status by its ID.
+ *     description: Lid_Status ni uning ID si bo‘yicha olish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: The ID of the lid status to retrieve.
+ *           description: Olinadigan Lid_Status ning ID si.
  *     responses:
  *       200:
- *         description: Lid status retrieved successfully.
+ *         description: Lid_Status muvaffaqiyatli olindi.
  *       404:
- *         description: Lid status not found.
+ *         description: Lid_Status topilmadi.
  *       500:
- *         description: Internal server error.
-*/
-lid_status.get('/getById/:id', getLid_StatusById);
+ *         description: Ichki server xatosi.
+ */
+lid_status.get("/getById/:id", getLid_StatusById);
 
 /**
  * @swagger
  * /lid_status/update/{id}:
  *   put:
- *     summary: Update a lid status by ID
+ *     summary: Lid_Status ni ID bo‘yicha yangilash
  *     tags: [Lid_Status]
- *     description: Update a lid status by its ID.
+ *     description: Lid_Status ni uning ID si bo‘yicha yangilash.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: The ID of the lid status to update.
+ *           description: Yangilanadigan Lid_Status ning ID si.
  *     requestBody:
  *       required: true
  *       content:
@@ -111,39 +115,43 @@ lid_status.get('/getById/:id', getLid_StatusById);
  *             properties:
  *               status:
  *                 type: string
- *                 description: The updated name of the lid status.
+ *                 description: Lid_Status ning yangilangan nomi.
  *     responses:
  *       200:
- *         description: Lid status updated successfully.
+ *         description: Lid_Status muvaffaqiyatli yangilandi.
  *       404:
- *         description: Lid status not found.
+ *         description: Lid_Status topilmadi.
  *       500:
- *         description: Internal server error.
-*/
-lid_status.put('/update/:id', lidStatusValidation(updateLidStatusValidationSchema), updateLid_Status);
+ *         description: Ichki server xatosi.
+ */
+lid_status.put(
+  "/update/:id",
+  lidStatusValidation(updateLidStatusValidationSchema),
+  updateLid_Status
+);
 
 /**
  * @swagger
  * /lid_status/delete/{id}:
  *   delete:
- *     summary: Delete a lid status by ID
+ *     summary: Lid_Status ni ID bo‘yicha o‘chirish
  *     tags: [Lid_Status]
- *     description: Delete a lid status by its ID.
+ *     description: Lid_Status ni uning ID si bo‘yicha o‘chirish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: The ID of the lid status to delete.
+ *           description: O‘chiriladigan Lid_Status ning ID si.
  *     responses:
  *       200:
- *         description: Lid status deleted successfully.
+ *         description: Lid_Status muvaffaqiyatli o‘chirildi.
  *       404:
- *         description: Lid status not found.
+ *         description: Lid_Status topilmadi.
  *       500:
- *         description: Internal server error.
-*/
-lid_status.delete('/delete/:id', deleteLid_Status);
+ *         description: Ichki server xatosi.
+ */
+lid_status.delete("/delete/:id", deleteLid_Status);
 
 module.exports = { lid_status };

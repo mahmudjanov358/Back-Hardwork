@@ -1,20 +1,18 @@
 const { Router } = require("express");
-const stuff = Router();
+const stuff_role = Router();
 
 const {
-  postStuff,
-  loginStuff,
-  getStuff,
-  getStuffById,
-  updateStuff,
-  deleteStuff,
-} = require("../controllers/stuff.controller");
+  postStuff_Role,
+  getStuff_Role,
+  getStuff_RoleById,
+  deleteStuff_Role,
+} = require("../controllers/stuff_role.controller");
 
 const {
-  postStuffValidationSchema,
-  updateStuffValidationSchema,
-} = require("../validations/stuffValidation.js");
-const stuffValidation = (schema) => (req, res, next) => {
+  postStuff_RoleValidationSchema,
+} = require("../validations/stuff_roleValidation");
+
+const stuffRoleValidation = (schema) => (req, res, next) => {
   const validationResult = schema.validate(req.body);
   if (validationResult.error) {
     return res
@@ -27,188 +25,103 @@ const stuffValidation = (schema) => (req, res, next) => {
 
 /**
  * @swagger
- * /stuff/post:
- *  post:
- *    summary: Create a new Stuff
- *    tags: [Stuff]
- *    description: Create a new stuff item with the provided details.
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            properties:
- *              first_name:
- *                type: string
- *                description: The first name of the stuff item.
- *              last_name:
- *                type: string
- *                description: The last name of the stuff item.
- *              phone_number:
- *                type: string
- *                description: The phone number of the stuff item.
- *              login:
- *                type: string
- *                description: The login of the stuff item.
- *              parol:
- *                type: string
- *                description: The parol of the stuff item.
- *              is_active:
- *                type: boolean
- *                description: The active status of the stuff item.
- *    responses:
- *      201:
- *        description: Stuff item created successfully!
- *      500:
- *        description: Internal Server Error!
-*/
-stuff.post("/post", stuffValidation(postStuffValidationSchema), postStuff);
-
-/**
- * @swagger
- * /stuff/login:
- *  post:
- *    summary: Login a Stuff item
- *    tags: [Stuff]
- *    description: Login a stuff item with the provided credentials.
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            properties:
- *              login:
- *                type: string
- *                description: The login of the stuff item.
- *              parol:
- *                type: string
- *                description: The parol of the stuff item.
- *    responses:
- *      200:
- *        description: Login successful!
- *      404:
- *        description: Stuff not found!
- *      401:
- *        description: Invalid login or password!
- *      500:
- *        description: Internal Server Error!
-*/
-stuff.post("/login", loginStuff);
-
-/**
- * @swagger
- * /stuff/get:
- *  get:
- *    summary: Retrieve all Stuff items
- *    tags: [Stuff]
- *    description: Get a list of all stuff items.
- *    responses:
- *      200:
- *        description: A list of stuff items!
- *      500:
- *        description: Internal Server Error!
-*/
-stuff.get("/get", getStuff);
-
-/**
- * @swagger
- * /stuff/getById/{id}:
- *  get:
- *    summary: Retrieve a Stuff item by ID
- *    tags: [Stuff]
- *    description: Get details of a specific stuff item by its ID.
- *    parameters:
- *      - in: path
- *        name: id
- *        required: true
- *        schema:
- *          type: string
- *          description: The ID of the stuff item.
- *    responses:
- *      200:
- *        description: Details of the stuff item!
- *      500:
- *        description: Internal Server Error!
-*/
-stuff.get("/getById/:id", getStuffById);
-
-/**
- * @swagger
- * /stuff/update/{id}:
- *  put:
- *    summary: Update a Stuff item by ID
- *    tags: [Stuff]
- *    description: Update details of a specific stuff item by its ID.
- *    parameters:
- *      - in: path
- *        name: id
- *        required: true
- *        schema:
- *          type: string
- *        description: The ID of the stuff item to update.
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            properties:
- *              first_name:
- *                type: string
- *                description: The first name of the stuff item.
- *              last_name:
- *                type: string
- *                description: The last name of the stuff item.
- *              phone_number:
- *                type: string
- *                description: The phone number of the stuff item.
- *              login:
- *                type: string
- *                description: The login of the stuff item.
- *              parol:
- *                type: string
- *                description: The parol of the stuff item.
- *              is_active:
- *                type: boolean
- *                description: The active status of the stuff item.
- *    responses:
- *      200:
- *        description: Stuff item updated successfully!
- *      404:
- *        description: Stuff not found!
- *      500:
- *        description: Internal Server Error!
-*/
-stuff.put(
-  "/update/:id",
-  stuffValidation(updateStuffValidationSchema),
-  updateStuff
+ * /stuff_role/post:
+ *   post:
+ *     summary: Yangi Stuff Role yaratish
+ *     tags: [Stuff_Role]
+ *     description: Kiritilgan ma'lumotlar asosida yangi Stuff Role (hodim roli) yaratish.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               role_name:
+ *                 type: string
+ *                 description: Stuff Role nomi (masalan: Admin, Menejer, O‘qituvchi).
+ *               permissions:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                   description: Ushbu Stuff Role uchun tanlangan permission ID lar ro‘yxati.
+ *     responses:
+ *       201:
+ *         description: Stuff Role muvaffaqiyatli yaratildi.
+ *       400:
+ *         description: So‘rov noto‘g‘ri yoki to‘liq emas.
+ *       500:
+ *         description: Ichki server xatosi yuz berdi.
+ */
+stuff_role.post(
+  "/post",
+  stuffRoleValidation(postStuff_RoleValidationSchema),
+  postStuff_Role
 );
 
 /**
  * @swagger
- * /stuff/delete/{id}:
- *  delete:
- *    summary: Delete a Stuff item by ID
- *    tags: [Stuff]
- *    description: Delete a specific stuff item by its ID.
- *    parameters:
- *      - in: path
- *        name: id
- *        required: true
- *        schema:
- *          type: string
- *        description: The ID of the stuff item to delete.
- *    responses:
- *      200:
- *        description: Stuff item deleted successfully!
- *      404:
- *        description: Students not found!
- *      500:
- *        description: Internal Server Error!
-*/
-stuff.delete("/delete/:id", deleteStuff);
+ * /stuff_role/get:
+ *   get:
+ *     summary: Barcha Stuff Role yozuvlarini olish
+ *     tags: [Stuff_Role]
+ *     description: Tizimdagi barcha Stuff Role yozuvlarini olish (Admin, Operator va h.k.).
+ *     responses:
+ *       200:
+ *         description: Stuff Role ro‘yxati muvaffaqiyatli olindi.
+ *       500:
+ *         description: Ichki server xatosi yuz berdi.
+ */
+stuff_role.get("/get", getStuff_Role);
 
-module.exports = { stuff };
+/**
+ * @swagger
+ * /stuff_role/getById/{id}:
+ *   get:
+ *     summary: Stuff Role ni ID orqali olish
+ *     tags: [Stuff_Role]
+ *     description: Ko‘rsatilgan ID orqali Stuff Role yozuvini olish.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Olish kerak bo‘lgan Stuff Role ID raqami.
+ *         schema:
+ *           type: string
+ *           description: Stuff Role'ning noyob identifikatori.
+ *     responses:
+ *       200:
+ *         description: Stuff Role ma'lumotlari muvaffaqiyatli olindi.
+ *       404:
+ *         description: Stuff Role topilmadi.
+ *       500:
+ *         description: Ichki server xatosi yuz berdi.
+ */
+stuff_role.get("/getById/:id", getStuff_RoleById);
+
+/**
+ * @swagger
+ * /stuff_role/delete/{id}:
+ *   delete:
+ *     summary: Stuff Role ni ID orqali o‘chirish
+ *     tags: [Stuff_Role]
+ *     description: Ko‘rsatilgan ID orqali Stuff Role yozuvini tizimdan o‘chirish.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: O‘chirilishi kerak bo‘lgan Stuff Role ID raqami.
+ *         schema:
+ *           type: string
+ *           description: Stuff Role'ning noyob identifikatori.
+ *     responses:
+ *       200:
+ *         description: Stuff Role muvaffaqiyatli o‘chirildi.
+ *       404:
+ *         description: Stuff Role topilmadi.
+ *       500:
+ *         description: Ichki server xatosi yuz berdi.
+ */
+stuff_role.delete("/delete/:id", deleteStuff_Role);
+
+module.exports = { stuff_role };

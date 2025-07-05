@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const lesson = Router();
 
 const {
@@ -7,12 +7,12 @@ const {
   getLessonById,
   updateLesson,
   deleteLesson,
-} = require('../controllers/lesson.controller');
+} = require("../controllers/lesson.controller");
 
 const {
   postLessonValidationSchema,
   updateLessonValidationSchema,
-} = require('../validations/lessonValidation');
+} = require("../validations/lessonValidation");
 const lessonValidation = (schema) => (req, res, next) => {
   const validationResult = schema.validate(req.body);
   if (validationResult.error) {
@@ -28,9 +28,9 @@ const lessonValidation = (schema) => (req, res, next) => {
  * @swagger
  * /lesson/post:
  *   post:
- *     summary: Create a new lesson
+ *     summary: Yangi Lesson yaratish
  *     tags: [Lesson]
- *     description: Create a new lesson with the provided details.
+ *     description: Yangi Lesson ni berilgan ma'lumotlar bilan yaratish.
  *     requestBody:
  *       required: true
  *       content:
@@ -40,78 +40,78 @@ const lessonValidation = (schema) => (req, res, next) => {
  *             properties:
  *               lesson_theme:
  *                 type: string
- *                 description: The theme of the lesson.
+ *                 description: Lesson ning mavzusi.
  *               lesson_number:
  *                 type: number
- *                 description: The number of the lesson.
+ *                 description: Lesson ning raqami.
  *               group_id:
  *                 type: string
- *                 description: The ID of the group associated with the lesson.
+ *                 description: Lesson bilan bog‘liq Group ning ID si.
  *               lesson_date:
  *                 type: string
  *                 format: date
- *                 description: The date of the lesson.
+ *                 description: Lesson ning sanasi.
  *     responses:
  *       201:
- *         description: Lesson created successfully.
+ *         description: Lesson muvaffaqiyatli yaratildi.
  *       500:
- *         description: Internal server error.
-*/
-lesson.post('/post', lessonValidation(postLessonValidationSchema), postLesson);
+ *         description: Ichki server xatosi.
+ */
+lesson.post("/post", lessonValidation(postLessonValidationSchema), postLesson);
 
 /**
  * @swagger
  * /lesson/get:
  *   get:
- *     summary: Get all lessons
+ *     summary: Barcha Lesson larni olish
  *     tags: [Lesson]
- *     description: Retrieve a list of all lessons.
+ *     description: Barcha Lesson lar ro‘yxatini olish.
  *     responses:
  *       200:
- *         description: A list of lessons.
+ *         description: Lesson lar ro‘yxati.
  *       500:
- *         description: Internal server error.
-*/
-lesson.get('/get', getLesson);
+ *         description: Ichki server xatosi.
+ */
+lesson.get("/get", getLesson);
 
 /**
  * @swagger
  * /lesson/getById/{id}:
  *   get:
- *     summary: Get lesson by ID
+ *     summary: Lesson ni ID bo‘yicha olish
  *     tags: [Lesson]
- *     description: Retrieve a lesson by its ID.
+ *     description: Lesson ni uning ID si bo‘yicha olish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *           description: The ID of the lesson.
+ *           description: Olinadigan Lesson ning ID si.
  *     responses:
  *       200:
- *         description: Lesson retrieved successfully.
+ *         description: Lesson muvaffaqiyatli olindi.
  *       404:
- *         description: Lesson not found.
+ *         description: Lesson topilmadi.
  *       500:
- *         description: Internal server error.
-*/
-lesson.get('/getById/:id', getLessonById);
+ *         description: Ichki server xatosi.
+ */
+lesson.get("/getById/:id", getLessonById);
 
 /**
  * @swagger
  * /lesson/update/{id}:
  *   patch:
- *     summary: Update lesson by ID
+ *     summary: Lesson ni ID bo‘yicha yangilash
  *     tags: [Lesson]
- *     description: Update a lesson by its ID with the provided details.
+ *     description: Lesson ni uning ID si bo‘yicha berilgan ma'lumotlar bilan yangilash.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *           description: The ID of the lesson to update.
+ *           description: Yangilanadigan Lesson ning ID si.
  *     requestBody:
  *       required: true
  *       content:
@@ -121,49 +121,53 @@ lesson.get('/getById/:id', getLessonById);
  *             properties:
  *               lesson_theme:
  *                 type: string
- *                 description: The theme of the lesson.
+ *                 description: Lesson ning mavzusi.
  *               lesson_number:
  *                 type: number
- *                 description: The number of the lesson.
+ *                 description: Lesson ning raqami.
  *               group_id:
  *                 type: string
- *                 description: The ID of the group associated with the lesson.
+ *                 description: Lesson bilan bog‘liq Group ning ID si.
  *               lesson_date:
  *                 type: string
  *                 format: date
- *                 description: The date of the lesson.
+ *                 description: Lesson ning sanasi.
  *     responses:
  *       200:
- *         description: Lesson updated successfully.
+ *         description: Lesson muvaffaqiyatli yangilandi.
  *       404:
- *         description: Lesson not found.
+ *         description: Lesson topilmadi.
  *       500:
- *         description: Internal server error.
-*/
-lesson.patch('/update/:id', lessonValidation(updateLessonValidationSchema), updateLesson);
+ *         description: Ichki server xatosi.
+ */
+lesson.patch(
+  "/update/:id",
+  lessonValidation(updateLessonValidationSchema),
+  updateLesson
+);
 
 /**
  * @swagger
  * /lesson/delete/{id}:
  *   delete:
- *     summary: Delete lesson by ID
+ *     summary: Lesson ni ID bo‘yicha o‘chirish
  *     tags: [Lesson]
- *     description: Delete a lesson by its ID.
+ *     description: Lesson ni uning ID si bo‘yicha o‘chirish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: The ID of the lesson to delete.
+ *           description: O‘chiriladigan Lesson ning ID si.
  *     responses:
  *       200:
- *         description: Lesson deleted successfully.
+ *         description: Lesson muvaffaqiyatli o‘chirildi.
  *       404:
- *         description: Lesson not found.
+ *         description: Lesson topilmadi.
  *       500:
- *         description: Internal server error.
-*/
-lesson.delete('/delete/:id', deleteLesson);
+ *         description: Ichki server xatosi.
+ */
+lesson.delete("/delete/:id", deleteLesson);
 
 module.exports = { lesson };

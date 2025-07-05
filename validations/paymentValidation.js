@@ -2,36 +2,43 @@ const JOI = require("joi");
 
 exports.postPaymentValidationSchema = JOI.object({
   students_id: JOI.string().required().messages({
-    "string.base": "Talaba identifikatori qator boʻlishi kerak!",
-    "string.empty": "Talaba identifikatori kiritilishi shart!",
+    "string.base": "Students ID string turida boʻlishi kerak!",
+    "string.empty": "Students ID kiritilishi shart!",
+    "any.required": "Students ID kiritilishi shart!",
   }),
   payment_last_date: JOI.date().required().messages({
-    "date.base": "To'lov oxirgi sanasi to'g'ri sana bo'lishi kerak!",
-    "date.empty": "To'lov oxirgi sanasi kiritilishi shart!",
+    "date.base": "Payment last date date turida boʻlishi kerak!",
+    "date.empty": "Payment last date kiritilishi shart!",
+    "any.required": "Payment last date kiritilishi shart!",
   }),
   payment_date: JOI.date().required().messages({
-    "date.base": "To'lov sanasi to'g'ri sana bo'lishi kerak!",
-    "date.empty": "To'lov sanasi kiritilishi shart!",
+    "date.base": "Payment date date turida boʻlishi kerak!",
+    "date.empty": "Payment date kiritilishi shart!",
+    "any.required": "Payment date kiritilishi shart!",
   }),
   price: JOI.number().integer().min(1).required().messages({
-    "number.base": "Narx raqam bo'lishi kerak!",
-    "number.empty": "Narx kiritilishi shart!",
-    "number.min": "Narx kamida 1 bo'lishi kerak!",
-    "number.max": "Narx eng ko'p 1000000 bo'lishi kerak!",
+    "number.base": "Price number turida boʻlishi kerak!",
+    "number.empty": "Price kiritilishi shart!",
+    "number.min": "Price kamida 1 boʻlishi kerak!",
+    "number.max": "Price eng koʻpi bilan 1000000 boʻlishi kerak!",
+    "any.required": "Price kiritilishi shart!",
   }),
   is_paid: JOI.boolean().required().messages({
-    "boolean.base": "To'lov holati boolean bo'lishi kerak!",
-    "boolean.empty": "To'lov holati kiritilishi shart!",
+    "boolean.base": "Is paid boolean turida boʻlishi kerak!",
+    "boolean.empty": "Is paid kiritilishi shart!",
+    "any.required": "Is paid kiritilishi shart!",
   }),
   total_attent: JOI.number().integer().min(0).required().messages({
-    "number.base": "Jami qatnashuv raqam bo'lishi kerak!",
-    "number.empty": "Jami qatnashuv kiritilishi shart!",
-    "number.min": "Jami qatnashuv kamida 0 bo'lishi kerak!",
-    "number.max": "Jami qatnashuv eng ko'p 100 bo'lishi kerak!",
+    "number.base": "Total attent number turida boʻlishi kerak!",
+    "number.empty": "Total attent kiritilishi shart!",
+    "number.min": "Total attent kamida 0 boʻlishi kerak!",
+    "number.max": "Total attent eng koʻpi bilan 100 boʻlishi kerak!",
+    "any.required": "Total attent kiritilishi shart!",
   }),
-}); // ----postPaymentValidationSchema
+});
 
-exports.updatePaymentValidationSchema = exports.postPaymentValidationSchema.fork(
-  Object.keys(exports.postPaymentValidationSchema.describe().keys),
-  (schema) => schema.optional()
-); // ----updatePaymentValidationSchema
+exports.updatePaymentValidationSchema =
+  exports.postPaymentValidationSchema.fork(
+    Object.keys(exports.postPaymentValidationSchema.describe().keys),
+    (schema) => schema.optional()
+  );

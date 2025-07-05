@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const reason_lid = Router();
 
 const {
@@ -7,12 +7,12 @@ const {
   getReason_LidById,
   updateReason_Lid,
   deleteReason_Lid,
-} = require('../controllers/reason_lid.controller');
+} = require("../controllers/reason_lid.controller");
 
 const {
   postReasonLidValidationSchema,
   updateReasonLidValidationSchema,
-} = require('../validations/reason_lidValidation');
+} = require("../validations/reason_lidValidation");
 const reasonLidValidation = (schema) => (req, res, next) => {
   const validationResult = schema.validate(req.body);
   if (validationResult.error) {
@@ -28,9 +28,9 @@ const reasonLidValidation = (schema) => (req, res, next) => {
  * @swagger
  * /reason_lid/post:
  *   post:
- *     summary: Create a new reason for lid
+ *     summary: Yangi Reason_Lid yaratish
  *     tags: [Reason_Lid]
- *     description: Create a new reason for lid with the provided details.
+ *     description: Yangi Reason_Lid ni berilgan ma'lumotlar bilan yaratish.
  *     requestBody:
  *       required: true
  *       content:
@@ -40,68 +40,72 @@ const reasonLidValidation = (schema) => (req, res, next) => {
  *             properties:
  *               reason:
  *                 type: string
- *                 description: The name of the reason for lid.
+ *                 description: Reason_Lid ning nomi.
  *     responses:
  *       201:
- *         description: Reason for lid created successfully.
+ *         description: Reason_Lid muvaffaqiyatli yaratildi.
  *       500:
- *         description: Internal server error.
-*/
-reason_lid.post('/post', reasonLidValidation(postReasonLidValidationSchema), postReason_Lid);
+ *         description: Ichki server xatosi.
+ */
+reason_lid.post(
+  "/post",
+  reasonLidValidation(postReasonLidValidationSchema),
+  postReason_Lid
+);
 
 /**
  * @swagger
  * /reason_lid/get:
  *   get:
- *     summary: Retrieve all reasons for lid
+ *     summary: Barcha Reason_Lid larni olish
  *     tags: [Reason_Lid]
- *     description: Get a list of all reasons for lid.
+ *     description: Barcha Reason_Lid lar ro‘yxatini olish.
  *     responses:
  *       200:
- *         description: List of reasons for lid retrieved successfully.
+ *         description: Reason_Lid lar ro‘yxati muvaffaqiyatli olindi.
  *       500:
- *         description: Internal server error.
-*/
-reason_lid.get('/get', getReason_Lid);
+ *         description: Ichki server xatosi.
+ */
+reason_lid.get("/get", getReason_Lid);
 
 /**
  * @swagger
  * /reason_lid/getById/{id}:
  *   get:
- *     summary: Retrieve a reason for lid by ID
+ *     summary: Reason_Lid ni ID bo‘yicha olish
  *     tags: [Reason_Lid]
- *     description: Get a specific reason for lid by its ID.
+ *     description: Reason_Lid ni uning ID si bo‘yicha olish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: The ID of the reason for lid.
+ *           description: Olinadigan Reason_Lid ning ID si.
  *     responses:
  *       '200':
- *         description: Reason for lid retrieved successfully.
+ *         description: Reason_Lid muvaffaqiyatli olindi.
  *       '404':
- *         description: Reason for lid not found.
+ *         description: Reason_Lid topilmadi.
  *       '500':
- *         description: Internal server error.
-*/
-reason_lid.get('/getById/:id', getReason_LidById);
+ *         description: Ichki server xatosi.
+ */
+reason_lid.get("/getById/:id", getReason_LidById);
 
 /**
  * @swagger
  * /reason_lid/update/{id}:
  *   put:
- *     summary: Update a reason for lid by ID
+ *     summary: Reason_Lid ni ID bo‘yicha yangilash
  *     tags: [Reason_Lid]
- *     description: Update a specific reason for lid by its ID with the provided details.
+ *     description: Reason_Lid ni uning ID si bo‘yicha berilgan ma'lumotlar bilan yangilash.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: The ID of the reason for lid to update.
+ *           description: Yang “…ilanadigan Reason_Lid ning ID si.
  *     requestBody:
  *       required: true
  *       content:
@@ -111,39 +115,43 @@ reason_lid.get('/getById/:id', getReason_LidById);
  *             properties:
  *               reason:
  *                 type: string
- *                 description: The updated name of the reason for lid.
+ *                 description: Reason_Lid ning yangilangan nomi.
  *     responses:
  *       '200':
- *         description: Reason for lid updated successfully.
+ *         description: Reason_Lid muvaffaqiyatli yangilandi.
  *       '404':
- *         description: Reason for lid not found.
+ *         description: Reason_Lid topilmadi.
  *       '500':
- *         description: Internal Server Error!
-*/
-reason_lid.put('/update/:id', reasonLidValidation(updateReasonLidValidationSchema), updateReason_Lid);
+ *         description: Ichki server xatosi!
+ */
+reason_lid.put(
+  "/update/:id",
+  reasonLidValidation(updateReasonLidValidationSchema),
+  updateReason_Lid
+);
 
 /**
  * @swagger
  * /reason_lid/delete/{id}:
  *   delete:
- *     summary: Delete a reason for lid by ID
+ *     summary: Reason_Lid ni ID bo‘yicha o‘chirish
  *     tags: [Reason_Lid]
- *     description: Delete a specific reason for lid by its ID.
+ *     description: Reason_Lid ni uning ID si bo‘yicha o‘chirish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: The ID of the reason for lid to delete.
+ *           description: O‘chiriladigan Reason_Lid ning ID si.
  *     responses:
  *       200:
- *         description: Reason for lid deleted successfully.
+ *         description: Reason_Lid muvaffaqiyatli o‘chirildi.
  *       404:
- *         description: Reason for lid not found.
+ *         description: Reason_Lid topilmadi.
  *       500:
- *         description: Internal server error.
-*/
-reason_lid.delete('/delete/:id', deleteReason_Lid);
+ *         description: Ichki server xatosi.
+ */
+reason_lid.delete("/delete/:id", deleteReason_Lid);
 
 module.exports = { reason_lid };

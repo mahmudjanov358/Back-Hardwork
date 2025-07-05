@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const payment = Router();
 
 const {
@@ -7,15 +7,17 @@ const {
   getPaymentById,
   updatePayment,
   deletePayment,
-} = require('../controllers/payment.controller');
+} = require("../controllers/payment.controller");
 const {
   postPaymentValidationSchema,
   updatePaymentValidationSchema,
-} = require('../validations/paymentValidation');
-const paymentValidation = schema => (req, res, next) => {
+} = require("../validations/paymentValidation");
+const paymentValidation = (schema) => (req, res, next) => {
   const validationResult = schema.validate(req.body);
   if (validationResult.error) {
-    return res.status(400).json({ message: validationResult.error.details[0].message });
+    return res
+      .status(400)
+      .json({ message: validationResult.error.details[0].message });
   } else {
     next();
   }
@@ -25,9 +27,9 @@ const paymentValidation = schema => (req, res, next) => {
  * @swagger
  * /payment/post:
  *   post:
- *     summary: Create a new Payment item
+ *     summary: Yangi Payment yaratish
  *     tags: [Payment]
- *     description: Create a new Payment item with the provided details.
+ *     description: Yangi Payment ni berilgan ma'lumotlar bilan yaratish.
  *     requestBody:
  *       required: true
  *       content:
@@ -37,85 +39,89 @@ const paymentValidation = schema => (req, res, next) => {
  *             properties:
  *               student_id:
  *                 type: string
- *                 description: The payment ID of the lid item.
+ *                 description: Talabaning ID si.
  *               payment_last_date:
  *                 type: string
  *                 format: date
- *                 description: 
+ *                 description: Payment ning oxirgi to‘lov sanasi.
  *               payment_date:
  *                 type: string
  *                 format: date
- *                 description: 
+ *                 description: Payment ning to‘lov sanasi.
  *               price:
  *                 type: number
- *                 description: 
+ *                 description: Payment ning summasi.
  *               is_paid:
  *                 type: boolean
- *                 description: 
+ *                 description: Payment to‘langan yoki to‘lanmaganligini ko‘rsatadi.
  *               total_attent:
  *                 type: string
- *                 description: 
+ *                 description: Payment ga tegishli umumiy ishtirok.
  *     responses:
  *       201:
- *         description: Payment item created successfully
+ *         description: Payment muvaffaqiyatli yaratildi.
  *       500:
- *         description: Internal Server Error
-*/
-payment.post('/post', paymentValidation(postPaymentValidationSchema), postPayment);
+ *         description: Ichki server xatosi.
+ */
+payment.post(
+  "/post",
+  paymentValidation(postPaymentValidationSchema),
+  postPayment
+);
 
 /**
  * @swagger
  * /payment/get:
- *   get:
- *     summary: Retrieve all Payment items
+ *  get:
+ *     summary: Barcha Payment larni olish
  *     tags: [Payment]
- *     description: Get a list of all payment items.
+ *     description: Barcha Payment lar ro‘yxatini olish.
  *     responses:
  *       200:
- *         description: Successfully retrieved paymnent items.
+ *         description: Payment lar muvaffaqiyatli olindi.
  *       500:
- *         description: Internal Server Error!
-*/
-payment.get('/get', getPayment);
+ *         description: Ichki server xatosi!
+ */
+payment.get("/get", getPayment);
 
 /**
  * @swagger
  * /payment/getById/{id}:
  *   get:
- *     summary: Retrieve a Payment item by ID
+ *     summary: Payment ni ID bo‘yicha olish
  *     tags: [Payment]
- *     description: Get details of a specific payment item by its ID.
+ *     description: Payment ni uning ID si bo‘yicha olish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: The ID of the payment item.
+ *           description: Olinadigan Payment ning ID si.
  *     responses:
  *       200:
- *         description: Details of the payment item found!
+ *         description: Payment ma'lumotlari topildi!
  *       404:
- *         description: Payment not found!
+ *         description: Payment topilmadi!
  *       500:
- *         description: Internal Server Error!
-*/
-payment.get('/getById/:id', getPaymentById);
+ *         description: Ichki server xatosi!
+ */
+payment.get("/getById/:id", getPaymentById);
 
 /**
  * @swagger
  * /payment/update/{id}:
  *   patch:
- *     summary: Update a Payment item by ID
+ *     summary: Payment ni ID bo‘yicha yangilash
  *     tags: [Payment]
- *     description: Update details of a specific payment item by its ID.
+ *     description: Payment ni uning ID si bo‘yicha berilgan ma'lumotlar bilan yangilash.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: The ID of the payment item to update.
+ *           description: Yangilanadigan Payment ning ID si.
  *     requestBody:
  *       required: true
  *       content:
@@ -125,56 +131,60 @@ payment.get('/getById/:id', getPaymentById);
  *             properties:
  *               student_id:
  *                 type: string
- *                 description: The payment ID of the lid item.
+ *                 description: Talabaning ID si.
  *               payment_last_date:
  *                 type: string
  *                 format: date
- *                 description: 
+ *                 description: Payment ning oxirgi to‘lov sanasi.
  *               payment_date:
  *                 type: string
  *                 format: date
- *                 description: 
+ *                 description: Payment ning to‘lov sanasi.
  *               price:
  *                 type: number
- *                 description: 
+ *                 description: Payment ning summasi.
  *               is_paid:
  *                 type: boolean
- *                 description: 
+ *                 description: Payment to‘langan yoki to‘lanmaganligini ko‘rsatadi.
  *               total_attent:
  *                 type: string
- *                 description: 
+ *                 description: Payment ga tegishli umumiy ishtirok.
  *     responses:
  *       200:
- *         description: Payment item updated successfully!
+ *         description: Payment muvaffaqiyatli yangilandi!
  *       404:
- *         description: Payment not found!
+ *         description: Payment topilmadi!
  *       500:
- *         description: Internal Server Error!
-*/
-payment.patch('/update/:id', paymentValidation(updatePaymentValidationSchema), updatePayment);
+ *         description: Ichki server xatosi!
+ */
+payment.patch(
+  "/update/:id",
+  paymentValidation(updatePaymentValidationSchema),
+  updatePayment
+);
 
 /**
  * @swagger
  * /payment/delete/{id}:
  *   delete:
- *     summary: Delete a payment item by ID
+ *     summary: Payment ni ID bo‘yicha o‘chirish
  *     tags: [Payment]
- *     description: Delete a specific payment item by its ID.
+ *     description: Payment ni uning ID si bo‘yicha o‘chirish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: The ID of the payment item to delete.
+ *           description: O‘chiriladigan Payment ning ID si.
  *     responses:
  *       200:
- *         description: Payment item deleted successfully!
+ *         description: Payment muvaffaqiyatli o‘chirildi!
  *       404:
- *         description: Payment item not found!
+ *         description: Payment topilmadi!
  *       500:
- *         description: Internal Server Error!
-*/
-payment.delete('/delete/:id', deletePayment);
+ *         description: Ichki server xatosi!
+ */
+payment.delete("/delete/:id", deletePayment);
 
 module.exports = { payment };

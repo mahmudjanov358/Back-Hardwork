@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const student_lesson = Router();
 
 const {
@@ -7,12 +7,13 @@ const {
   getStudent_LessonById,
   updateStudent_Lesson,
   deleteStudent_Lesson,
-} = require('../controllers/student_lesson.controller');
+} = require("../controllers/student_lesson.controller");
 
 const {
   postStudentLessonValidationSchema,
   updateStudentLessonValidationSchema,
-} = require('../validations/student_lessonValidation');
+} = require("../validations/student_lessonValidation");
+
 const studentLessonValidation = (schema) => (req, res, next) => {
   const validationResult = schema.validate(req.body);
   if (validationResult.error) {
@@ -28,9 +29,9 @@ const studentLessonValidation = (schema) => (req, res, next) => {
  * @swagger
  * /student_lesson/post:
  *   post:
- *     summary: Create a new Student Lesson item
+ *     summary: Yangi Student Lesson yozuvini yaratish
  *     tags: [Student_Lesson]
- *     description: Create a new student lesson item with the provided details.
+ *     description: Kiritilgan ma'lumotlar asosida yangi Student Lesson (talaba-dars) yozuvini yaratish.
  *     requestBody:
  *       required: true
  *       content:
@@ -40,80 +41,88 @@ const studentLessonValidation = (schema) => (req, res, next) => {
  *             properties:
  *               lesson_id:
  *                 type: string
- *                 description: 
+ *                 description: Darsning ID raqami.
  *               student_id:
  *                 type: string
- *                 description: 
+ *                 description: Talabaning ID raqami.
  *               is_there:
  *                 type: boolean
- *                 description: 
+ *                 description: Darsda qatnashganlik holati (true/false).
  *               reason:
  *                 type: string
- *                 description: 
+ *                 description: Sabab (agar qatnashmagan bo‘lsa).
  *               be_paid:
  *                 type: boolean
- *                 description: 
+ *                 description: To‘lov holati (to‘langan — true, to‘lanmagan — false).
  *     responses:
  *       201:
- *         description: Student Lesson item created successfully!
+ *         description: Student Lesson yozuvi muvaffaqiyatli yaratildi.
+ *       400:
+ *         description: Noto‘g‘ri ma'lumot yuborildi.
  *       500:
- *         description: Internal Server Error!
-*/
-student_lesson.post('/post', studentLessonValidation(postStudentLessonValidationSchema), postStudent_Lesson);
+ *         description: Ichki server xatosi yuz berdi.
+ */
+student_lesson.post(
+  "/post",
+  studentLessonValidation(postStudentLessonValidationSchema),
+  postStudent_Lesson
+);
 
 /**
  * @swagger
  * /student_lesson/get:
  *   get:
- *     summary: Retrieve all Student Lesson items
+ *     summary: Barcha Student Lesson yozuvlarini olish
  *     tags: [Student_Lesson]
- *     description: Get a list of all Student Lesson items.
+ *     description: Tizimdagi barcha Student Lesson (talaba-dars) yozuvlarini olish.
  *     responses:
  *       200:
- *         description: Successfully retrieved student lesson items.
+ *         description: Yozuvlar muvaffaqiyatli qaytarildi.
  *       500:
- *         description: Internal Server Error!
-*/
-student_lesson.get('/get', getStudent_Lesson);
+ *         description: Ichki server xatosi yuz berdi.
+ */
+student_lesson.get("/get", getStudent_Lesson);
 
 /**
  * @swagger
  * /student_lesson/getById/{id}:
  *   get:
- *     summary: Retrieve a Student Lesson item by ID
+ *     summary: ID orqali Student Lesson yozuvini olish
  *     tags: [Student_Lesson]
- *     description: Get details of a specific student lesson item by its ID.
+ *     description: Ko‘rsatilgan ID asosida Student Lesson yozuvini olish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
+ *         description: Yozuvning ID raqami.
  *         schema:
  *           type: string
- *         description: The ID of the student lesson item.
+ *           description: Yozuvning noyob identifikatori.
  *     responses:
  *       200:
- *         description: Details of the Student Lesson item found!
+ *         description: Student Lesson yozuvi topildi.
  *       404:
- *         description: Student Lesson not found!
+ *         description: Yozuv topilmadi.
  *       500:
- *         description: Internal Server Error!
-*/
-student_lesson.get('/getById/:id', getStudent_LessonById);
+ *         description: Ichki server xatosi yuz berdi.
+ */
+student_lesson.get("/getById/:id", getStudent_LessonById);
 
 /**
  * @swagger
  * /student_lesson/update/{id}:
  *   patch:
- *     summary: Update a Student Lesson item by ID
+ *     summary: ID orqali Student Lesson yozuvini yangilash
  *     tags: [Student_Lesson]
- *     description: Update details of a specific student lesson item by its ID.
+ *     description: Student Lesson yozuvini ID asosida yangilash.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
+ *         description: Yangilanadigan yozuvning ID raqami.
  *         schema:
  *           type: string
- *         description: The ID of the student lesson item to update.
+ *           description: Yozuvning noyob identifikatori.
  *     requestBody:
  *       required: true
  *       content:
@@ -123,51 +132,56 @@ student_lesson.get('/getById/:id', getStudent_LessonById);
  *             properties:
  *               lesson_id:
  *                 type: string
- *                 description: 
+ *                 description: Darsning yangi ID raqami.
  *               student_id:
  *                 type: string
- *                 description: 
+ *                 description: Talabaning yangi ID raqami.
  *               is_there:
  *                 type: boolean
- *                 description: 
+ *                 description: Qatnashganlik holati.
  *               reason:
  *                 type: string
- *                 description: 
+ *                 description: Sabab (ixtiyoriy).
  *               be_paid:
  *                 type: boolean
- *                 description: 
+ *                 description: To‘lov holati.
  *     responses:
  *       200:
- *         description: Student Lesson item updated successfully!
+ *         description: Student Lesson yozuvi muvaffaqiyatli yangilandi.
  *       404:
- *         description: Student Lesson not found!
+ *         description: Yozuv topilmadi.
  *       500:
- *         description: Internal Server Error!
-*/
-student_lesson.patch('/update/:id', studentLessonValidation(updateStudentLessonValidationSchema), updateStudent_Lesson);
+ *         description: Ichki server xatosi yuz berdi.
+ */
+student_lesson.patch(
+  "/update/:id",
+  studentLessonValidation(updateStudentLessonValidationSchema),
+  updateStudent_Lesson
+);
 
 /**
  * @swagger
  * /student_lesson/delete/{id}:
  *   delete:
- *     summary: Delete a Student Lesson item by ID
+ *     summary: ID orqali Student Lesson yozuvini o‘chirish
  *     tags: [Student_Lesson]
- *     description: Delete a specific student lesson item by its ID.
+ *     description: Ko‘rsatilgan ID asosida Student Lesson yozuvini tizimdan o‘chirish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
+ *         description: O‘chiriladigan yozuvning ID raqami.
  *         schema:
  *           type: string
- *         description: The ID of the student lesson item to delete.
+ *           description: Yozuvning noyob identifikatori.
  *     responses:
  *       200:
- *         description: Student Lesson item deleted successfully!
+ *         description: Student Lesson yozuvi muvaffaqiyatli o‘chirildi.
  *       404:
- *         description: Student Lesson not found!
+ *         description: Yozuv topilmadi.
  *       500:
- *         description: Internal Server Error!
-*/
-student_lesson.delete('/delete/:id', deleteStudent_Lesson);
+ *         description: Ichki server xatosi yuz berdi.
+ */
+student_lesson.delete("/delete/:id", deleteStudent_Lesson);
 
 module.exports = { student_lesson };

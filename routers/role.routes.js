@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const role = Router();
 
 const {
@@ -6,17 +6,19 @@ const {
   getRole,
   getRoleById,
   updateRole,
-  deleteRole
-} = require('../controllers/role.controller');
+  deleteRole,
+} = require("../controllers/role.controller");
 
 const {
   postRoleValidationSchema,
   updateRoleValidationSchema,
-} = require('../validations/roleValidation')
-const roleValidation = schema => (req, res, next) => {
+} = require("../validations/roleValidation");
+const roleValidation = (schema) => (req, res, next) => {
   const validationResult = schema.validate(req.body);
   if (validationResult.error) {
-    return res.status(400).json({ message: validationResult.error.details[0].message });
+    return res
+      .status(400)
+      .json({ message: validationResult.error.details[0].message });
   } else {
     next();
   }
@@ -26,9 +28,9 @@ const roleValidation = schema => (req, res, next) => {
  * @swagger
  * /role/post:
  *  post:
- *    summary: Create a new Role
+ *    summary: Yangi Role yaratish
  *    tags: [Role]
- *    description: Create a new role with the provided details.
+ *    description: Yangi Role ni berilgan ma'lumotlar bilan yaratish.
  *    requestBody:
  *      required: true
  *      content:
@@ -38,70 +40,68 @@ const roleValidation = schema => (req, res, next) => {
  *            properties:
  *              name:
  *                type: string
- *                description: The name of the role.
+ *                description: Role ning nomi.
  *    responses:
  *      201:
- *        description: Role created successfully!
+ *        description: Role muvaffaqiyatli yaratildi!
  *      500:
- *        description: Internal Server Error!
-*/
-role.post('/post',
-  roleValidation(postRoleValidationSchema),
-  postRole);
+ *        description: Ichki server xatosi!
+ */
+role.post("/post", roleValidation(postRoleValidationSchema), postRole);
 
 /**
  * @swagger
  * /role/get:
  *  get:
- *    summary: Retrieve all Roles
+ *    summary: Barcha Role larni olish
  *    tags: [Role]
- *    description: Get a list of all roles.
+ *    description: Barcha Role lar ro‘yxatini olish.
  *    responses:
  *      200:
- *        description: A list of roles!
+ *        description: Role lar ro‘yxati muvaffaqiyatli olindi!
  *      500:
- *        description: Internal Server Error!
-*/
-role.get('/get', getRole);
+ *        description: Ichki server xatosi!
+ */
+role.get("/get", getRole);
 
 /**
  * @swagger
  * /role/getById/{id}:
  *  get:
- *    summary: Retrieve a Role by ID
+ *    summary: Role ni ID bo‘yicha olish
  *    tags: [Role]
- *    description: Get details of a specific role by its ID.
+ *    description: Role ni uning ID si bo‘yicha olish.
  *    parameters:
  *      - in: path
  *        name: id
  *        required: true
- *        description: The ID of the role to retrieve.
  *        schema:
  *          type: string
+ *          description: Olinadigan Role ning ID si.
  *    responses:
  *      200:
- *        description: Role details retrieved successfully!
+ *        description: Role ma'lumotlari muvaffaqiyatli olindi!
  *      404:
- *        description: Role not found!
+ *        description: Role topilmadi!
  *      500:
- *        description: Internal Server Error!
-*/
-role.get('/getById/:id', getRoleById);
+ *        description: Ichki server xatosi!
+ */
+role.get("/getById/:id", getRoleById);
 
 /**
  * @swagger
  * /role/update/{id}:
  *  patch:
- *    summary: Update a Role by ID
+ *    summary: Role ni ID bo‘yicha yangilash
  *    tags: [Role]
- *    description: Update details of a specific role by its ID.
+ *    description: Role ni uning ID si bo‘yicha berilgan ma'lumotlar bilan yangilash.
  *    parameters:
  *      - in: path
  *        name: id
  *        required: true
- *        description: The ID of the role to update.
  *        schema:
  *          type: string
+ *          description: Yangilanadigan Role ning ID si.
  *    requestBody:
  *      required: true
  *      content:
@@ -111,41 +111,43 @@ role.get('/getById/:id', getRoleById);
  *            properties:
  *              name:
  *                type: string
- *                description: The name of the role.
+ *                description: Role ning yangilangan nomi.
  *    responses:
  *      200:
- *        description: Role updated successfully.
+ *        description: Role muvaffaqiyatli yangilandi.
  *      404:
- *        description: Role not found!
+ *        description: Role topilmadi!
  *      500:
- *        description: Internal Server Error!
-*/
-role.put('/update/:id',
+ *        description: Ichki server xatosi!
+ */
+role.patch(
+  "/update/:id",
   roleValidation(updateRoleValidationSchema),
-  updateRole);
+  updateRole
+);
 
 /**
  * @swagger
  * /role/delete/{id}:
  *  delete:
- *    summary: Delete a Role by ID
+ *    summary: Role ni ID bo‘yicha o‘chirish
  *    tags: [Role]
- *    description: Delete a specific role by its ID.
+ *    description: Role ni uning ID si bo‘yicha o‘chirish.
  *    parameters:
  *      - in: path
  *        name: id
  *        required: true
- *        description: The ID of the role to delete.
  *        schema:
  *          type: string
+ *          description: O‘chiriladigan Role ning ID si.
  *    responses:
  *      200:
- *        description: Role deleted successfully.
+ *        description: Role muvaffaqiyatli o‘chirildi.
  *      404:
- *        description: Role not found!
+ *        description: Role topilmadi!
  *      500:
- *        description: Internal Server Error!
-*/
-role.delete('/delete/:id', deleteRole);
+ *        description: Ichki server xatosi!
+ */
+role.delete("/delete/:id", deleteRole);
 
 module.exports = { role };

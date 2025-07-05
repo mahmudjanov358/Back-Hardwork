@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const group_stuff = Router();
 
 const {
@@ -6,11 +6,11 @@ const {
   getGroup_Stuff,
   getGroup_StuffById,
   deleteGroup_Stuff,
-} = require('../controllers/group_stuff.controller');
+} = require("../controllers/group_stuff.controller");
 
 const {
   postGroupStuffValidationSchema,
-} = require('../validations/group_stuffValidation');
+} = require("../validations/group_stuffValidation");
 const groupStuffValidation = (schema) => (req, res, next) => {
   const validationResult = schema.validate(req.body);
   if (validationResult.error) {
@@ -26,9 +26,9 @@ const groupStuffValidation = (schema) => (req, res, next) => {
  * @swagger
  * /group_stuff/post:
  *   post:
- *     summary: Create a new group stuff
+ *     summary: Yangi Group_Stuff yaratish
  *     tags: [Group_Stuff]
- *     description: Create a new group stuff with the provided details.
+ *     description: Yangi Group_Stuff ni berilgan ma'lumotlar bilan yaratish.
  *     requestBody:
  *       required: true
  *       content:
@@ -38,81 +38,85 @@ const groupStuffValidation = (schema) => (req, res, next) => {
  *             properties:
  *               group_id:
  *                 type: string
- *                 description: The ID of the group.
+ *                 description: Guruhning ID si.
  *               stuff_id:
  *                 type: string
- *                 description: The ID of the stuff.
+ *                 description: Xodimning ID si.
  *     responses:
  *       201:
- *         description: Group stuff created successfully.
+ *         description: Group_Stuff muvaffaqiyatli yaratildi.
  *       400:
- *         description: Invalid request body.
+ *         description: Noto‘g‘ri so‘rov tanasi.
  *       500:
- *         description: Internal server error.
-*/
-group_stuff.post('/post', groupStuffValidation(postGroupStuffValidationSchema), postGroup_Stuff);
+ *         description: Ichki server xatosi.
+ */
+group_stuff.post(
+  "/post",
+  groupStuffValidation(postGroupStuffValidationSchema),
+  postGroup_Stuff
+);
 
 /**
  * @swagger
  * /group_stuff/get:
  *   get:
- *     summary: Get all group stuff
+ *     summary: Barcha Group_Stuff larni olish
  *     tags: [Group_Stuff]
- *     description: Retrieve a list of all group stuff.
+ *     description: Barcha Group_Stuff lar ro‘yxatini olish.
  *     responses:
  *       200:
- *         description: A list of group stuff.
+ *         description: Group_Stuff lar ro‘yxati.
  *       500:
- *         description: Internal server error.
-*/
-group_stuff.get('/get', getGroup_Stuff);
+ *         description: Ichki server xatosi.
+ */
+group_stuff.get("/get", getGroup_Stuff);
 
 /**
  * @swagger
  * /group_stuff/getById/{id}:
  *   get:
- *     summary: Get group stuff by ID
+ *     summary: Group_Stuff ni ID bo‘yicha olish
  *     tags: [Group_Stuff]
- *     description: Retrieve a group stuff by its ID.
+ *     description: Group_Stuff ni uning ID si bo‘yicha olish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: The ID of the group stuff.
+ *           description: Olinadigan Group_Stuff ning ID si.
  *     responses:
  *       200:
- *         description: Group stuff retrieved successfully.
+ *         description: Group_Stuff muvaffaqiyatli olindi.
  *       404:
- *         description: Group stuff not found.
+ *         description: Group_Stuff topilmadi.
  *       500:
- *         description: Internal server error.
-*/
-group_stuff.get('/getById/:id', getGroup_StuffById);
+ *         description: Ichki server xatosi.
+ */
+group_stuff.get("/getById/:id", getGroup_StuffById);
 
 /**
  * @swagger
  * /group_stuff/delete/{id}:
  *   delete:
- *     summary: Delete group stuff by ID
+ *     summary: Group_Stuff ni ID bo‘yicha o‘chirish
  *     tags: [Group_Stuff]
- *     description: Delete a group stuff by its ID.
+ *     description: Group_Stuff ni uning ID si bo‘yicha o‘chirish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: The ID of the group stuff to delete.
+ *           description: O‘chiriladigan Group_Stuff ning ID si.
  *     responses:
  *       200:
- *         description: Group stuff deleted successfully.
+ *         description: Group_Stuff muvaffaqiyatli o‘chirildi.
  *       404:
- *         description: Group stuff not found.
+ *         description: Group_Stuff topilmadi.
  *       500:
- *         description: Internal server error.
-*/
-group_stuff.delete('/delete/:id', deleteGroup_Stuff);
+ *         description: Ichki server xatosi.
+ */
+group_stuff.delete("/delete/:id", deleteGroup_Stuff);
 
 module.exports = { group_stuff };

@@ -2,28 +2,32 @@ const JOI = require("joi");
 
 exports.postStudentLessonValidationSchema = JOI.object({
   lesson_id: JOI.string().required().messages({
-    "string.base": "Dars identifikatori qator boʻlishi kerak!",
-    "string.empty": "Dars identifikatori kiritilishi shart!",
+    "string.base": "Lesson ID string turida bo‘lishi kerak!",
+    "string.empty": "Lesson ID kiritilishi shart!",
+    "any.required": "Lesson ID kiritilishi shart!",
   }),
   students_id: JOI.string().required().messages({
-    "string.base": "Talaba identifikatori qator boʻlishi kerak!",
-    "string.empty": "Talaba identifikatori kiritilishi shart!",
+    "string.base": "Student ID string turida bo‘lishi kerak!",
+    "string.empty": "Student ID kiritilishi shart!",
+    "any.required": "Student ID kiritilishi shart!",
   }),
   is_there: JOI.boolean().required().messages({
-    "boolean.base": "Borligi boolean bo'lishi kerak!",
-    "boolean.empty": "Borligi kiritilishi shart!",
+    "boolean.base": "Is There qiymati boolean turida bo‘lishi kerak!",
+    "any.required": "Is There kiritilishi shart!",
   }),
   reason: JOI.string().optional().messages({
-    "string.base": "Sabab qator boʻlishi kerak!",
-    "string.empty": "Sabab kiritilishi shart!",
+    "string.base": "Reason string turida bo‘lishi kerak!",
+    "string.empty": "Reason bo‘sh bo‘lmasligi kerak!",
   }),
   be_paid: JOI.boolean().required().messages({
-    "boolean.base": "To'lanishi kerak boolean bo'lishi kerak!",
-    "boolean.empty": "To'lanishi kerak kiritilishi shart!",
+    "boolean.base": "Be Paid qiymati boolean turida bo‘lishi kerak!",
+    "any.required": "Be Paid kiritilishi shart!",
   }),
 });
 
-exports.updateStudentLessonValidationSchema = exports.postStudentLessonValidationSchema.fork(
-  Object.keys(exports.postStudentLessonValidationSchema.describe().keys),
-  (schema) => schema.optional()
-); // ----updateStudentLessonValidationSchema
+// --- Yangilash uchun optional schema ---
+exports.updateStudentLessonValidationSchema =
+  exports.postStudentLessonValidationSchema.fork(
+    Object.keys(exports.postStudentLessonValidationSchema.describe().keys),
+    (schema) => schema.optional()
+  );
