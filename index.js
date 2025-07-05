@@ -1,6 +1,6 @@
 // ----Librarys
 const express = require("express");
-const { connect, version } = require("mongoose");
+const { connect } = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
 const swaggerJsdoc = require("swagger-jsdoc");
