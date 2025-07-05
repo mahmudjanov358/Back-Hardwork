@@ -13,6 +13,7 @@ const {
   postLidStatusValidationSchema,
   updateLidStatusValidationSchema,
 } = require("../validations/lid_statusValidation");
+
 const lidStatusValidation = (schema) => (req, res, next) => {
   const validationResult = schema.validate(req.body);
   if (validationResult.error) {
@@ -28,9 +29,9 @@ const lidStatusValidation = (schema) => (req, res, next) => {
  * @swagger
  * /lid_status/post:
  *   post:
- *     summary: Yangi Lid_Status yaratish
+ *     summary: Yangi Lid_Status yozuvini yaratish
  *     tags: [Lid_Status]
- *     description: Yangi Lid_Status ni berilgan ma'lumotlar bilan yaratish.
+ *     description: Kiritilgan ma'lumotlar asosida yangi Lid_Status yozuvini yaratish.
  *     requestBody:
  *       required: true
  *       content:
@@ -44,8 +45,10 @@ const lidStatusValidation = (schema) => (req, res, next) => {
  *     responses:
  *       201:
  *         description: Lid_Status muvaffaqiyatli yaratildi.
+ *       400:
+ *         description: Noto‘g‘ri yoki to‘liq bo‘lmagan ma'lumot yuborildi.
  *       500:
- *         description: Ichki server xatosi.
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 lid_status.post(
   "/post",
@@ -57,14 +60,14 @@ lid_status.post(
  * @swagger
  * /lid_status/get:
  *   get:
- *     summary: Barcha Lid_Status larni olish
+ *     summary: Barcha Lid_Status yozuvlarini olish
  *     tags: [Lid_Status]
- *     description: Barcha Lid_Status lar ro‘yxatini olish.
+ *     description: Tizimdagi barcha Lid_Status yozuvlarini olish.
  *     responses:
  *       200:
- *         description: Lid_Status lar ro‘yxati muvaffaqiyatli olindi.
+ *         description: Lid_Status ro‘yxati muvaffaqiyatli olindi.
  *       500:
- *         description: Ichki server xatosi.
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 lid_status.get("/get", getLid_Status);
 
@@ -72,40 +75,40 @@ lid_status.get("/get", getLid_Status);
  * @swagger
  * /lid_status/getById/{id}:
  *   get:
- *     summary: Lid_Status ni ID bo‘yicha olish
+ *     summary: ID orqali Lid_Status yozuvini olish
  *     tags: [Lid_Status]
- *     description: Lid_Status ni uning ID si bo‘yicha olish.
+ *     description: Ko‘rsatilgan ID orqali Lid_Status yozuvini olish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *           description: Olinadigan Lid_Status ning ID si.
+ *           description: Olish kerak bo‘lgan Lid_Status ning ID raqami.
  *     responses:
  *       200:
- *         description: Lid_Status muvaffaqiyatli olindi.
+ *         description: Lid_Status yozuvi muvaffaqiyatli topildi.
  *       404:
  *         description: Lid_Status topilmadi.
  *       500:
- *         description: Ichki server xatosi.
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 lid_status.get("/getById/:id", getLid_StatusById);
 
 /**
  * @swagger
  * /lid_status/update/{id}:
- *   put:
- *     summary: Lid_Status ni ID bo‘yicha yangilash
+ *   patch:
+ *     summary: ID orqali Lid_Status yozuvini yangilash
  *     tags: [Lid_Status]
- *     description: Lid_Status ni uning ID si bo‘yicha yangilash.
+ *     description: Berilgan ID asosida Lid_Status yozuvini yangilash.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *           description: Yangilanadigan Lid_Status ning ID si.
+ *           description: Yangilanadigan Lid_Status ning ID raqami.
  *     requestBody:
  *       required: true
  *       content:
@@ -119,12 +122,14 @@ lid_status.get("/getById/:id", getLid_StatusById);
  *     responses:
  *       200:
  *         description: Lid_Status muvaffaqiyatli yangilandi.
+ *       400:
+ *         description: Noto‘g‘ri yoki to‘liq bo‘lmagan ma'lumot yuborildi.
  *       404:
  *         description: Lid_Status topilmadi.
  *       500:
- *         description: Ichki server xatosi.
+ *         description: Serverda ichki xatolik yuz berdi.
  */
-lid_status.put(
+lid_status.patch(
   "/update/:id",
   lidStatusValidation(updateLidStatusValidationSchema),
   updateLid_Status
@@ -134,23 +139,23 @@ lid_status.put(
  * @swagger
  * /lid_status/delete/{id}:
  *   delete:
- *     summary: Lid_Status ni ID bo‘yicha o‘chirish
+ *     summary: ID orqali Lid_Status yozuvini o‘chirish
  *     tags: [Lid_Status]
- *     description: Lid_Status ni uning ID si bo‘yicha o‘chirish.
+ *     description: Ko‘rsatilgan ID orqali Lid_Status yozuvini o‘chirish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *           description: O‘chiriladigan Lid_Status ning ID si.
+ *           description: O‘chiriladigan Lid_Status ning ID raqami.
  *     responses:
  *       200:
  *         description: Lid_Status muvaffaqiyatli o‘chirildi.
  *       404:
  *         description: Lid_Status topilmadi.
  *       500:
- *         description: Ichki server xatosi.
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 lid_status.delete("/delete/:id", deleteLid_Status);
 

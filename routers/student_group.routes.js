@@ -27,9 +27,9 @@ const studentGroupValidation = (schema) => (req, res, next) => {
  * @swagger
  * /student_group/post:
  *   post:
- *     summary: Yangi Student Group yaratish
+ *     summary: Yangi Student_Group yozuvini yaratish
  *     tags: [Student_Group]
- *     description: Kiritilgan ma'lumotlar asosida yangi Student Group (talaba va guruh orasidagi bog‘lanish) yozuvini yaratish.
+ *     description: Kiritilgan ma'lumotlar asosida yangi Student_Group yozuvini yaratish.
  *     requestBody:
  *       required: true
  *       content:
@@ -39,13 +39,13 @@ const studentGroupValidation = (schema) => (req, res, next) => {
  *             properties:
  *               students_id:
  *                 type: string
- *                 description: Talabaga tegishli ID (student hujjatining ID raqami).
+ *                 description: Students ning ID raqami.
  *               group_id:
  *                 type: string
- *                 description: Guruhga tegishli ID (group hujjatining ID raqami).
+ *                 description: Group ning ID raqami.
  *     responses:
  *       201:
- *         description: Student Group muvaffaqiyatli yaratildi.
+ *         description: Student_Group yozuvi muvaffaqiyatli yaratildi.
  *       400:
  *         description: Noto‘g‘ri yoki to‘liq ma'lumot yuborildi.
  *       500:
@@ -61,12 +61,12 @@ student_group.post(
  * @swagger
  * /student_group/get:
  *   get:
- *     summary: Barcha Student Group yozuvlarini olish
+ *     summary: Barcha Student_Group yozuvlarini olish
  *     tags: [Student_Group]
- *     description: Tizimdagi barcha Student Group (talaba-guruh bog‘lanishlari) yozuvlarini olish.
+ *     description: Tizimdagi barcha Student_Group yozuvlarini olish.
  *     responses:
  *       200:
- *         description: Student Group ro‘yxati muvaffaqiyatli olindi.
+ *         description: Student_Group ro‘yxati muvaffaqiyatli olindi.
  *       500:
  *         description: Ichki server xatosi yuz berdi.
  */
@@ -76,22 +76,21 @@ student_group.get("/get", getStudent_Group);
  * @swagger
  * /student_group/getById/{id}:
  *   get:
- *     summary: ID orqali Student Group yozuvini olish
+ *     summary: ID orqali Student_Group yozuvini olish
  *     tags: [Student_Group]
- *     description: Ko‘rsatilgan ID asosida aniq bir Student Group yozuvini olish.
+ *     description: Ko‘rsatilgan ID asosida Student_Group yozuvini olish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: Olish kerak bo‘lgan Student Group yozuvining ID raqami.
  *         schema:
  *           type: string
- *           description: Student Group yozuvining noyob identifikatori.
+ *         description: Olish kerak bo‘lgan Student_Group yozuvining ID raqami.
  *     responses:
  *       200:
- *         description: Student Group yozuvi muvaffaqiyatli topildi.
+ *         description: Student_Group yozuvi muvaffaqiyatli topildi.
  *       404:
- *         description: Student Group yozuvi topilmadi.
+ *         description: Student_Group yozuvi topilmadi.
  *       500:
  *         description: Ichki server xatosi yuz berdi.
  */
@@ -101,22 +100,21 @@ student_group.get("/getById/:id", getStudent_GroupById);
  * @swagger
  * /student_group/delete/{id}:
  *   delete:
- *     summary: ID orqali Student Group yozuvini o‘chirish
+ *     summary: ID orqali Student_Group yozuvini o‘chirish
  *     tags: [Student_Group]
- *     description: Ko‘rsatilgan ID asosida Student Group yozuvini tizimdan o‘chirish.
+ *     description: Ko‘rsatilgan ID asosida Student_Group yozuvini tizimdan o‘chirish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: O‘chiriladigan Student Group yozuvining ID raqami.
  *         schema:
  *           type: string
- *           description: Student Group yozuvining noyob identifikatori.
+ *         description: O‘chiriladigan Student_Group yozuvining ID raqami.
  *     responses:
  *       200:
- *         description: Student Group yozuvi muvaffaqiyatli o‘chirildi.
+ *         description: Student_Group yozuvi muvaffaqiyatli o‘chirildi.
  *       404:
- *         description: Student Group yozuvi topilmadi.
+ *         description: Student_Group yozuvi topilmadi.
  *       500:
  *         description: Ichki server xatosi yuz berdi.
  */

@@ -29,9 +29,9 @@ const studentLessonValidation = (schema) => (req, res, next) => {
  * @swagger
  * /student_lesson/post:
  *   post:
- *     summary: Yangi Student Lesson yozuvini yaratish
+ *     summary: Yangi Student_Lesson yozuvini yaratish
  *     tags: [Student_Lesson]
- *     description: Kiritilgan ma'lumotlar asosida yangi Student Lesson (talaba-dars) yozuvini yaratish.
+ *     description: Kiritilgan ma'lumotlar asosida yangi Student_Lesson yozuvini yaratish.
  *     requestBody:
  *       required: true
  *       content:
@@ -41,22 +41,22 @@ const studentLessonValidation = (schema) => (req, res, next) => {
  *             properties:
  *               lesson_id:
  *                 type: string
- *                 description: Darsning ID raqami.
+ *                 description: Lesson ning ID raqami.
  *               student_id:
  *                 type: string
- *                 description: Talabaning ID raqami.
+ *                 description: Students ning ID raqami.
  *               is_there:
  *                 type: boolean
- *                 description: Darsda qatnashganlik holati (true/false).
+ *                 description: Lesson da qatnashganlik holati (true/false).
  *               reason:
  *                 type: string
- *                 description: Sabab (agar qatnashmagan bo‘lsa).
+ *                 description: Sabab (ixtiyoriy).
  *               be_paid:
  *                 type: boolean
  *                 description: To‘lov holati (to‘langan — true, to‘lanmagan — false).
  *     responses:
  *       201:
- *         description: Student Lesson yozuvi muvaffaqiyatli yaratildi.
+ *         description: Student_Lesson yozuvi muvaffaqiyatli yaratildi.
  *       400:
  *         description: Noto‘g‘ri ma'lumot yuborildi.
  *       500:
@@ -72,12 +72,12 @@ student_lesson.post(
  * @swagger
  * /student_lesson/get:
  *   get:
- *     summary: Barcha Student Lesson yozuvlarini olish
+ *     summary: Barcha Student_Lesson yozuvlarini olish
  *     tags: [Student_Lesson]
- *     description: Tizimdagi barcha Student Lesson (talaba-dars) yozuvlarini olish.
+ *     description: Tizimdagi barcha Student_Lesson yozuvlarini olish.
  *     responses:
  *       200:
- *         description: Yozuvlar muvaffaqiyatli qaytarildi.
+ *         description: Student_Lesson ro‘yxati muvaffaqiyatli qaytarildi.
  *       500:
  *         description: Ichki server xatosi yuz berdi.
  */
@@ -87,22 +87,21 @@ student_lesson.get("/get", getStudent_Lesson);
  * @swagger
  * /student_lesson/getById/{id}:
  *   get:
- *     summary: ID orqali Student Lesson yozuvini olish
+ *     summary: ID orqali Student_Lesson yozuvini olish
  *     tags: [Student_Lesson]
- *     description: Ko‘rsatilgan ID asosida Student Lesson yozuvini olish.
+ *     description: Ko‘rsatilgan ID asosida Student_Lesson yozuvini olish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: Yozuvning ID raqami.
  *         schema:
  *           type: string
- *           description: Yozuvning noyob identifikatori.
+ *         description: Olish kerak bo‘lgan Student_Lesson yozuvining ID raqami.
  *     responses:
  *       200:
- *         description: Student Lesson yozuvi topildi.
+ *         description: Student_Lesson yozuvi muvaffaqiyatli topildi.
  *       404:
- *         description: Yozuv topilmadi.
+ *         description: Student_Lesson yozuvi topilmadi.
  *       500:
  *         description: Ichki server xatosi yuz berdi.
  */
@@ -112,17 +111,16 @@ student_lesson.get("/getById/:id", getStudent_LessonById);
  * @swagger
  * /student_lesson/update/{id}:
  *   patch:
- *     summary: ID orqali Student Lesson yozuvini yangilash
+ *     summary: ID orqali Student_Lesson yozuvini yangilash
  *     tags: [Student_Lesson]
- *     description: Student Lesson yozuvini ID asosida yangilash.
+ *     description: Student_Lesson yozuvini ID asosida yangilash.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: Yangilanadigan yozuvning ID raqami.
  *         schema:
  *           type: string
- *           description: Yozuvning noyob identifikatori.
+ *         description: Yangilanadigan Student_Lesson yozuvining ID raqami.
  *     requestBody:
  *       required: true
  *       content:
@@ -132,13 +130,13 @@ student_lesson.get("/getById/:id", getStudent_LessonById);
  *             properties:
  *               lesson_id:
  *                 type: string
- *                 description: Darsning yangi ID raqami.
+ *                 description: Lesson ning yangi ID raqami.
  *               student_id:
  *                 type: string
- *                 description: Talabaning yangi ID raqami.
+ *                 description: Students ning yangi ID raqami.
  *               is_there:
  *                 type: boolean
- *                 description: Qatnashganlik holati.
+ *                 description: Lesson da qatnashganlik holati.
  *               reason:
  *                 type: string
  *                 description: Sabab (ixtiyoriy).
@@ -147,9 +145,9 @@ student_lesson.get("/getById/:id", getStudent_LessonById);
  *                 description: To‘lov holati.
  *     responses:
  *       200:
- *         description: Student Lesson yozuvi muvaffaqiyatli yangilandi.
+ *         description: Student_Lesson yozuvi muvaffaqiyatli yangilandi.
  *       404:
- *         description: Yozuv topilmadi.
+ *         description: Student_Lesson yozuvi topilmadi.
  *       500:
  *         description: Ichki server xatosi yuz berdi.
  */
@@ -163,22 +161,21 @@ student_lesson.patch(
  * @swagger
  * /student_lesson/delete/{id}:
  *   delete:
- *     summary: ID orqali Student Lesson yozuvini o‘chirish
+ *     summary: ID orqali Student_Lesson yozuvini o‘chirish
  *     tags: [Student_Lesson]
- *     description: Ko‘rsatilgan ID asosida Student Lesson yozuvini tizimdan o‘chirish.
+ *     description: Ko‘rsatilgan ID asosida Student_Lesson yozuvini tizimdan o‘chirish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: O‘chiriladigan yozuvning ID raqami.
  *         schema:
  *           type: string
- *           description: Yozuvning noyob identifikatori.
+ *         description: O‘chiriladigan Student_Lesson yozuvining ID raqami.
  *     responses:
  *       200:
- *         description: Student Lesson yozuvi muvaffaqiyatli o‘chirildi.
+ *         description: Student_Lesson yozuvi muvaffaqiyatli o‘chirildi.
  *       404:
- *         description: Yozuv topilmadi.
+ *         description: Student_Lesson yozuvi topilmadi.
  *       500:
  *         description: Ichki server xatosi yuz berdi.
  */

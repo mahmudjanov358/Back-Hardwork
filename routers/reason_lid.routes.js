@@ -13,6 +13,7 @@ const {
   postReasonLidValidationSchema,
   updateReasonLidValidationSchema,
 } = require("../validations/reason_lidValidation");
+
 const reasonLidValidation = (schema) => (req, res, next) => {
   const validationResult = schema.validate(req.body);
   if (validationResult.error) {
@@ -28,9 +29,9 @@ const reasonLidValidation = (schema) => (req, res, next) => {
  * @swagger
  * /reason_lid/post:
  *   post:
- *     summary: Yangi Reason_Lid yaratish
+ *     summary: Yangi Reason_Lid yozuvini yaratish
  *     tags: [Reason_Lid]
- *     description: Yangi Reason_Lid ni berilgan ma'lumotlar bilan yaratish.
+ *     description: Kiritilgan ma'lumotlar asosida yangi Reason_Lid yozuvini yaratish.
  *     requestBody:
  *       required: true
  *       content:
@@ -40,12 +41,14 @@ const reasonLidValidation = (schema) => (req, res, next) => {
  *             properties:
  *               reason:
  *                 type: string
- *                 description: Reason_Lid ning nomi.
+ *                 description: Reason_Lid ning sababi.
  *     responses:
  *       201:
  *         description: Reason_Lid muvaffaqiyatli yaratildi.
+ *       400:
+ *         description: Noto‘g‘ri yoki to‘liq bo‘lmagan ma'lumot yuborildi.
  *       500:
- *         description: Ichki server xatosi.
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 reason_lid.post(
   "/post",
@@ -57,14 +60,14 @@ reason_lid.post(
  * @swagger
  * /reason_lid/get:
  *   get:
- *     summary: Barcha Reason_Lid larni olish
+ *     summary: Barcha Reason_Lid yozuvlarini olish
  *     tags: [Reason_Lid]
- *     description: Barcha Reason_Lid lar ro‘yxatini olish.
+ *     description: Tizimdagi barcha Reason_Lid yozuvlarini olish.
  *     responses:
  *       200:
- *         description: Reason_Lid lar ro‘yxati muvaffaqiyatli olindi.
+ *         description: Reason_Lid ro‘yxati muvaffaqiyatli olindi.
  *       500:
- *         description: Ichki server xatosi.
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 reason_lid.get("/get", getReason_Lid);
 
@@ -72,40 +75,40 @@ reason_lid.get("/get", getReason_Lid);
  * @swagger
  * /reason_lid/getById/{id}:
  *   get:
- *     summary: Reason_Lid ni ID bo‘yicha olish
+ *     summary: ID orqali Reason_Lid yozuvini olish
  *     tags: [Reason_Lid]
- *     description: Reason_Lid ni uning ID si bo‘yicha olish.
+ *     description: Ko‘rsatilgan ID orqali Reason_Lid yozuvini olish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *           description: Olinadigan Reason_Lid ning ID si.
+ *           description: Olish kerak bo‘lgan Reason_Lid ning ID raqami.
  *     responses:
- *       '200':
- *         description: Reason_Lid muvaffaqiyatli olindi.
- *       '404':
+ *       200:
+ *         description: Reason_Lid yozuvi muvaffaqiyatli topildi.
+ *       404:
  *         description: Reason_Lid topilmadi.
- *       '500':
- *         description: Ichki server xatosi.
+ *       500:
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 reason_lid.get("/getById/:id", getReason_LidById);
 
 /**
  * @swagger
  * /reason_lid/update/{id}:
- *   put:
- *     summary: Reason_Lid ni ID bo‘yicha yangilash
+ *   patch:
+ *     summary: ID orqali Reason_Lid yozuvini yangilash
  *     tags: [Reason_Lid]
- *     description: Reason_Lid ni uning ID si bo‘yicha berilgan ma'lumotlar bilan yangilash.
+ *     description: Berilgan ID asosida Reason_Lid yozuvini yangilash.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *           description: Yang “…ilanadigan Reason_Lid ning ID si.
+ *           description: Yangilanadigan Reason_Lid ning ID raqami.
  *     requestBody:
  *       required: true
  *       content:
@@ -115,16 +118,16 @@ reason_lid.get("/getById/:id", getReason_LidById);
  *             properties:
  *               reason:
  *                 type: string
- *                 description: Reason_Lid ning yangilangan nomi.
+ *                 description: Reason_Lid ning yangilangan sababi.
  *     responses:
- *       '200':
+ *       200:
  *         description: Reason_Lid muvaffaqiyatli yangilandi.
- *       '404':
+ *       404:
  *         description: Reason_Lid topilmadi.
- *       '500':
- *         description: Ichki server xatosi!
+ *       500:
+ *         description: Serverda ichki xatolik yuz berdi.
  */
-reason_lid.put(
+reason_lid.patch(
   "/update/:id",
   reasonLidValidation(updateReasonLidValidationSchema),
   updateReason_Lid
@@ -134,23 +137,23 @@ reason_lid.put(
  * @swagger
  * /reason_lid/delete/{id}:
  *   delete:
- *     summary: Reason_Lid ni ID bo‘yicha o‘chirish
+ *     summary: ID orqali Reason_Lid yozuvini o‘chirish
  *     tags: [Reason_Lid]
- *     description: Reason_Lid ni uning ID si bo‘yicha o‘chirish.
+ *     description: Ko‘rsatilgan ID orqali Reason_Lid yozuvini o‘chirish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *           description: O‘chiriladigan Reason_Lid ning ID si.
+ *           description: O‘chiriladigan Reason_Lid ning ID raqami.
  *     responses:
  *       200:
  *         description: Reason_Lid muvaffaqiyatli o‘chirildi.
  *       404:
  *         description: Reason_Lid topilmadi.
  *       500:
- *         description: Ichki server xatosi.
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 reason_lid.delete("/delete/:id", deleteReason_Lid);
 

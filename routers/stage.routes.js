@@ -29,9 +29,9 @@ const stageValidation = (schema) => (req, res, next) => {
  * @swagger
  * /stage/post:
  *   post:
- *     summary: Yangi Stage yaratish
+ *     summary: Yangi Stage yozuvini yaratish
  *     tags: [Stage]
- *     description: Berilgan ma'lumotlar asosida yangi stage (bosqich) yaratish.
+ *     description: Kiritilgan ma'lumotlar asosida yangi Stage yozuvini yaratish.
  *     requestBody:
  *       required: true
  *       content:
@@ -41,10 +41,12 @@ const stageValidation = (schema) => (req, res, next) => {
  *             properties:
  *               name:
  *                 type: string
- *                 description: Stage nomi (bosqich nomi).
+ *                 description: Stage ning nomi.
  *     responses:
  *       201:
  *         description: Stage muvaffaqiyatli yaratildi.
+ *       400:
+ *         description: Noto‘g‘ri yoki to‘liq bo‘lmagan ma'lumot yuborildi.
  *       500:
  *         description: Serverda ichki xatolik yuz berdi.
  */
@@ -54,12 +56,12 @@ stage.post("/post", stageValidation(postStageValidationSchema), postStage);
  * @swagger
  * /stage/get:
  *   get:
- *     summary: Barcha Stage larni olish
+ *     summary: Barcha Stage yozuvlarini olish
  *     tags: [Stage]
- *     description: Tizimdagi barcha stage (bosqich) lar ro'yxatini olish.
+ *     description: Tizimdagi barcha Stage yozuvlarini olish.
  *     responses:
  *       200:
- *         description: Stage lar ro'yxati muvaffaqiyatli olindi.
+ *         description: Stage ro'yxati muvaffaqiyatli olindi.
  *       500:
  *         description: Serverda ichki xatolik yuz berdi.
  */
@@ -69,20 +71,19 @@ stage.get("/get", getStage);
  * @swagger
  * /stage/getById/{id}:
  *   get:
- *     summary: Stage ni ID orqali olish
+ *     summary: ID orqali Stage yozuvini olish
  *     tags: [Stage]
- *     description: Ko‘rsatilgan ID orqali stage (bosqich) ma'lumotlarini olish.
+ *     description: Ko‘rsatilgan ID orqali Stage yozuvini olish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: Olish kerak bo‘lgan stage'ning ID raqami.
  *         schema:
  *           type: string
- *           description: Stage'ning noyob ID qiymati (masalan, MongoDB ObjectId).
+ *           description: Olish kerak bo‘lgan Stage ning ID raqami.
  *     responses:
  *       200:
- *         description: So‘ralgan stage ma'lumotlari qaytarildi.
+ *         description: Stage yozuvi muvaffaqiyatli topildi.
  *       404:
  *         description: Stage topilmadi.
  *       500:
@@ -93,18 +94,17 @@ stage.get("/getById/:id", getStageById);
 /**
  * @swagger
  * /stage/update/{id}:
- *   put:
- *     summary: Stage ni ID orqali yangilash
+ *   patch:
+ *     summary: ID orqali Stage yozuvini yangilash
  *     tags: [Stage]
- *     description: Berilgan ID asosida stage (bosqich) ma'lumotlarini yangilash.
+ *     description: Berilgan ID asosida Stage yozuvini yangilash.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: Yangilanadigan stage'ning ID raqami.
  *         schema:
  *           type: string
- *           description: Yangilanadigan stage'ning noyob identifikatori.
+ *           description: Yangilanadigan Stage ning ID raqami.
  *     requestBody:
  *       required: true
  *       content:
@@ -114,7 +114,7 @@ stage.get("/getById/:id", getStageById);
  *             properties:
  *               name:
  *                 type: string
- *                 description: Stage'ning yangi nomi.
+ *                 description: Stage ning yangi nomi.
  *     responses:
  *       200:
  *         description: Stage muvaffaqiyatli yangilandi.
@@ -123,7 +123,7 @@ stage.get("/getById/:id", getStageById);
  *       500:
  *         description: Serverda ichki xatolik yuz berdi.
  */
-stage.put(
+stage.patch(
   "/update/:id",
   stageValidation(updateStageValidationSchema),
   updateStage
@@ -133,17 +133,16 @@ stage.put(
  * @swagger
  * /stage/delete/{id}:
  *   delete:
- *     summary: Stage ni ID orqali o‘chirish
+ *     summary: ID orqali Stage yozuvini o‘chirish
  *     tags: [Stage]
- *     description: Ko‘rsatilgan ID orqali stage'ni tizimdan o‘chirish.
+ *     description: Ko‘rsatilgan ID orqali Stage yozuvini o‘chirish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: O‘chiriladigan stage'ning ID raqami.
  *         schema:
  *           type: string
- *           description: O‘chirilayotgan stage'ning noyob identifikatori.
+ *           description: O‘chiriladigan Stage ning ID raqami.
  *     responses:
  *       200:
  *         description: Stage muvaffaqiyatli o‘chirildi.

@@ -27,9 +27,9 @@ const stuffRoleValidation = (schema) => (req, res, next) => {
  * @swagger
  * /stuff_role/post:
  *   post:
- *     summary: Yangi Hodim Role (vazifa) yaratish
+ *     summary: Yangi Stuff Role (vazifa) yaratish
  *     tags: [Stuff_Role]
- *     description: Kiritilgan ma'lumotlar asosida yangi hodim rolini (lavozimni) yaratish.
+ *     description: Kiritilgan ma'lumotlar asosida yangi Stuff Role ni yaratish.
  *     requestBody:
  *       required: true
  *       content:
@@ -37,17 +37,15 @@ const stuffRoleValidation = (schema) => (req, res, next) => {
  *           schema:
  *             type: object
  *             properties:
- *               role_name:
+ *               stuff_id:
  *                 type: string
- *                 description: Role nomi (masalan: admin, o‘qituvchi, menejer).
- *               permissions:
- *                 type: array
- *                 items:
- *                   type: string
- *                 description: Ushbu rolga tegishli ruxsatlar ro‘yxati.
+ *                 description: Stuff ning ID si.
+ *               role_id:
+ *                 type: string
+ *                 description: Role ning ID si.
  *     responses:
  *       201:
- *         description: Hodim roli muvaffaqiyatli yaratildi.
+ *         description: Stuff Role muvaffaqiyatli yaratildi.
  *       500:
  *         description: Serverda ichki xatolik yuz berdi.
  */
@@ -61,12 +59,12 @@ stuff_role.post(
  * @swagger
  * /stuff_role/get:
  *   get:
- *     summary: Barcha Hodim Rollarini olish
+ *     summary: Barcha Stuff Role larni olish
  *     tags: [Stuff_Role]
- *     description: Tizimdagi barcha hodim rollari ro‘yxatini olish.
+ *     description: Tizimdagi barcha Stuff Role lar ro‘yxatini olish.
  *     responses:
  *       200:
- *         description: Hodim rollari ro‘yxati muvaffaqiyatli qaytarildi.
+ *         description: Stuff Role lar ro‘yxati muvaffaqiyatli qaytarildi.
  *       500:
  *         description: Serverda ichki xatolik yuz berdi.
  */
@@ -76,22 +74,21 @@ stuff_role.get("/get", getStuff_Role);
  * @swagger
  * /stuff_role/getById/{id}:
  *   get:
- *     summary: ID orqali Hodim Rolini olish
+ *     summary: ID orqali Stuff Role ni olish
  *     tags: [Stuff_Role]
- *     description: Ko‘rsatilgan ID orqali ma'lum bir hodim rolini olish.
+ *     description: Ko‘rsatilgan ID orqali ma'lum bir Stuff Role ni olish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: Olish kerak bo‘lgan hodim roliga tegishli ID raqami.
  *         schema:
  *           type: string
- *           description: Hodim rolining noyob identifikatori.
+ *         description: Olish kerak bo‘lgan Stuff Role ga tegishli ID raqami.
  *     responses:
  *       200:
- *         description: Hodim roli muvaffaqiyatli topildi.
+ *         description: Stuff Role muvaffaqiyatli topildi.
  *       404:
- *         description: Hodim roli topilmadi.
+ *         description: Stuff Role topilmadi.
  *       500:
  *         description: Serverda ichki xatolik yuz berdi.
  */
@@ -101,22 +98,21 @@ stuff_role.get("/getById/:id", getStuff_RoleById);
  * @swagger
  * /stuff_role/delete/{id}:
  *   delete:
- *     summary: ID orqali Hodim Rolini o‘chirish
+ *     summary: ID orqali Stuff Role ni o‘chirish
  *     tags: [Stuff_Role]
- *     description: Ko‘rsatilgan ID orqali ma'lum bir hodim rolini tizimdan o‘chirish.
+ *     description: Ko‘rsatilgan ID orqali ma'lum bir Stuff Role ni tizimdan o‘chirish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: O‘chiriladigan rolga tegishli ID raqami.
  *         schema:
  *           type: string
- *           description: Hodim rolining noyob identifikatori.
+ *         description: O‘chiriladigan Stuff Role ga tegishli ID raqami.
  *     responses:
  *       200:
- *         description: Hodim roli muvaffaqiyatli o‘chirildi.
+ *         description: Stuff Role muvaffaqiyatli o‘chirildi.
  *       404:
- *         description: Hodim roli topilmadi.
+ *         description: Stuff Role topilmadi.
  *       500:
  *         description: Serverda ichki xatolik yuz berdi.
  */

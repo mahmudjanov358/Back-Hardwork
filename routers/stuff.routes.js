@@ -1,18 +1,21 @@
 const { Router } = require("express");
-const stuff_role = Router();
+const stuff = Router();
 
 const {
-  postStuff_Role,
-  getStuff_Role,
-  getStuff_RoleById,
-  deleteStuff_Role,
-} = require("../controllers/stuff_role.controller");
+  postStuff,
+  loginStuff,
+  getStuff,
+  getStuffById,
+  updateStuff,
+  deleteStuff,
+} = require("../controllers/stuff.controller");
 
 const {
-  postStuff_RoleValidationSchema,
-} = require("../validations/stuff_roleValidation");
+  postStuffValidationSchema,
+  updateStuffValidationSchema,
+} = require("../validations/stuffValidation.js");
 
-const stuffRoleValidation = (schema) => (req, res, next) => {
+const stuffValidation = (schema) => (req, res, next) => {
   const validationResult = schema.validate(req.body);
   if (validationResult.error) {
     return res
@@ -25,11 +28,11 @@ const stuffRoleValidation = (schema) => (req, res, next) => {
 
 /**
  * @swagger
- * /stuff_role/post:
+ * /stuff/post:
  *   post:
- *     summary: Yangi Stuff Role yaratish
- *     tags: [Stuff_Role]
- *     description: Kiritilgan ma'lumotlar asosida yangi Stuff Role (hodim roli) yaratish.
+ *     summary: Yangi Stuff yaratish
+ *     tags: [Stuff]
+ *     description: Kiritilgan ma'lumotlar asosida yangi Stuff yaratish.
  *     requestBody:
  *       required: true
  *       content:
@@ -37,91 +40,176 @@ const stuffRoleValidation = (schema) => (req, res, next) => {
  *           schema:
  *             type: object
  *             properties:
- *               role_name:
+ *               first_name:
  *                 type: string
- *                 description: Stuff Role nomi (masalan: Admin, Menejer, O‘qituvchi).
- *               permissions:
- *                 type: array
- *                 items:
- *                   type: string
- *                   description: Ushbu Stuff Role uchun tanlangan permission ID lar ro‘yxati.
+ *                 description: Stuff ismi.
+ *               last_name:
+ *                 type: string
+ *                 description: Stuff familiyasi.
+ *               phone_number:
+ *                 type: string
+ *                 description: Stuff telefon raqami.
+ *               login:
+ *                 type: string
+ *                 description: Stuff login nomi.
+ *               parol:
+ *                 type: string
+ *                 description: Stuff paroli.
+ *               is_active:
+ *                 type: boolean
+ *                 description: Stuff faollik holati (true yoki false).
  *     responses:
  *       201:
- *         description: Stuff Role muvaffaqiyatli yaratildi.
- *       400:
- *         description: So‘rov noto‘g‘ri yoki to‘liq emas.
+ *         description: Stuff muvaffaqiyatli yaratildi.
  *       500:
  *         description: Ichki server xatosi yuz berdi.
  */
-stuff_role.post(
-  "/post",
-  stuffRoleValidation(postStuff_RoleValidationSchema),
-  postStuff_Role
+stuff.post("/post", stuffValidation(postStuffValidationSchema), postStuff);
+
+/**
+ * @swagger
+ * /stuff/login:
+ *   post:
+ *     summary: Stuff login qilish
+ *     tags: [Stuff]
+ *     description: Stuff login va parol orqali tizimga kirish.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               login:
+ *                 type: string
+ *                 description: Stuff login nomi.
+ *               parol:
+ *                 type: string
+ *                 description: Stuff paroli.
+ *     responses:
+ *       200:
+ *         description: Stuff tizimga muvaffaqiyatli kirdi.
+ *       404:
+ *         description: Stuff topilmadi.
+ *       401:
+ *         description: Login yoki parol noto‘g‘ri.
+ *       500:
+ *         description: Ichki server xatosi yuz berdi.
+ */
+stuff.post("/login", loginStuff);
+
+/**
+ * @swagger
+ * /stuff/get:
+ *   get:
+ *     summary: Barcha Stuff larni olish
+ *     tags: [Stuff]
+ *     description: Tizimdagi barcha Stuff yozuvlarini olish.
+ *     responses:
+ *       200:
+ *         description: Stuff ro'yxati muvaffaqiyatli qaytarildi.
+ *       500:
+ *         description: Ichki server xatosi yuz berdi.
+ */
+stuff.get("/get", getStuff);
+
+/**
+ * @swagger
+ * /stuff/getById/{id}:
+ *   get:
+ *     summary: ID orqali Stuff ni olish
+ *     tags: [Stuff]
+ *     description: Ko‘rsatilgan ID orqali Stuff yozuvini olish.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Olish kerak bo‘lgan Stuff ID raqami.
+ *     responses:
+ *       200:
+ *         description: Stuff ma'lumotlari muvaffaqiyatli olindi.
+ *       500:
+ *         description: Ichki server xatosi yuz berdi.
+ */
+stuff.get("/getById/:id", getStuffById);
+
+/**
+ * @swagger
+ * /stuff/update/{id}:
+ *   patch:
+ *     summary: Stuff ni ID orqali yangilash
+ *     tags: [Stuff]
+ *     description: Berilgan ID asosida Stuff yozuvini yangilash.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Yangilanadigan Stuff ID raqami.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               first_name:
+ *                 type: string
+ *                 description: Stuff ning yangilangan ismi.
+ *               last_name:
+ *                 type: string
+ *                 description: Stuff ning yangilangan familiyasi.
+ *               phone_number:
+ *                 type: string
+ *                 description: Stuff ning yangilangan telefon raqami.
+ *               login:
+ *                 type: string
+ *                 description: Stuff ning yangilangan login nomi.
+ *               parol:
+ *                 type: string
+ *                 description: Stuff ning yangi paroli.
+ *               is_active:
+ *                 type: boolean
+ *                 description: Stuff ning faollik holati.
+ *     responses:
+ *       200:
+ *         description: Stuff ma'lumotlari muvaffaqiyatli yangilandi.
+ *       404:
+ *         description: Stuff topilmadi.
+ *       500:
+ *         description: Ichki server xatosi yuz berdi.
+ */
+stuff.patch(
+  "/update/:id",
+  stuffValidation(updateStuffValidationSchema),
+  updateStuff
 );
 
 /**
  * @swagger
- * /stuff_role/get:
- *   get:
- *     summary: Barcha Stuff Role yozuvlarini olish
- *     tags: [Stuff_Role]
- *     description: Tizimdagi barcha Stuff Role yozuvlarini olish (Admin, Operator va h.k.).
- *     responses:
- *       200:
- *         description: Stuff Role ro‘yxati muvaffaqiyatli olindi.
- *       500:
- *         description: Ichki server xatosi yuz berdi.
- */
-stuff_role.get("/get", getStuff_Role);
-
-/**
- * @swagger
- * /stuff_role/getById/{id}:
- *   get:
- *     summary: Stuff Role ni ID orqali olish
- *     tags: [Stuff_Role]
- *     description: Ko‘rsatilgan ID orqali Stuff Role yozuvini olish.
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: Olish kerak bo‘lgan Stuff Role ID raqami.
- *         schema:
- *           type: string
- *           description: Stuff Role'ning noyob identifikatori.
- *     responses:
- *       200:
- *         description: Stuff Role ma'lumotlari muvaffaqiyatli olindi.
- *       404:
- *         description: Stuff Role topilmadi.
- *       500:
- *         description: Ichki server xatosi yuz berdi.
- */
-stuff_role.get("/getById/:id", getStuff_RoleById);
-
-/**
- * @swagger
- * /stuff_role/delete/{id}:
+ * /stuff/delete/{id}:
  *   delete:
- *     summary: Stuff Role ni ID orqali o‘chirish
- *     tags: [Stuff_Role]
- *     description: Ko‘rsatilgan ID orqali Stuff Role yozuvini tizimdan o‘chirish.
+ *     summary: ID orqali Stuff ni o‘chirish
+ *     tags: [Stuff]
+ *     description: Ko‘rsatilgan ID orqali Stuff yozuvini o‘chirish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: O‘chirilishi kerak bo‘lgan Stuff Role ID raqami.
  *         schema:
  *           type: string
- *           description: Stuff Role'ning noyob identifikatori.
+ *         description: O‘chiriladigan Stuff ID raqami.
  *     responses:
  *       200:
- *         description: Stuff Role muvaffaqiyatli o‘chirildi.
+ *         description: Stuff muvaffaqiyatli o‘chirildi.
  *       404:
- *         description: Stuff Role topilmadi.
+ *         description: Stuff topilmadi.
  *       500:
  *         description: Ichki server xatosi yuz berdi.
  */
-stuff_role.delete("/delete/:id", deleteStuff_Role);
+stuff.delete("/delete/:id", deleteStuff);
 
-module.exports = { stuff_role };
+module.exports = { stuff };

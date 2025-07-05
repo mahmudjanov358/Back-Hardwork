@@ -13,6 +13,7 @@ const {
   postGroupValidationSchema,
   updateGroupValidationSchema,
 } = require("../validations/groupValidation");
+
 const groupValidation = (schema) => (req, res, next) => {
   const validationResult = schema.validate(req.body);
   if (validationResult.error) {
@@ -28,9 +29,9 @@ const groupValidation = (schema) => (req, res, next) => {
  * @swagger
  * /group/post:
  *   post:
- *     summary: Yangi Group yaratish
+ *     summary: Yangi Group yozuvini yaratish
  *     tags: [Group]
- *     description: Yangi Group ni berilgan ma'lumotlar bilan yaratish.
+ *     description: Kiritilgan ma'lumotlar asosida yangi Group yozuvini yaratish.
  *     requestBody:
  *       required: true
  *       content:
@@ -52,18 +53,18 @@ const groupValidation = (schema) => (req, res, next) => {
  *                 description: Darsning haftadagi kuni.
  *               group_stage_id:
  *                 type: string
- *                 description: Group ning bosqich ID si.
+ *                 description: Group ning bosqich raqami.
  *               room_number:
- *                 type: string
+ *                 type: number
  *                 description: Group ning xona raqami.
  *               room_floor:
- *                 type: string
+ *                 type: number
  *                 description: Group xonasining qavati.
  *               branch_id:
  *                 type: string
- *                 description: Group ning Branch ID si.
+ *                 description: Group ning filial raqami.
  *               lessons_quant:
- *                 type: string
+ *                 type: number
  *                 description: Group uchun darslar soni.
  *               is_active:
  *                 type: boolean
@@ -71,8 +72,10 @@ const groupValidation = (schema) => (req, res, next) => {
  *     responses:
  *       201:
  *         description: Group muvaffaqiyatli yaratildi.
+ *       400:
+ *         description: Noto‘g‘ri yoki to‘liq bo‘lmagan ma'lumot yuborildi.
  *       500:
- *         description: Ichki server xatosi.
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 group.post("/post", groupValidation(postGroupValidationSchema), postGroup);
 
@@ -80,14 +83,14 @@ group.post("/post", groupValidation(postGroupValidationSchema), postGroup);
  * @swagger
  * /group/get:
  *   get:
- *     summary: Barcha Group larni olish
+ *     summary: Barcha Group yozuvlarini olish
  *     tags: [Group]
- *     description: Barcha Group lar ro‘yxatini olish.
+ *     description: Tizimdagi barcha Group yozuvlarini olish.
  *     responses:
  *       200:
- *         description: Group lar ro‘yxati.
+ *         description: Group ro‘yxati muvaffaqiyatli olindi.
  *       500:
- *         description: Ichki server xatosi.
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 group.get("/get", getGroup);
 
@@ -95,23 +98,23 @@ group.get("/get", getGroup);
  * @swagger
  * /group/getById/{id}:
  *   get:
- *     summary: Group ni ID bo‘yicha olish
+ *     summary: ID orqali Group yozuvini olish
  *     tags: [Group]
- *     description: Group ni uning ID si bo‘yicha olish.
+ *     description: Ko‘rsatilgan ID orqali Group yozuvini olish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *           description: Olinadigan Group ning ID si.
+ *           description: Olish kerak bo‘lgan Group ning ID raqami.
  *     responses:
  *       200:
- *         description: Group ma'lumotlari.
+ *         description: Group yozuvi muvaffaqiyatli topildi.
  *       404:
  *         description: Group topilmadi.
  *       500:
- *         description: Ichki server xatosi.
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 group.get("/getById/:id", getGroupById);
 
@@ -119,16 +122,16 @@ group.get("/getById/:id", getGroupById);
  * @swagger
  * /group/update/{id}:
  *   patch:
- *     summary: Group ni ID bo‘yicha yangilash
+ *     summary: ID orqali Group yozuvini yangilash
  *     tags: [Group]
- *     description: Group ni uning ID si bo‘yicha yangilash.
+ *     description: Berilgan ID asosida Group yozuvini yangilash.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *           description: Yangilanadigan Group ning ID si.
+ *           description: Yangilanadigan Group ning ID raqami.
  *     requestBody:
  *       required: true
  *       content:
@@ -155,7 +158,7 @@ group.get("/getById/:id", getGroupById);
  *                 type: number
  *                 description: Group xonasining qavati.
  *               lessons_quant:
- *                 type: string
+ *                 type: number
  *                 description: Group uchun darslar soni.
  *               is_active:
  *                 type: boolean
@@ -163,10 +166,12 @@ group.get("/getById/:id", getGroupById);
  *     responses:
  *       200:
  *         description: Group muvaffaqiyatli yangilandi.
+ *       400:
+ *         description: Noto‘g‘ri yoki to‘liq bo‘lmagan ma'lumot yuborildi.
  *       404:
  *         description: Group topilmadi.
  *       500:
- *         description: Ichki server xatosi.
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 group.patch(
   "/update/:id",
@@ -178,23 +183,23 @@ group.patch(
  * @swagger
  * /group/delete/{id}:
  *   delete:
- *     summary: Group ni ID bo‘yicha o‘chirish
+ *     summary: ID orqali Group yozuvini o‘chirish
  *     tags: [Group]
- *     description: Group ni uning ID si bo‘yicha o‘chirish.
+ *     description: Ko‘rsatilgan ID orqali Group yozuvini o‘chirish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *           description: O‘chiriladigan Group ning ID si.
+ *           description: O‘chiriladigan Group ning ID raqami.
  *     responses:
  *       200:
  *         description: Group muvaffaqiyatli o‘chirildi.
  *       404:
  *         description: Group topilmadi.
  *       500:
- *         description: Ichki server xatosi.
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 group.delete("/delete/:id", deleteGroup);
 

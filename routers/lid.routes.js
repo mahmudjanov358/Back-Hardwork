@@ -13,6 +13,7 @@ const {
   postLidValidationSchema,
   updateLidValidationSchema,
 } = require("../validations/lidValidation");
+
 const lidValidation = (schema) => (req, res, next) => {
   const validationResult = schema.validate(req.body);
   if (validationResult.error) {
@@ -28,9 +29,9 @@ const lidValidation = (schema) => (req, res, next) => {
  * @swagger
  * /lid/post:
  *   post:
- *     summary: Yangi Lid yaratish
+ *     summary: Yangi Lid yozuvini yaratish
  *     tags: [Lid]
- *     description: Yangi Lid ni berilgan ma'lumotlar bilan yaratish.
+ *     description: Kiritilgan ma'lumotlar asosida yangi Lid yozuvini yaratish.
  *     requestBody:
  *       required: true
  *       content:
@@ -49,7 +50,7 @@ const lidValidation = (schema) => (req, res, next) => {
  *                 description: Lid ning telefon raqami.
  *               lid_stage_id:
  *                 type: string
- *                 description: Lid ning bosqich ID si.
+ *                 description: Lid ning bosqich raqami.
  *               test_date:
  *                 type: string
  *                 format: date
@@ -62,18 +63,20 @@ const lidValidation = (schema) => (req, res, next) => {
  *                 description: Lid ning sinov darsi vaqti.
  *               trial_lesson_group_id:
  *                 type: string
- *                 description: Lid ning sinov darsi Group ID si.
+ *                 description: Lid ning sinov darsi guruh raqami.
  *               lid_status_id:
  *                 type: string
- *                 description: Lid ning holat ID si.
+ *                 description: Lid ning holat raqami.
  *               cancel_reason_id:
  *                 type: string
- *                 description: Lid ning bekor qilish sababi ID si.
+ *                 description: Lid ning bekor qilish sababi raqami.
  *     responses:
  *       201:
- *         description: Lid muvaffaqiyatli yaratildi!
+ *         description: Lid muvaffaqiyatli yaratildi.
+ *       400:
+ *         description: Noto‘g‘ri yoki to‘liq bo‘lmagan ma'lumot yuborildi.
  *       500:
- *         description: Ichki server xatosi!
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 lid.post("/post", lidValidation(postLidValidationSchema), postLid);
 
@@ -81,14 +84,14 @@ lid.post("/post", lidValidation(postLidValidationSchema), postLid);
  * @swagger
  * /lid/get:
  *   get:
- *     summary: Barcha Lid larni olish
+ *     summary: Barcha Lid yozuvlarini olish
  *     tags: [Lid]
- *     description: Barcha Lid lar ro‘yxatini olish.
+ *     description: Tizimdagi barcha Lid yozuvlarini olish.
  *     responses:
  *       200:
- *         description: Lid lar muvaffaqiyatli olindi.
+ *         description: Lid ro‘yxati muvaffaqiyatli olindi.
  *       500:
- *         description: Ichki server xatosi!
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 lid.get("/get", getLid);
 
@@ -96,23 +99,23 @@ lid.get("/get", getLid);
  * @swagger
  * /lid/getById/{id}:
  *   get:
- *     summary: Lid ni ID bo‘yicha olish
+ *     summary: ID orqali Lid yozuvini olish
  *     tags: [Lid]
- *     края: Lid ni uning ID si bo‘yicha olish.
+ *     description: Ko‘rsatilgan ID orqali Lid yozuvini olish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *           description: Olinadigan Lid ning ID si.
+ *           description: Olish kerak bo‘lgan Lid ning ID raqami.
  *     responses:
  *       200:
- *         description: Lid ma'lumotlari topildi!
+ *         description: Lid yozuvi muvaffaqiyatli topildi.
  *       404:
- *         description: Lid topilmadi!
+ *         description: Lid topilmadi.
  *       500:
- *         description: Ichki server xatosi!
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 lid.get("/getById/:id", getLidById);
 
@@ -120,16 +123,16 @@ lid.get("/getById/:id", getLidById);
  * @swagger
  * /lid/update/{id}:
  *   patch:
- *     summary: Lid ni ID bo‘yicha yangilash
+ *     summary: ID orqali Lid yozuvini yangilash
  *     tags: [Lid]
- *     description: Lid ni uning ID si bo‘yicha berilgan ma'lumotlar bilan yangilash.
+ *     description: Berilgan ID asosida Lid yozuvini yangilash.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *           description: Yangilanadigan Lid ning ID si.
+ *           description: Yangilanadigan Lid ning ID raqami.
  *     requestBody:
  *       required: true
  *       content:
@@ -158,11 +161,13 @@ lid.get("/getById/:id", getLidById);
  *                 description: Lid ning sinov darsi vaqti.
  *     responses:
  *       200:
- *         description: Lid muvaffaqiyatli yangilandi!
+ *         description: Lid muvaffaqiyatli yangilandi.
+ *       400:
+ *         description: Noto‘g‘ri yoki to‘liq bo‘lmagan ma'lumot yuborildi.
  *       404:
- *         description: Lid topilmadi!
+ *         description: Lid topilmadi.
  *       500:
- *         description: Ichki server xatosi!
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 lid.patch("/update/:id", lidValidation(updateLidValidationSchema), updateLid);
 
@@ -170,23 +175,23 @@ lid.patch("/update/:id", lidValidation(updateLidValidationSchema), updateLid);
  * @swagger
  * /lid/delete/{id}:
  *   delete:
- *     summary: Lid ni ID bo‘yicha o‘chirish
+ *     summary: ID orqali Lid yozuvini o‘chirish
  *     tags: [Lid]
- *     description: Lid ni uning ID si bo‘yicha o‘chirish.
+ *     description: Ko‘rsatilgan ID orqali Lid yozuvini o‘chirish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *           description: O‘chiriladigan Lid ning ID si.
+ *           description: O‘chiriladigan Lid ning ID raqami.
  *     responses:
  *       200:
- *         description: Lid muvaffaqiyatli o‘chirildi!
+ *         description: Lid muvaffaqiyatli o‘chirildi.
  *       404:
- *         description: Lid topilmadi!
+ *         description: Lid topilmadi.
  *       500:
- *         description: Ichki server xatosi!
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 lid.delete("/delete/:id", deleteLid);
 

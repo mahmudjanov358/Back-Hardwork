@@ -31,7 +31,7 @@ const studentsValidation = (schema) => (req, res, next) => {
  *   post:
  *     summary: Yangi Students yaratish
  *     tags: [Students]
- *     description: Kiritilgan ma'lumotlar asosida yangi Students (talaba) yozuvini yaratish.
+ *     description: Kiritilgan ma'lumotlar asosida yangi Students yozuvini yaratish.
  *     requestBody:
  *       required: true
  *       content:
@@ -41,23 +41,23 @@ const studentsValidation = (schema) => (req, res, next) => {
  *             properties:
  *               lid_id:
  *                 type: string
- *                 description: Students'ning lid identifikatori.
+ *                 description: Students ning Lid identifikatori.
  *               first_name:
  *                 type: string
- *                 description: Students ismi.
+ *                 description: Students ning ismi.
  *               last_name:
  *                 type: string
- *                 description: Students familiyasi.
+ *                 description: Students ning familiyasi.
  *               phone_number:
  *                 type: string
- *                 description: Students telefon raqami.
+ *                 description: Students ning telefon raqami.
  *               birthday:
  *                 type: string
  *                 format: date
- *                 description: Students tug‘ilgan sanasi (YYYY-MM-DD).
+ *                 description: Students ning tug‘ilgan sanasi (YYYY-MM-DD).
  *               gender:
  *                 type: string
- *                 description: Students jinsi (male, female yoki other).
+ *                 description: Students ning jinsi (male, female yoki other).
  *     responses:
  *       201:
  *         description: Students muvaffaqiyatli yaratildi.
@@ -78,7 +78,7 @@ students.post(
  *   get:
  *     summary: Barcha Students yozuvlarini olish
  *     tags: [Students]
- *     description: Tizimdagi barcha Students (talabalar) yozuvlarini olish.
+ *     description: Tizimdagi barcha Students yozuvlarini olish.
  *     responses:
  *       200:
  *         description: Students ro'yxati muvaffaqiyatli olindi.
@@ -91,17 +91,16 @@ students.get("/get", getStudents);
  * @swagger
  * /students/getById/{id}:
  *   get:
- *     summary: ID orqali Students ma'lumotini olish
+ *     summary: ID orqali Students yozuvini olish
  *     tags: [Students]
  *     description: Ko‘rsatilgan ID orqali Students yozuvini olish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: Olish kerak bo‘lgan Students ID raqami.
  *         schema:
  *           type: string
- *           description: Students'ning noyob identifikatori.
+ *         description: Olish kerak bo‘lgan Students ning ID raqami.
  *     responses:
  *       200:
  *         description: Students ma'lumotlari muvaffaqiyatli olindi.
@@ -116,17 +115,16 @@ students.get("/getById/:id", getStudentsById);
  * @swagger
  * /students/update/{id}:
  *   patch:
- *     summary: Students ni ID orqali yangilash
+ *     summary: Students yozuvini ID orqali yangilash
  *     tags: [Students]
  *     description: Berilgan ID asosida Students yozuvini yangilash.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: Yangilanadigan Students ID raqami.
  *         schema:
  *           type: string
- *           description: Students'ning noyob identifikatori.
+ *         description: Yangilanadigan Students ning ID raqami.
  *     requestBody:
  *       required: true
  *       content:
@@ -136,20 +134,20 @@ students.get("/getById/:id", getStudentsById);
  *             properties:
  *               first_name:
  *                 type: string
- *                 description: Yangilangan ismi.
+ *                 description: Students ning yangilangan ismi.
  *               last_name:
  *                 type: string
- *                 description: Yangilangan familiyasi.
+ *                 description: Students ning yangilangan familiyasi.
  *               phone_number:
  *                 type: string
- *                 description: Yangilangan telefon raqami.
+ *                 description: Students ning yangilangan telefon raqami.
  *               birthday:
  *                 type: string
  *                 format: date
- *                 description: Yangilangan tug‘ilgan sanasi.
+ *                 description: Students ning yangilangan tug‘ilgan sanasi.
  *               gender:
  *                 type: string
- *                 description: Yangilangan jins.
+ *                 description: Students ning yangilangan jinsi.
  *     responses:
  *       200:
  *         description: Students ma'lumotlari muvaffaqiyatli yangilandi.
@@ -168,17 +166,16 @@ students.patch(
  * @swagger
  * /students/delete/{id}:
  *   delete:
- *     summary: ID orqali Students ni o‘chirish
+ *     summary: ID orqali Students yozuvini o‘chirish
  *     tags: [Students]
  *     description: Ko‘rsatilgan ID orqali Students yozuvini o‘chirish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: O‘chiriladigan Students ID raqami.
  *         schema:
  *           type: string
- *           description: Students'ning noyob identifikatori.
+ *         description: O‘chiriladigan Students ning ID raqami.
  *     responses:
  *       200:
  *         description: Students muvaffaqiyatli o‘chirildi.

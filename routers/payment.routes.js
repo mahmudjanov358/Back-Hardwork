@@ -8,10 +8,12 @@ const {
   updatePayment,
   deletePayment,
 } = require("../controllers/payment.controller");
+
 const {
   postPaymentValidationSchema,
   updatePaymentValidationSchema,
 } = require("../validations/paymentValidation");
+
 const paymentValidation = (schema) => (req, res, next) => {
   const validationResult = schema.validate(req.body);
   if (validationResult.error) {
@@ -27,9 +29,9 @@ const paymentValidation = (schema) => (req, res, next) => {
  * @swagger
  * /payment/post:
  *   post:
- *     summary: Yangi Payment yaratish
+ *     summary: Yangi Payment yozuvini yaratish
  *     tags: [Payment]
- *     description: Yangi Payment ni berilgan ma'lumotlar bilan yaratish.
+ *     description: Kiritilgan ma'lumotlar asosida yangi Payment yozuvini yaratish.
  *     requestBody:
  *       required: true
  *       content:
@@ -39,7 +41,7 @@ const paymentValidation = (schema) => (req, res, next) => {
  *             properties:
  *               student_id:
  *                 type: string
- *                 description: Talabaning ID si.
+ *                 description: Students ning ID raqami.
  *               payment_last_date:
  *                 type: string
  *                 format: date
@@ -53,15 +55,17 @@ const paymentValidation = (schema) => (req, res, next) => {
  *                 description: Payment ning summasi.
  *               is_paid:
  *                 type: boolean
- *                 description: Payment to‘langan yoki to‘lanmaganligini ko‘rsatadi.
+ *                 description: To‘lov holati (to‘langan — true, to‘lanmagan — false).
  *               total_attent:
  *                 type: string
- *                 description: Payment ga tegishli umumiy ishtirok.
+ *                 description: Umumiy ishtirok.
  *     responses:
  *       201:
  *         description: Payment muvaffaqiyatli yaratildi.
+ *       400:
+ *         description: Noto‘g‘ri yoki to‘liq bo‘lmagan ma'lumot yuborildi.
  *       500:
- *         description: Ichki server xatosi.
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 payment.post(
   "/post",
@@ -72,15 +76,15 @@ payment.post(
 /**
  * @swagger
  * /payment/get:
- *  get:
- *     summary: Barcha Payment larni olish
+ *   get:
+ *     summary: Barcha Payment yozuvlarini olish
  *     tags: [Payment]
- *     description: Barcha Payment lar ro‘yxatini olish.
+ *     description: Tizimdagi barcha Payment yozuvlarini olish.
  *     responses:
  *       200:
- *         description: Payment lar muvaffaqiyatli olindi.
+ *         description: Payment ro‘yxati muvaffaqiyatli olindi.
  *       500:
- *         description: Ichki server xatosi!
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 payment.get("/get", getPayment);
 
@@ -88,23 +92,23 @@ payment.get("/get", getPayment);
  * @swagger
  * /payment/getById/{id}:
  *   get:
- *     summary: Payment ni ID bo‘yicha olish
+ *     summary: ID orqali Payment yozuvini olish
  *     tags: [Payment]
- *     description: Payment ni uning ID si bo‘yicha olish.
+ *     description: Ko‘rsatilgan ID orqali Payment yozuvini olish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *           description: Olinadigan Payment ning ID si.
+ *           description: Olish kerak bo‘lgan Payment ning ID raqami.
  *     responses:
  *       200:
- *         description: Payment ma'lumotlari topildi!
+ *         description: Payment yozuvi muvaffaqiyatli topildi.
  *       404:
- *         description: Payment topilmadi!
+ *         description: Payment topilmadi.
  *       500:
- *         description: Ichki server xatosi!
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 payment.get("/getById/:id", getPaymentById);
 
@@ -112,16 +116,16 @@ payment.get("/getById/:id", getPaymentById);
  * @swagger
  * /payment/update/{id}:
  *   patch:
- *     summary: Payment ni ID bo‘yicha yangilash
+ *     summary: ID orqali Payment yozuvini yangilash
  *     tags: [Payment]
- *     description: Payment ni uning ID si bo‘yicha berilgan ma'lumotlar bilan yangilash.
+ *     description: Berilgan ID asosida Payment yozuvini yangilash.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *           description: Yangilanadigan Payment ning ID si.
+ *           description: Yangilanadigan Payment ning ID raqami.
  *     requestBody:
  *       required: true
  *       content:
@@ -131,7 +135,7 @@ payment.get("/getById/:id", getPaymentById);
  *             properties:
  *               student_id:
  *                 type: string
- *                 description: Talabaning ID si.
+ *                 description: Students ning ID raqami.
  *               payment_last_date:
  *                 type: string
  *                 format: date
@@ -145,17 +149,17 @@ payment.get("/getById/:id", getPaymentById);
  *                 description: Payment ning summasi.
  *               is_paid:
  *                 type: boolean
- *                 description: Payment to‘langan yoki to‘lanmaganligini ko‘rsatadi.
+ *                 description: To‘lov holati (to‘langan — true, to‘lanmagan — false).
  *               total_attent:
  *                 type: string
- *                 description: Payment ga tegishli umumiy ishtirok.
+ *                 description: Umumiy ishtirok.
  *     responses:
  *       200:
- *         description: Payment muvaffaqiyatli yangilandi!
+ *         description: Payment muvaffaqiyatli yangilandi.
  *       404:
- *         description: Payment topilmadi!
+ *         description: Payment topilmadi.
  *       500:
- *         description: Ichki server xatosi!
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 payment.patch(
   "/update/:id",
@@ -167,23 +171,23 @@ payment.patch(
  * @swagger
  * /payment/delete/{id}:
  *   delete:
- *     summary: Payment ni ID bo‘yicha o‘chirish
+ *     summary: ID orqali Payment yozuvini o‘chirish
  *     tags: [Payment]
- *     description: Payment ni uning ID si bo‘yicha o‘chirish.
+ *     description: Ko‘rsatilgan ID orqali Payment yozuvini o‘chirish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *           description: O‘chiriladigan Payment ning ID si.
+ *           description: O‘chiriladigan Payment ning ID raqami.
  *     responses:
  *       200:
- *         description: Payment muvaffaqiyatli o‘chirildi!
+ *         description: Payment muvaffaqiyatli o‘chirildi.
  *       404:
- *         description: Payment topilmadi!
+ *         description: Payment topilmadi.
  *       500:
- *         description: Ichki server xatosi!
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 payment.delete("/delete/:id", deletePayment);
 

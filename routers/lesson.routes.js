@@ -13,6 +13,7 @@ const {
   postLessonValidationSchema,
   updateLessonValidationSchema,
 } = require("../validations/lessonValidation");
+
 const lessonValidation = (schema) => (req, res, next) => {
   const validationResult = schema.validate(req.body);
   if (validationResult.error) {
@@ -28,9 +29,9 @@ const lessonValidation = (schema) => (req, res, next) => {
  * @swagger
  * /lesson/post:
  *   post:
- *     summary: Yangi Lesson yaratish
+ *     summary: Yangi Lesson yozuvini yaratish
  *     tags: [Lesson]
- *     description: Yangi Lesson ni berilgan ma'lumotlar bilan yaratish.
+ *     description: Kiritilgan ma'lumotlar asosida yangi Lesson yozuvini yaratish.
  *     requestBody:
  *       required: true
  *       content:
@@ -46,7 +47,7 @@ const lessonValidation = (schema) => (req, res, next) => {
  *                 description: Lesson ning raqami.
  *               group_id:
  *                 type: string
- *                 description: Lesson bilan bog‘liq Group ning ID si.
+ *                 description: Lesson bilan bog‘liq guruh raqami.
  *               lesson_date:
  *                 type: string
  *                 format: date
@@ -54,8 +55,10 @@ const lessonValidation = (schema) => (req, res, next) => {
  *     responses:
  *       201:
  *         description: Lesson muvaffaqiyatli yaratildi.
+ *       400:
+ *         description: Noto‘g‘ri yoki to‘liq bo‘lmagan ma'lumot yuborildi.
  *       500:
- *         description: Ichki server xatosi.
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 lesson.post("/post", lessonValidation(postLessonValidationSchema), postLesson);
 
@@ -63,14 +66,14 @@ lesson.post("/post", lessonValidation(postLessonValidationSchema), postLesson);
  * @swagger
  * /lesson/get:
  *   get:
- *     summary: Barcha Lesson larni olish
+ *     summary: Barcha Lesson yozuvlarini olish
  *     tags: [Lesson]
- *     description: Barcha Lesson lar ro‘yxatini olish.
+ *     description: Tizimdagi barcha Lesson yozuvlarini olish.
  *     responses:
  *       200:
- *         description: Lesson lar ro‘yxati.
+ *         description: Lesson ro‘yxati muvaffaqiyatli olindi.
  *       500:
- *         description: Ichki server xatosi.
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 lesson.get("/get", getLesson);
 
@@ -78,23 +81,23 @@ lesson.get("/get", getLesson);
  * @swagger
  * /lesson/getById/{id}:
  *   get:
- *     summary: Lesson ni ID bo‘yicha olish
+ *     summary: ID orqali Lesson yozuvini olish
  *     tags: [Lesson]
- *     description: Lesson ni uning ID si bo‘yicha olish.
+ *     description: Ko‘rsatilgan ID orqali Lesson yozuvini olish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *           description: Olinadigan Lesson ning ID si.
+ *         description: Olish kerak bo‘lgan Lesson ning ID raqami.
  *     responses:
  *       200:
- *         description: Lesson muvaffaqiyatli olindi.
+ *         description: Lesson yozuvi muvaffaqiyatli topildi.
  *       404:
  *         description: Lesson topilmadi.
  *       500:
- *         description: Ichki server xatosi.
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 lesson.get("/getById/:id", getLessonById);
 
@@ -102,16 +105,16 @@ lesson.get("/getById/:id", getLessonById);
  * @swagger
  * /lesson/update/{id}:
  *   patch:
- *     summary: Lesson ni ID bo‘yicha yangilash
+ *     summary: ID orqali Lesson yozuvini yangilash
  *     tags: [Lesson]
- *     description: Lesson ni uning ID si bo‘yicha berilgan ma'lumotlar bilan yangilash.
+ *     description: Berilgan ID asosida Lesson yozuvini yangilash.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *           description: Yangilanadigan Lesson ning ID si.
+ *         description: Yangilanadigan Lesson ning ID raqami.
  *     requestBody:
  *       required: true
  *       content:
@@ -127,7 +130,7 @@ lesson.get("/getById/:id", getLessonById);
  *                 description: Lesson ning raqami.
  *               group_id:
  *                 type: string
- *                 description: Lesson bilan bog‘liq Group ning ID si.
+ *                 description: Lesson bilan bog‘liq guruh raqami.
  *               lesson_date:
  *                 type: string
  *                 format: date
@@ -135,10 +138,12 @@ lesson.get("/getById/:id", getLessonById);
  *     responses:
  *       200:
  *         description: Lesson muvaffaqiyatli yangilandi.
+ *       400:
+ *         description: Noto‘g‘ri yoki to‘liq bo‘lmagan ma'lumot yuborildi.
  *       404:
  *         description: Lesson topilmadi.
  *       500:
- *         description: Ichki server xatosi.
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 lesson.patch(
   "/update/:id",
@@ -150,23 +155,23 @@ lesson.patch(
  * @swagger
  * /lesson/delete/{id}:
  *   delete:
- *     summary: Lesson ni ID bo‘yicha o‘chirish
+ *     summary: ID orqali Lesson yozuvini o‘chirish
  *     tags: [Lesson]
- *     description: Lesson ni uning ID si bo‘yicha o‘chirish.
+ *     description: Ko‘rsatilgan ID orqali Lesson yozuvini o‘chirish.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *           description: O‘chiriladigan Lesson ning ID si.
+ *         description: O‘chiriladigan Lesson ning ID raqami.
  *     responses:
  *       200:
  *         description: Lesson muvaffaqiyatli o‘chirildi.
  *       404:
  *         description: Lesson topilmadi.
  *       500:
- *         description: Ichki server xatosi.
+ *         description: Serverda ichki xatolik yuz berdi.
  */
 lesson.delete("/delete/:id", deleteLesson);
 

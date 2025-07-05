@@ -20,7 +20,6 @@ exports.postPaymentValidationSchema = JOI.object({
     "number.base": "Price number turida boʻlishi kerak!",
     "number.empty": "Price kiritilishi shart!",
     "number.min": "Price kamida 1 boʻlishi kerak!",
-    "number.max": "Price eng koʻpi bilan 1000000 boʻlishi kerak!",
     "any.required": "Price kiritilishi shart!",
   }),
   is_paid: JOI.boolean().required().messages({
