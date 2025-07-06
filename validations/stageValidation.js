@@ -9,10 +9,9 @@ exports.postStageValidationSchema = JOI.object({
       "Stage nomi eng ko‘pi bilan 50 ta belgidan iborat bo‘lishi kerak!",
     "any.required": "Stage nomi kiritilishi shart!",
   }),
-});
+}); // ----postStageValidationSchema
 
-// --- Update schema: barcha field’larni optional holatga o‘tkazish ---
 exports.updateStageValidationSchema = exports.postStageValidationSchema.fork(
   Object.keys(exports.postStageValidationSchema.describe().keys),
   (schema) => schema.optional()
-);
+); // ----updateStageValidationSchema

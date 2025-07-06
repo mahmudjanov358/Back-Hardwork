@@ -57,9 +57,9 @@ exports.postGroupValidationSchema = JOI.object({
     "boolean.empty": "Is active kiritilishi shart!",
     "any.required": "Is active kiritilishi shart!",
   }),
-});
+}); // ----postGroupValidationSchema
 
 exports.updateGroupValidationSchema = exports.postGroupValidationSchema.fork(
   Object.keys(exports.postGroupValidationSchema.describe().keys),
   (schema) => schema.optional()
-);
+); // ----updateGroupValidationSchema

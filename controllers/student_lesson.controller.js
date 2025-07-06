@@ -14,14 +14,14 @@ exports.postStudent_Lesson = async (req, res) => {
     await newStudentLesson.save();
     return res.status(200).json({
       success: true,
-      message: "Student_Lesson created successfully!",
+      message: "Student_Lesson muvaffaqiyatli yaratildi!",
       student_lesson: newStudentLesson,
     });
   } catch (error) {
-    console.error("Error StudentLesson created —", error);
+    console.error("Error Student_Lesson yaratish —", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!",
+      message: "Xatolik yuz berdi!",
     });
   }
 };
@@ -32,14 +32,14 @@ exports.getStudent_Lesson = async (req, res) => {
     const student_lessons = await Student_Lesson.find({});
     return res.status(200).json({
       success: true,
-      message: "Student_Lessons list!",
+      message: "Student_Lessons ro'yxati!",
       student_lessons: student_lessons,
     });
   } catch (error) {
-    console.error("Error Student_Lessons list — ", error);
+    console.error("Error Student_Lessons ro'yxati — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!",
+      message: "Xatolik yuz berdi!",
     });
   }
 };
@@ -55,20 +55,20 @@ exports.getStudent_LessonById = async (req, res) => {
     if (!studentLesson) {
       return res.status(404).json({
         success: false,
-        message: "Student_Lesson not found!",
+        message: "Student_Lesson topilmadi!",
       });
     } else {
       return res.status(200).json({
         success: true,
-        message: "Student_Lesson details!",
+        message: "Student_Lesson ma'lumotlari!",
         student_lesson: studentLesson,
       });
     }
   } catch (error) {
-    console.error("Error is by ID Student_Lesson — ", error);
+    console.error("Error ID bo'yicha Student_Lesson — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!",
+      message: "Xatolik yuz berdi!",
     });
   }
 };
@@ -91,20 +91,20 @@ exports.updateStudent_Lesson = async (req, res) => {
     if (!updatedStudentLesson) {
       return res.status(404).json({
         success: false,
-        message: "Student_Lesson not found!",
+        message: "Student_Lesson topilmadi!",
       });
     } else {
       return res.status(200).json({
         success: true,
-        message: "Student_Lesson updated successfully!",
+        message: "Student_Lesson muvaffaqiyatli yangilandi!",
         student_lesson: updatedStudentLesson,
       });
     }
   } catch (error) {
-    console.error("Error updated Student_Lesson — ", error);
+    console.error("Error yangilangan Student_Lesson — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!",
+      message: "Xatolik yuz berdi!",
     });
   }
 };
@@ -120,20 +120,20 @@ exports.deleteStudent_Lesson = async (req, res) => {
     if (!deletedStudentLesson) {
       return res.status(404).json({
         success: false,
-        message: "Student_Lesson not found!",
+        message: "Student_Lesson topilmadi!",
       });
     } else {
       return res.status(200).json({
         success: true,
-        message: "Student_Lesson deleted successfully!",
+        message: "Student_Lesson muvaffaqiyatli o'chirildi!",
         student_lesson: deletedStudentLesson,
       });
     }
   } catch (error) {
-    console.error("Error deleted Student_Lesson — ", error);
+    console.error("Error o'chirilgan Student_Lesson — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!",
+      message: "Xatolik yuz berdi!",
     });
   }
 };

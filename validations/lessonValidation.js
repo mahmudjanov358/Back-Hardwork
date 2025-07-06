@@ -26,9 +26,9 @@ exports.postLessonValidationSchema = JOI.object({
     "date.empty": "Lesson date kiritilishi shart!",
     "any.required": "Lesson date kiritilishi shart!",
   }),
-});
+}); // ----postLessonValidationSchema
 
 exports.updateLessonValidationSchema = exports.postLessonValidationSchema.fork(
   Object.keys(exports.postLessonValidationSchema.describe().keys),
   (schema) => schema.optional()
-);
+); // ----updateLessonValidationSchema

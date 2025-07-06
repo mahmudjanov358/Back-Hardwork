@@ -11,14 +11,14 @@ exports.postStudent_Group = async (req, res) => {
     await newStudentGroup.save();
     return res.status(200).json({
       success: true,
-      message: "StudentGroup created successfully!",
+      message: "StudentGroup muvaffaqiyatli yaratildi!",
       student_group: newStudentGroup,
     });
   } catch (error) {
-    console.error("Error Student_Group created —", error);
+    console.error("Error Student_Group yaratish —", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!",
+      message: "Xatolik yuz berdi!",
     });
   }
 };
@@ -29,14 +29,14 @@ exports.getStudent_Group = async (req, res) => {
     const student_groups = await Student_Group.find({});
     return res.status(200).json({
       success: true,
-      message: "Student_Groups list!",
+      message: "Student_Groups ro'yxati!",
       student_groups: student_groups,
     });
   } catch (error) {
-    console.error("Error Student_Groups list — ", error);
+    console.error("Error Student_Groups ro'yxati — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!",
+      message: "Xatolik yuz berdi!",
     });
   }
 };
@@ -52,20 +52,20 @@ exports.getStudent_GroupById = async (req, res) => {
     if (!studentGroup) {
       return res.status(404).json({
         success: false,
-        message: "Student_Group not found!",
+        message: "Student_Group topilmadi!",
       });
     } else {
       return res.status(200).json({
         success: true,
-        message: "Student_Group details!",
+        message: "Student_Group ma'lumotlari!",
         student_group: studentGroup,
       });
     }
   } catch (error) {
-    console.error("Error is by ID Student_Group — ", error);
+    console.error("Error ID bo'yicha Student_Group — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!",
+      message: "Xatolik yuz berdi!",
     });
   }
 };
@@ -81,19 +81,19 @@ exports.deleteStudent_Group = async (req, res) => {
     if (!deletedStudentGroup) {
       return res.status(404).json({
         success: false,
-        message: "Student_Group not found!",
+        message: "Student_Group topilmadi!",
       });
     } else {
       return res.status(200).json({
         success: true,
-        message: "Student_Group deleted successfully!",
+        message: "Student_Group muvaffaqiyatli o'chirildi!",
       });
     }
   } catch (error) {
-    console.error("Error deleted Student_Group — ", error);
+    console.error("Error o'chirilgan Student_Group — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!",
+      message: "Xatolik yuz berdi!",
     });
   }
 };

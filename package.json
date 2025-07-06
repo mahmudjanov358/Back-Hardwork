@@ -4,12 +4,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "running": "nodemon index.js"
+    "go": "nodemon index.js"
   },
   "keywords": [],
   "author": "Abdulloh Mahmudjanov",
   "license": "ISC",
-  "description": "Imtihon uchun Hardwork loyihasi!",
+  "description": "Imtihon uchun HARDWORK loyihasi!",
   "dependencies": {
     "bcrypt": "^6.0.0",
     "body-parser": "^2.2.0",

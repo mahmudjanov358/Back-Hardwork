@@ -1,14 +1,9 @@
-const { Lesson } = require('../models/lessonSchema');
+const { Lesson } = require("../models/lessonSchema");
 
 // ----postLesson
 exports.postLesson = async (req, res) => {
   try {
-    const {
-      lesson_theme,
-      lesson_number,
-      group_id,
-      lesson_date,
-    } = req.body;
+    const { lesson_theme, lesson_number, group_id, lesson_date } = req.body;
     const newLesson = new Lesson({
       lesson_theme,
       lesson_number,
@@ -18,15 +13,15 @@ exports.postLesson = async (req, res) => {
     await newLesson.save();
     return res.status(200).json({
       success: true,
-      message: "Lesson created successfully!"
+      message: "Lesson muvaffaqiyatli yaratildi!",
     });
   } catch (error) {
-    console.error("Error Lesson created —", error);
+    console.error("Error Lesson yaratish —", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };
 
 // ----getLesson
@@ -35,85 +30,79 @@ exports.getLesson = async (req, res) => {
     const lessons = await Lesson.find({});
     return res.status(200).json({
       success: true,
-      message: "Lessons list!",
-      lessons: lessons
+      message: "Darslar ro'yxati!",
+      lessons: lessons,
     });
   } catch (error) {
-    console.error("Error Lessons list — ", error);
+    console.error("Error Darslar ro'yxati — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
   }
-}
+};
 
 // ----getLessonById
 exports.getLessonById = async (req, res) => {
   try {
     const lessonId = req.params.id;
-    const lesson = await Lesson.findById(
-      lessonId
-    ).populate(
-      'group_id'
-    );
+    const lesson = await Lesson.findById(lessonId).populate("group_id");
 
     if (!lesson) {
       return res.status(404).json({
         success: false,
-        message: "Lesson not found!"
+        message: "Dars topilmadi!",
       });
     } else {
       return res.status(200).json({
         success: true,
-        message: "Lesson found!",
-        lesson: lesson
+        message: "Dars ma'lumotlari!",
+        lesson: lesson,
       });
-    };
+    }
   } catch (error) {
-    console.error("Error is by ID Lesson — ", error);
+    console.error("Error ID bo'yicha Dars — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };
 
 // ----updateLesson
 exports.updateLesson = async (req, res) => {
   try {
     const { id } = req.params;
-    const {
-      lesson_theme,
-      lesson_number,
-      lesson_date,
-    } = req.body;
+    const { lesson_theme, lesson_number, lesson_date } = req.body;
     const updatedLesson = await Lesson.findByIdAndUpdate(
-      id, {
-      lesson_theme,
-      lesson_number,
-      lesson_date,
-    }, { new: true }
+      id,
+      {
+        lesson_theme,
+        lesson_number,
+        lesson_date,
+      },
+      { new: true }
     );
 
     if (!updatedLesson) {
       return res.status(404).json({
         success: false,
-        message: "Lesson not found!"
+        message: "Dars topilmadi!",
       });
     } else {
       return res.status(200).json({
         success: true,
-        message: "Lesson updated successfully!",
-        updatedLesson: updatedLesson
+        message: "Dars muvaffaqiyatli yangilandi!",
+        updatedLesson: updatedLesson,
       });
-    };
+    }
   } catch (error) {
-    console.error("Error updated Lesson — ", error);
+    console.error("Error yangilangan Dars — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };
 
 // ----deleteLesson
@@ -125,19 +114,19 @@ exports.deleteLesson = async (req, res) => {
     if (!deleteLesson) {
       return res.status(404).json({
         success: false,
-        message: "Lesson not found!"
+        message: "Dars topilmadi!",
       });
     } else {
       return res.status(200).json({
         success: true,
-        message: "Lesson deleted successfully!"
+        message: "Dars muvaffaqiyatli o'chirildi!",
       });
-    };
+    }
   } catch (error) {
-    console.error("Error deleted Lesson — ", error);
+    console.error("Error o'chirilgan Dars — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };

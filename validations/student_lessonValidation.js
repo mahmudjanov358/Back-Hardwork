@@ -23,11 +23,10 @@ exports.postStudentLessonValidationSchema = JOI.object({
     "boolean.base": "Be Paid qiymati boolean turida bo‘lishi kerak!",
     "any.required": "Be Paid kiritilishi shart!",
   }),
-});
+}); // ----postStudentLessonValidationSchema
 
-// --- Yangilash uchun optional schema ---
 exports.updateStudentLessonValidationSchema =
   exports.postStudentLessonValidationSchema.fork(
     Object.keys(exports.postStudentLessonValidationSchema.describe().keys),
     (schema) => schema.optional()
-  );
+  ); // ----updateStudentLessonValidationSchema

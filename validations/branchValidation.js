@@ -26,9 +26,9 @@ exports.postBranchValidationSchema = JOI.object({
         "Call number +998XXXXXXXXX formatida boʻlishi kerak!",
       "any.required": "Call number kiritilishi shart!",
     }),
-});
+}); // ----postBranchValidationSchema
 
 exports.updateBranchValidationSchema = exports.postBranchValidationSchema.fork(
   Object.keys(exports.postBranchValidationSchema.describe().keys),
   (schema) => schema.optional()
-);
+); // ----updateBranchValidationSchema

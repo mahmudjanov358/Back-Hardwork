@@ -1,4 +1,4 @@
-const { Stage } = require('../models/stageSchema');
+const { Stage } = require("../models/stageSchema");
 
 // ----postStage
 exports.postStage = async (req, res) => {
@@ -10,16 +10,16 @@ exports.postStage = async (req, res) => {
     await newStage.save();
     return res.status(200).json({
       success: true,
-      message: "Stage created successfully!",
-      stage: newStage
+      message: "Stage muvaffaqiyatli yaratildi!",
+      stage: newStage,
     });
   } catch (error) {
-    console.error("Error Stage created —", error);
+    console.error("Error Stage yaratish —", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };
 
 // ----getStage
@@ -28,16 +28,16 @@ exports.getStage = async (req, res) => {
     const stages = await Stage.find({});
     return res.status(200).json({
       success: true,
-      message: "Stages list!",
-      stages: stages
+      message: "Stages ro'yxati!",
+      stages: stages,
     });
   } catch (error) {
-    console.error("Error Stages list — ", error);
+    console.error("Error Stages ro'yxati — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };
 
 // ----getStageById
@@ -49,22 +49,22 @@ exports.getStageById = async (req, res) => {
     if (!stage) {
       return res.status(404).json({
         success: false,
-        message: "Stage not found!"
+        message: "Stage topilmadi!",
       });
     } else {
       return res.status(200).json({
         success: true,
-        message: "Stage found!",
-        stage: stage
+        message: "Stage ma'lumotlari!",
+        stage: stage,
       });
-    };
+    }
   } catch (error) {
-    console.error("Error is by ID Stage — ", error);
+    console.error("Error ID bo'yicha Stage — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };
 
 // ----updateStage
@@ -73,30 +73,32 @@ exports.updateStage = async (req, res) => {
     const { id } = req.params;
     const { name } = req.body;
     const updatedStage = await Stage.findByIdAndUpdate(
-      id, {
-      name
-    }, { new: true }
+      id,
+      {
+        name,
+      },
+      { new: true }
     );
 
     if (!updatedStage) {
       return res.status(404).json({
         success: false,
-        message: "Stage not found!"
+        message: "Stage topilmadi!",
       });
     } else {
       return res.status(200).json({
         success: true,
-        message: "Stage updated successfully!",
-        stage: updatedStage
+        message: "Stage muvaffaqiyatli yangilandi!",
+        stage: updatedStage,
       });
     }
   } catch (error) {
-    console.error("Error updated Stage — ", error);
+    console.error("Error yangilangan Stage — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };
 
 // ----deleteStage
@@ -108,19 +110,19 @@ exports.deleteStage = async (req, res) => {
     if (!stage) {
       return res.status(404).json({
         success: false,
-        message: "Stage not found!"
+        message: "Stage topilmadi!",
       });
     } else {
       return res.status(200).json({
         success: true,
-        message: "Stage deleted successfully!"
+        message: "Stage muvaffaqiyatli o'chirildi!",
       });
     }
   } catch (error) {
-    console.error("Error deleted Stage — ", error);
+    console.error("Error o'chirilgan Stage — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };

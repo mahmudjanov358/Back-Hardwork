@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model } = require("mongoose");
 
 const branchSchema = new Schema({
   name: { type: String, required: true, trim: true },
@@ -6,5 +6,5 @@ const branchSchema = new Schema({
   call_number: { type: String, required: true },
 });
 
-const Branch = model('Branch', branchSchema);
+const Branch = model("Branch", branchSchema);
 module.exports = { Branch };

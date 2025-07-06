@@ -1,39 +1,43 @@
-const { Stuff } = require('../models/stuffSchema');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const { Stuff } = require("../models/stuffSchema");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 // ----postStuff
 exports.postStuff = async (req, res) => {
   try {
-    const {
-      first_name,
-      last_name,
-      phone_number,
-      login,
-      parol,
-      is_active
-    } = req.body;
-    const hashParol = await bcrypt.hash(parol, 10);
-    const newStuff = await Stuff({
-      first_name,
-      last_name,
-      phone_number,
-      login,
-      parol: hashParol,
-      is_active,
-    });
-    await newStuff.save();
-    return res.status(200).json({
-      success: true,
-      message: "Stuff created successfully!"
-    });
+    const { first_name, last_name, phone_number, login, parol, is_active } =
+      req.body;
+    const existingStuff = await Stuff.findOne({ login });
+    console.log(existingStuff);
+
+    if (existingStuff) {
+      return res.status(404).json({
+        success: false,
+        message: "Login band etilgan!",
+      });
+    } else {
+      const hashParol = await bcrypt.hash(parol, 10);
+      const newStuff = await Stuff({
+        first_name,
+        last_name,
+        phone_number,
+        login,
+        parol: hashParol,
+        is_active,
+      });
+      await newStuff.save();
+      return res.status(200).json({
+        success: true,
+        message: "Stuff muvaffaqiyatli yaratildi!",
+      });
+    }
   } catch (error) {
-    console.error("Error Stuff created —", error);
+    console.error("Error Stuff yaratish —", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };
 
 // ----loginStuff
@@ -45,7 +49,7 @@ exports.loginStuff = async (req, res) => {
     if (!loginName) {
       return res.status(404).json({
         success: false,
-        message: "Login not found!"
+        message: "Login topilmadi!",
       });
     }
 
@@ -53,7 +57,7 @@ exports.loginStuff = async (req, res) => {
     if (!parolMatch) {
       return res.status(401).json({
         success: false,
-        message: "Invalid login or password!"
+        message: "Login yoki parol xato!",
       });
     }
 
@@ -66,7 +70,7 @@ exports.loginStuff = async (req, res) => {
     console.error("Error Stuff login —", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
   }
 };
@@ -77,16 +81,16 @@ exports.getStuff = async (req, res) => {
     const stuffs = await Stuff.find({});
     return res.status(200).json({
       success: true,
-      message: "Stuffs list!",
-      stuffs: stuffs
+      message: "Stuffs ro'yxati!",
+      stuffs: stuffs,
     });
   } catch (error) {
-    console.error("Error Stuffs list — ", error);
+    console.error("Error Stuffs ro'yxati — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };
 
 // ----getStuffById
@@ -98,63 +102,59 @@ exports.getStuffById = async (req, res) => {
     if (!stuff) {
       return res.status(404).json({
         success: false,
-        message: "Stuff not found!"
+        message: "Stuff topilmadi!",
       });
     } else {
       return res.status(200).json({
         success: true,
-        message: "Stuff found!",
-        stuff: stuff
+        message: "Stuff ma'lumotlari!",
+        stuff: stuff,
       });
-    };
+    }
   } catch (error) {
-    console.error("Error is by ID Stuff — ", error);
+    console.error("Error ID bo'yicha Stuff — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };
 
 // ----updateStuff
 exports.updateStuff = async (req, res) => {
   try {
     const { id } = req.params;
-    const {
-      first_name,
-      last_name,
-      phone_number,
-      login,
-      parol,
-    } = req.body;
+    const { first_name, last_name, phone_number, login, parol } = req.body;
     const updatedStuff = await Stuff.findByIdAndUpdate(
-      id, {
-      first_name,
-      last_name,
-      phone_number,
-      login,
-      parol,
-    }, { new: true },
+      id,
+      {
+        first_name,
+        last_name,
+        phone_number,
+        login,
+        parol,
+      },
+      { new: true }
     );
 
     if (!updatedStuff) {
       return res.status(404).json({
         success: false,
-        message: "Stuff not found!"
+        message: "Stuff topilmadi!",
       });
     } else {
       return res.status(200).json({
         success: true,
-        message: "Stuff updated successfully!"
+        message: "Stuff muvaffaqiyatli yangilandi!",
       });
-    };
+    }
   } catch (error) {
-    console.error("Error updated Stuff — ", error);
+    console.error("Error yangilangan Stuff — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };
 
 // ----deleteStuff
@@ -166,19 +166,19 @@ exports.deleteStuff = async (req, res) => {
     if (!deletedStuff) {
       return res.status(404).json({
         success: false,
-        message: "Stuff not found!"
+        message: "Stuff topilmadi!",
       });
     } else {
       return res.status(200).json({
         success: true,
-        message: "Stuff deleted successfully!"
+        message: "Stuff muvaffaqiyatli o'chirildi!",
       });
-    };
+    }
   } catch (error) {
-    console.error("Error deleted Stuff — ", error);
+    console.error("Error o'chirilgan Stuff — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };

@@ -1,4 +1,4 @@
-const { Lid } = require('../models/lidSchema');
+const { Lid } = require("../models/lidSchema");
 
 // ----postLid
 exports.postLid = async (req, res) => {
@@ -31,15 +31,15 @@ exports.postLid = async (req, res) => {
     await newLid.save();
     return res.status(200).json({
       success: true,
-      message: "Lid created successfully!",
+      message: "Lid muvaffaqiyatli yaratildi!",
     });
   } catch (error) {
-    console.error("Error Lid created —", error);
+    console.error("Error Lid yaratish —", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };
 
 // ----getLid
@@ -48,46 +48,45 @@ exports.getLid = async (req, res) => {
     const lids = await Lid.find();
     return res.status(200).json({
       success: true,
-      message: "Lids list!",
-      lids: lids
+      message: "Lids ro'yxati!",
+      lids: lids,
     });
   } catch (error) {
-    console.error("Error Lids list — ", error);
+    console.error("Error Lids ro'yxati — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };
 
 // ----getLidById
 exports.getLidById = async (req, res) => {
   try {
     const lidId = req.params.id;
-    const lid = await Lid.findById(
-      lidId).populate(
-        'lid_stage_id trial_lesson_group_id lid_status_id cancel_reason_id'
-      );
+    const lid = await Lid.findById(lidId).populate(
+      "lid_stage_id trial_lesson_group_id lid_status_id cancel_reason_id"
+    );
 
     if (!lid) {
       return res.status(404).json({
         success: false,
-        message: "Lid not found!"
+        message: "Lid topilmadi!",
       });
     } else {
       return res.status(200).json({
         success: true,
-        message: "Lid details!",
-        lid: lid
+        message: "Lid ma'lumotlari!",
+        lid: lid,
       });
-    };
+    }
   } catch (error) {
-    console.error("Error is by ID Lid — ", error);
+    console.error("Error ID bo'yicha Lid — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };
 
 // ----updateLid
@@ -102,34 +101,38 @@ exports.updateLid = async (req, res) => {
       trial_lesson_date,
       trial_lesson_time,
     } = req.body;
-    const updatedLid = await Lid.findByIdAndUpdate(id, {
-      first_name,
-      last_name,
-      phone_number,
-      test_date,
-      trial_lesson_date,
-      trial_lesson_time,
-    }, { new: true });
+    const updatedLid = await Lid.findByIdAndUpdate(
+      id,
+      {
+        first_name,
+        last_name,
+        phone_number,
+        test_date,
+        trial_lesson_date,
+        trial_lesson_time,
+      },
+      { new: true }
+    );
 
     if (!updatedLid) {
       return res.status(404).json({
         success: false,
-        message: "Lid not found!"
+        message: "Lid topilmadi!",
       });
     } else {
       return res.status(200).json({
         success: true,
-        message: "Lid updated successfully!",
+        message: "Lid muvaffaqiyatli yangilandi!",
         updatedLid: updatedLid,
       });
     }
   } catch (error) {
-    console.error("Error updated Lid — ", error);
+    console.error("Error yangilangan Lid — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };
 
 // ----deleteLid
@@ -141,19 +144,19 @@ exports.deleteLid = async (req, res) => {
     if (!deletedLid) {
       return res.status(404).json({
         success: false,
-        message: "Lid not found!"
+        message: "Lid topilmadi!",
       });
     } else {
       return res.status(200).json({
         success: true,
-        message: "Lid deleted successfully!"
+        message: "Lid muvaffaqiyatli o'chirildi!",
       });
     }
   } catch (error) {
-    console.error("Error deleted Lid — ", error);
+    console.error("Error o'chirilgan Lid — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };

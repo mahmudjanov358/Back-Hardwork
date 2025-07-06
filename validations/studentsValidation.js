@@ -43,11 +43,10 @@ exports.postStudentsValidationSchema = JOI.object({
       "Gender faqat quyidagilardan biri bo‘lishi kerak: male, female.",
     "any.required": "Gender kiritilishi shart!",
   }),
-});
+}); // ----postStudentsValidationSchema
 
-// --- Yangilash uchun optional variant ---
 exports.updateStudentsValidationSchema =
   exports.postStudentsValidationSchema.fork(
     Object.keys(exports.postStudentsValidationSchema.describe().keys),
     (schema) => schema.optional()
-  );
+  ); // ----updateStudentsValidationSchema

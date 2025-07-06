@@ -1,6 +1,6 @@
-const { Schema, model } = require('mongoose');
-const { Stage } = require('./stageSchema');
-const { Branch } = require('./branchSchema');
+const { Schema, model } = require("mongoose");
+const { Stage } = require("./stageSchema");
+const { Branch } = require("./branchSchema");
 
 const groupSchema = new Schema({
   group_name: { type: String, required: true, trim: true },
@@ -12,8 +12,8 @@ const groupSchema = new Schema({
   room_floor: { type: Number, required: true },
   branch_id: { type: Schema.Types.ObjectId, ref: Branch, required: true },
   lessons_quant: { type: String, required: true },
-  is_active: { type: Boolean }
+  is_active: { type: Boolean },
 });
 
-const Group = model('Group', groupSchema);
+const Group = model("Group", groupSchema);
 module.exports = { Group };

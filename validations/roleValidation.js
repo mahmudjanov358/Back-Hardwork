@@ -9,10 +9,9 @@ exports.postRoleValidationSchema = JOI.object({
       "Role nomi eng ko‘pi bilan 50 ta belgidan iborat bo‘lishi kerak!",
     "any.required": "Role nomi kiritilishi shart!",
   }),
-});
+}); // ----postRoleValidationSchema
 
-// --- Yangilash uchun: optional variant ---
 exports.updateRoleValidationSchema = exports.postRoleValidationSchema.fork(
   Object.keys(exports.postRoleValidationSchema.describe().keys),
   (schema) => schema.optional()
-);
+); // ----updateRoleValidationSchema

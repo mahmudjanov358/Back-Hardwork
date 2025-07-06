@@ -11,4 +11,4 @@ exports.postStuff_RoleValidationSchema = JOI.object({
     "string.empty": "Role ID kiritilishi shart!",
     "any.required": "Role ID kiritilishi shart!",
   }),
-});
+}); // ----postStuff_RoleValidationSchema

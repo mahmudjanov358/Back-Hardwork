@@ -1,6 +1,6 @@
-const { Schema, model } = require('mongoose');
-const { Lesson } = require('./lessonSchema');
-const { Students } = require('./studentsSchema');
+const { Schema, model } = require("mongoose");
+const { Lesson } = require("./lessonSchema");
+const { Students } = require("./studentsSchema");
 
 const student_lessonSchema = new Schema({
   lesson_id: { type: Schema.Types.ObjectId, ref: Lesson, required: true },
@@ -10,5 +10,5 @@ const student_lessonSchema = new Schema({
   be_paid: { type: Boolean },
 });
 
-const Student_Lesson = model('Student_Lesson', student_lessonSchema);
+const Student_Lesson = model("Student_Lesson", student_lessonSchema);
 module.exports = { Student_Lesson };

@@ -61,9 +61,9 @@ exports.postLidValidationSchema = JOI.object({
     "string.base": "Cancel reason ID string turida bo'lishi kerak!",
     "string.empty": "Cancel reason ID kiritilishi shart emas!",
   }),
-});
+}); // ----postLidValidationSchema
 
 exports.updateLidValidationSchema = exports.postLidValidationSchema.fork(
   Object.keys(exports.postLidValidationSchema.describe().keys),
   (schema) => schema.optional()
-);
+); // ----updateLidValidationSchema

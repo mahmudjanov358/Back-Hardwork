@@ -11,4 +11,4 @@ exports.postStudentGroupValidationSchema = JOI.object({
     "string.empty": "Group ID kiritilishi shart!",
     "any.required": "Group ID kiritilishi shart!",
   }),
-});
+}); // ----postStudentGroupValidationSchema

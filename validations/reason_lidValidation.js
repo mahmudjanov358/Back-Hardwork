@@ -6,11 +6,10 @@ exports.postReasonLidValidationSchema = JOI.object({
     "string.empty": "Reason Lid kiritilishi shart!",
     "any.required": "Reason Lid kiritilishi shart!",
   }),
-});
+}); // ----postReasonLidValidationSchema
 
-// --- Yangilash uchun optional holat ---
 exports.updateReasonLidValidationSchema =
   exports.postReasonLidValidationSchema.fork(
     Object.keys(exports.postReasonLidValidationSchema.describe().keys),
     (schema) => schema.optional()
-  );
+  ); // ----updateReasonLidValidationSchema

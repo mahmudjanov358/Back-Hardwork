@@ -11,10 +11,10 @@ exports.postGroupStuffValidationSchema = JOI.object({
     "string.empty": "Stuff ID kiritilishi shart!",
     "any.required": "Stuff ID kiritilishi shart!",
   }),
-});
+}); // ----postGroupStuffValidationSchema
 
 exports.updateGroupStuffValidationSchema =
   exports.postGroupStuffValidationSchema.fork(
     Object.keys(exports.postGroupStuffValidationSchema.describe().keys),
     (schema) => schema.optional()
-  );
+  ); // ----updateGroupStuffValidationSchema

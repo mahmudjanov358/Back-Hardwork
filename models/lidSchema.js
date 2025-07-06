@@ -1,8 +1,8 @@
-const { Schema, model } = require('mongoose');
-const { Stage } = require('./stageSchema');
-const { Group } = require('./groupSchema');
-const { Lid_Status } = require('./lid_statusSchema');
-const { Reason_Lid } = require('./reason_lidSchema');
+const { Schema, model } = require("mongoose");
+const { Stage } = require("./stageSchema");
+const { Group } = require("./groupSchema");
+const { Lid_Status } = require("./lid_statusSchema");
+const { Reason_Lid } = require("./reason_lidSchema");
 
 const lidSchema = new Schema({
   first_name: { type: String, required: true, trim: true },
@@ -17,5 +17,5 @@ const lidSchema = new Schema({
   cancel_reason_id: { type: Schema.Types.ObjectId, ref: Reason_Lid },
 });
 
-const Lid = model('Lid', lidSchema);
+const Lid = model("Lid", lidSchema);
 module.exports = { Lid };

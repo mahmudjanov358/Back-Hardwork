@@ -50,9 +50,9 @@ exports.postStuffValidationSchema = JOI.object({
     "boolean.base": "Is Active boolean turida bo‘lishi kerak!",
     "any.required": "Is Active kiritilishi shart!",
   }),
-});
+}); // ----postStuffValidationSchema
 
 exports.updateStuffValidationSchema = exports.postStuffValidationSchema.fork(
   Object.keys(exports.postStuffValidationSchema.describe().keys),
   (field) => field.optional()
-);
+); // ----updateStuffValidationSchema

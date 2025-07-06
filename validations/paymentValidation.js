@@ -34,10 +34,10 @@ exports.postPaymentValidationSchema = JOI.object({
     "number.max": "Total attent eng koʻpi bilan 100 boʻlishi kerak!",
     "any.required": "Total attent kiritilishi shart!",
   }),
-});
+}); // ----postPaymentValidationSchema
 
 exports.updatePaymentValidationSchema =
   exports.postPaymentValidationSchema.fork(
     Object.keys(exports.postPaymentValidationSchema.describe().keys),
     (schema) => schema.optional()
-  );
+  ); // ----updatePaymentValidationSchema

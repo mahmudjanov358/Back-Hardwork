@@ -1,5 +1,5 @@
-const { Schema, model } = require('mongoose');
-const { Students } = require('./studentsSchema');
+const { Schema, model } = require("mongoose");
+const { Students } = require("./studentsSchema");
 
 const paymentSchema = new Schema({
   students_id: { type: Schema.Types.ObjectId, ref: Students },
@@ -10,5 +10,5 @@ const paymentSchema = new Schema({
   total_attent: { type: Number, required: true },
 });
 
-const Payment = model('Payment', paymentSchema);
+const Payment = model("Payment", paymentSchema);
 module.exports = { Payment };

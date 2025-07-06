@@ -1,13 +1,9 @@
-const { Branch } = require('../models/branchSchema');
+const { Branch } = require("../models/branchSchema");
 
 // ----postBranch
 exports.postBranch = async (req, res) => {
   try {
-    const {
-      name,
-      address,
-      call_number,
-    } = req.body;
+    const { name, address, call_number } = req.body;
     const newBranch = new Branch({
       name,
       address,
@@ -16,15 +12,15 @@ exports.postBranch = async (req, res) => {
     await newBranch.save();
     return res.status(200).json({
       success: true,
-      message: "Branch created successfully!"
+      message: "Branch muvaffaqiyatli yaratildi!",
     });
   } catch (error) {
-    console.error("Error Branch created —", error);
+    console.error("Error Branch yaratish — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };
 
 // ----getBranch
@@ -33,16 +29,16 @@ exports.getBranch = async (req, res) => {
     const branches = await Branch.find({});
     return res.status(200).json({
       success: true,
-      message: "Branches list!",
-      branches: branches
+      message: "Branchlar ro'yxati!",
+      branches: branches,
     });
   } catch (error) {
-    console.error("Error Branches list — ", error);
+    console.error("Error Branchlar ro'yxati! — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };
 
 // ----getBranchById
@@ -54,22 +50,22 @@ exports.getBranchById = async (req, res) => {
     if (!branch) {
       return res.status(404).json({
         success: false,
-        message: "Branch not found!"
+        message: "Branch topilmadi!",
       });
     } else {
       return res.status(200).json({
         success: true,
-        message: "Branch details!",
-        branch: branch
+        message: "Branch ma'lumotlari!",
+        branch: branch,
       });
     }
   } catch (error) {
-    console.error("Error is by ID Branch — ", error);
+    console.error("Error ID bo'yicha Branch — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };
 
 // ----updateBranch
@@ -77,31 +73,35 @@ exports.updateBranch = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, address, call_number } = req.body;
-    const updatedBranch = await Branch.findByIdAndUpdate(id, {
-      name,
-      address,
-      call_number
-    }, { new: true });
+    const updatedBranch = await Branch.findByIdAndUpdate(
+      id,
+      {
+        name,
+        address,
+        call_number,
+      },
+      { new: true }
+    );
 
     if (!updatedBranch) {
       return res.status(404).json({
         success: false,
-        message: "Branch not found!"
+        message: "Branch topilmadi!",
       });
     } else {
       return res.status(200).json({
         success: true,
-        message: "Branch updated successfully!",
-        branch: updatedBranch
+        message: "Branch muvaffaqiyatli yangilandi!",
+        branch: updatedBranch,
       });
     }
   } catch (error) {
-    console.error("Error updated Branch — ", error);
+    console.error("Error yangilangan Branch — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };
 
 // ----deleteBranch
@@ -113,19 +113,19 @@ exports.deleteBranch = async (req, res) => {
     if (!deletedBranch) {
       return res.status(404).json({
         success: false,
-        message: "Branch not found!"
+        message: "Branch topilmadi!",
       });
     } else {
       return res.status(200).json({
         success: true,
-        message: "Branch deleted successfully!"
+        message: "Branch muvaffaqiyatli o'chirildi!",
       });
     }
   } catch (error) {
-    console.error("Error deleted Branch — ", error);
+    console.error("Error o'chirilgan Branch — ", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!"
+      message: "Xatolik yuz berdi!",
     });
-  };
+  }
 };
