@@ -28,7 +28,7 @@ const stuffRoleValidation = (schema) => (req, res, next) => {
  * /stuff_role/post:
  *   post:
  *     summary: Yangi Stuff Role (vazifa) yaratish
- *     tags: [Stuff_Role]
+ *     tags: [Stuff_Role-3]
  *     description: Kiritilgan ma'lumotlar asosida yangi Stuff Role ni yaratish.
  *     requestBody:
  *       required: true
@@ -60,7 +60,7 @@ stuff_role.post(
  * /stuff_role/get:
  *   get:
  *     summary: Barcha Stuff Role larni olish
- *     tags: [Stuff_Role]
+ *     tags: [Stuff_Role-3]
  *     description: Tizimdagi barcha Stuff Role lar ro‘yxatini olish.
  *     responses:
  *       200:
@@ -75,7 +75,7 @@ stuff_role.get("/get", getStuff_Role);
  * /stuff_role/getById/{id}:
  *   get:
  *     summary: ID orqali Stuff Role ni olish
- *     tags: [Stuff_Role]
+ *     tags: [Stuff_Role-3]
  *     description: Ko‘rsatilgan ID orqali ma'lum bir Stuff Role ni olish.
  *     parameters:
  *       - in: path
@@ -99,7 +99,7 @@ stuff_role.get("/getById/:id", getStuff_RoleById);
  * /stuff_role/delete/{id}:
  *   delete:
  *     summary: ID orqali Stuff Role ni o‘chirish
- *     tags: [Stuff_Role]
+ *     tags: [Stuff_Role-3]
  *     description: Ko‘rsatilgan ID orqali ma'lum bir Stuff Role ni tizimdan o‘chirish.
  *     parameters:
  *       - in: path

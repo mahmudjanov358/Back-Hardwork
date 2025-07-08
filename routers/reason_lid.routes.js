@@ -30,7 +30,7 @@ const reasonLidValidation = (schema) => (req, res, next) => {
  * /reason_lid/post:
  *   post:
  *     summary: Yangi Reason_Lid yozuvini yaratish
- *     tags: [Reason_Lid]
+ *     tags: [Reason_Lid-10]
  *     description: Kiritilgan ma'lumotlar asosida yangi Reason_Lid yozuvini yaratish.
  *     requestBody:
  *       required: true
@@ -61,7 +61,7 @@ reason_lid.post(
  * /reason_lid/get:
  *   get:
  *     summary: Barcha Reason_Lid yozuvlarini olish
- *     tags: [Reason_Lid]
+ *     tags: [Reason_Lid-10]
  *     description: Tizimdagi barcha Reason_Lid yozuvlarini olish.
  *     responses:
  *       200:
@@ -76,7 +76,7 @@ reason_lid.get("/get", getReason_Lid);
  * /reason_lid/getById/{id}:
  *   get:
  *     summary: ID orqali Reason_Lid yozuvini olish
- *     tags: [Reason_Lid]
+ *     tags: [Reason_Lid-10]
  *     description: Ko‘rsatilgan ID orqali Reason_Lid yozuvini olish.
  *     parameters:
  *       - in: path
@@ -100,7 +100,7 @@ reason_lid.get("/getById/:id", getReason_LidById);
  * /reason_lid/update/{id}:
  *   patch:
  *     summary: ID orqali Reason_Lid yozuvini yangilash
- *     tags: [Reason_Lid]
+ *     tags: [Reason_Lid-10]
  *     description: Berilgan ID asosida Reason_Lid yozuvini yangilash.
  *     parameters:
  *       - in: path
@@ -138,7 +138,7 @@ reason_lid.patch(
  * /reason_lid/delete/{id}:
  *   delete:
  *     summary: ID orqali Reason_Lid yozuvini o‘chirish
- *     tags: [Reason_Lid]
+ *     tags: [Reason_Lid-10]
  *     description: Ko‘rsatilgan ID orqali Reason_Lid yozuvini o‘chirish.
  *     parameters:
  *       - in: path

@@ -30,7 +30,7 @@ const lessonValidation = (schema) => (req, res, next) => {
  * /lesson/post:
  *   post:
  *     summary: Yangi Lesson yozuvini yaratish
- *     tags: [Lesson]
+ *     tags: [Lesson-8]
  *     description: Kiritilgan ma'lumotlar asosida yangi Lesson yozuvini yaratish.
  *     requestBody:
  *       required: true
@@ -67,7 +67,7 @@ lesson.post("/post", lessonValidation(postLessonValidationSchema), postLesson);
  * /lesson/get:
  *   get:
  *     summary: Barcha Lesson yozuvlarini olish
- *     tags: [Lesson]
+ *     tags: [Lesson-8]
  *     description: Tizimdagi barcha Lesson yozuvlarini olish.
  *     responses:
  *       200:
@@ -82,7 +82,7 @@ lesson.get("/get", getLesson);
  * /lesson/getById/{id}:
  *   get:
  *     summary: ID orqali Lesson yozuvini olish
- *     tags: [Lesson]
+ *     tags: [Lesson-8]
  *     description: Ko‘rsatilgan ID orqali Lesson yozuvini olish.
  *     parameters:
  *       - in: path
@@ -106,7 +106,7 @@ lesson.get("/getById/:id", getLessonById);
  * /lesson/update/{id}:
  *   patch:
  *     summary: ID orqali Lesson yozuvini yangilash
- *     tags: [Lesson]
+ *     tags: [Lesson-8]
  *     description: Berilgan ID asosida Lesson yozuvini yangilash.
  *     parameters:
  *       - in: path
@@ -156,7 +156,7 @@ lesson.patch(
  * /lesson/delete/{id}:
  *   delete:
  *     summary: ID orqali Lesson yozuvini o‘chirish
- *     tags: [Lesson]
+ *     tags: [Lesson-8]
  *     description: Ko‘rsatilgan ID orqali Lesson yozuvini o‘chirish.
  *     parameters:
  *       - in: path

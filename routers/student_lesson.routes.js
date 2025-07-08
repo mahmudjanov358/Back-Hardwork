@@ -30,7 +30,7 @@ const studentLessonValidation = (schema) => (req, res, next) => {
  * /student_lesson/post:
  *   post:
  *     summary: Yangi Student_Lesson yozuvini yaratish
- *     tags: [Student_Lesson]
+ *     tags: [Student_Lesson-14]
  *     description: Kiritilgan ma'lumotlar asosida yangi Student_Lesson yozuvini yaratish.
  *     requestBody:
  *       required: true
@@ -73,7 +73,7 @@ student_lesson.post(
  * /student_lesson/get:
  *   get:
  *     summary: Barcha Student_Lesson yozuvlarini olish
- *     tags: [Student_Lesson]
+ *     tags: [Student_Lesson-14]
  *     description: Tizimdagi barcha Student_Lesson yozuvlarini olish.
  *     responses:
  *       200:
@@ -88,7 +88,7 @@ student_lesson.get("/get", getStudent_Lesson);
  * /student_lesson/getById/{id}:
  *   get:
  *     summary: ID orqali Student_Lesson yozuvini olish
- *     tags: [Student_Lesson]
+ *     tags: [Student_Lesson-14]
  *     description: Ko‘rsatilgan ID asosida Student_Lesson yozuvini olish.
  *     parameters:
  *       - in: path
@@ -112,7 +112,7 @@ student_lesson.get("/getById/:id", getStudent_LessonById);
  * /student_lesson/update/{id}:
  *   patch:
  *     summary: ID orqali Student_Lesson yozuvini yangilash
- *     tags: [Student_Lesson]
+ *     tags: [Student_Lesson-14]
  *     description: Student_Lesson yozuvini ID asosida yangilash.
  *     parameters:
  *       - in: path
@@ -162,7 +162,7 @@ student_lesson.patch(
  * /student_lesson/delete/{id}:
  *   delete:
  *     summary: ID orqali Student_Lesson yozuvini o‘chirish
- *     tags: [Student_Lesson]
+ *     tags: [Student_Lesson-14]
  *     description: Ko‘rsatilgan ID asosida Student_Lesson yozuvini tizimdan o‘chirish.
  *     parameters:
  *       - in: path

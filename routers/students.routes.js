@@ -30,7 +30,7 @@ const studentsValidation = (schema) => (req, res, next) => {
  * /students/post:
  *   post:
  *     summary: Yangi Students yaratish
- *     tags: [Students]
+ *     tags: [Students-12]
  *     description: Kiritilgan ma'lumotlar asosida yangi Students yozuvini yaratish.
  *     requestBody:
  *       required: true
@@ -77,7 +77,7 @@ students.post(
  * /students/get:
  *   get:
  *     summary: Barcha Students yozuvlarini olish
- *     tags: [Students]
+ *     tags: [Students-12]
  *     description: Tizimdagi barcha Students yozuvlarini olish.
  *     responses:
  *       200:
@@ -92,7 +92,7 @@ students.get("/get", getStudents);
  * /students/getById/{id}:
  *   get:
  *     summary: ID orqali Students yozuvini olish
- *     tags: [Students]
+ *     tags: [Students-12]
  *     description: Ko‘rsatilgan ID orqali Students yozuvini olish.
  *     parameters:
  *       - in: path
@@ -116,7 +116,7 @@ students.get("/getById/:id", getStudentsById);
  * /students/update/{id}:
  *   patch:
  *     summary: Students yozuvini ID orqali yangilash
- *     tags: [Students]
+ *     tags: [Students-12]
  *     description: Berilgan ID asosida Students yozuvini yangilash.
  *     parameters:
  *       - in: path
@@ -167,7 +167,7 @@ students.patch(
  * /students/delete/{id}:
  *   delete:
  *     summary: ID orqali Students yozuvini o‘chirish
- *     tags: [Students]
+ *     tags: [Students-12]
  *     description: Ko‘rsatilgan ID orqali Students yozuvini o‘chirish.
  *     parameters:
  *       - in: path

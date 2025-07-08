@@ -31,7 +31,7 @@ const stuffValidation = (schema) => (req, res, next) => {
  * /stuff/post:
  *   post:
  *     summary: Yangi Stuff yaratish
- *     tags: [Stuff]
+ *     tags: [Stuff-2]
  *     description: Kiritilgan ma'lumotlar asosida yangi Stuff yaratish.
  *     requestBody:
  *       required: true
@@ -71,7 +71,7 @@ stuff.post("/post", stuffValidation(postStuffValidationSchema), postStuff);
  * /stuff/login:
  *   post:
  *     summary: Stuff login qilish
- *     tags: [Stuff]
+ *     tags: [Stuff-2]
  *     description: Stuff login va parol orqali tizimga kirish.
  *     requestBody:
  *       required: true
@@ -103,7 +103,7 @@ stuff.post("/login", loginStuff);
  * /stuff/get:
  *   get:
  *     summary: Barcha Stuff larni olish
- *     tags: [Stuff]
+ *     tags: [Stuff-2]
  *     description: Tizimdagi barcha Stuff yozuvlarini olish.
  *     responses:
  *       200:
@@ -118,7 +118,7 @@ stuff.get("/get", getStuff);
  * /stuff/getById/{id}:
  *   get:
  *     summary: ID orqali Stuff ni olish
- *     tags: [Stuff]
+ *     tags: [Stuff-2]
  *     description: Ko‘rsatilgan ID orqali Stuff yozuvini olish.
  *     parameters:
  *       - in: path
@@ -140,7 +140,7 @@ stuff.get("/getById/:id", getStuffById);
  * /stuff/update/{id}:
  *   patch:
  *     summary: Stuff ni ID orqali yangilash
- *     tags: [Stuff]
+ *     tags: [Stuff-2]
  *     description: Berilgan ID asosida Stuff yozuvini yangilash.
  *     parameters:
  *       - in: path
@@ -193,7 +193,7 @@ stuff.patch(
  * /stuff/delete/{id}:
  *   delete:
  *     summary: ID orqali Stuff ni o‘chirish
- *     tags: [Stuff]
+ *     tags: [Stuff-2]
  *     description: Ko‘rsatilgan ID orqali Stuff yozuvini o‘chirish.
  *     parameters:
  *       - in: path

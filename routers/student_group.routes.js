@@ -28,7 +28,7 @@ const studentGroupValidation = (schema) => (req, res, next) => {
  * /student_group/post:
  *   post:
  *     summary: Yangi Student_Group yozuvini yaratish
- *     tags: [Student_Group]
+ *     tags: [Student_Group-13]
  *     description: Kiritilgan ma'lumotlar asosida yangi Student_Group yozuvini yaratish.
  *     requestBody:
  *       required: true
@@ -62,7 +62,7 @@ student_group.post(
  * /student_group/get:
  *   get:
  *     summary: Barcha Student_Group yozuvlarini olish
- *     tags: [Student_Group]
+ *     tags: [Student_Group-13]
  *     description: Tizimdagi barcha Student_Group yozuvlarini olish.
  *     responses:
  *       200:
@@ -77,7 +77,7 @@ student_group.get("/get", getStudent_Group);
  * /student_group/getById/{id}:
  *   get:
  *     summary: ID orqali Student_Group yozuvini olish
- *     tags: [Student_Group]
+ *     tags: [Student_Group-13]
  *     description: Ko‘rsatilgan ID asosida Student_Group yozuvini olish.
  *     parameters:
  *       - in: path
@@ -101,7 +101,7 @@ student_group.get("/getById/:id", getStudent_GroupById);
  * /student_group/delete/{id}:
  *   delete:
  *     summary: ID orqali Student_Group yozuvini o‘chirish
- *     tags: [Student_Group]
+ *     tags: [Student_Group-13]
  *     description: Ko‘rsatilgan ID asosida Student_Group yozuvini tizimdan o‘chirish.
  *     parameters:
  *       - in: path

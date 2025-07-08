@@ -29,7 +29,7 @@ const roleValidation = (schema) => (req, res, next) => {
  * /role/post:
  *  post:
  *    summary: Yangi Role yaratish
- *    tags: [Role]
+ *    tags: [Role-1]
  *    description: Yangi Role ni berilgan ma'lumotlar bilan yaratish.
  *    requestBody:
  *      required: true
@@ -54,7 +54,7 @@ role.post("/post", roleValidation(postRoleValidationSchema), postRole);
  * /role/get:
  *  get:
  *    summary: Barcha Role larni olish
- *    tags: [Role]
+ *    tags: [Role-1]
  *    description: Barcha Role lar ro‘yxatini olish.
  *    responses:
  *      200:
@@ -69,7 +69,7 @@ role.get("/get", getRole);
  * /role/getById/{id}:
  *  get:
  *    summary: Role ni ID bo‘yicha olish
- *    tags: [Role]
+ *    tags: [Role-1]
  *    description: Role ni uning ID si bo‘yicha olish.
  *    parameters:
  *      - in: path
@@ -93,7 +93,7 @@ role.get("/getById/:id", getRoleById);
  * /role/update/{id}:
  *  patch:
  *    summary: Role ni ID bo‘yicha yangilash
- *    tags: [Role]
+ *    tags: [Role-1]
  *    description: Role ni uning ID si bo‘yicha berilgan ma'lumotlar bilan yangilash.
  *    parameters:
  *      - in: path
@@ -131,7 +131,7 @@ role.patch(
  * /role/delete/{id}:
  *  delete:
  *    summary: Role ni ID bo‘yicha o‘chirish
- *    tags: [Role]
+ *    tags: [Role-1]
  *    description: Role ni uning ID si bo‘yicha o‘chirish.
  *    parameters:
  *      - in: path

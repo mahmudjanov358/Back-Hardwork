@@ -27,7 +27,7 @@ const groupStuffValidation = (schema) => (req, res, next) => {
  * /group_stuff/post:
  *   post:
  *     summary: Yangi Group_Stuff yaratish
- *     tags: [Group_Stuff]
+ *     tags: [Group_Stuff-7]
  *     description: Yangi Group_Stuff ni berilgan ma'lumotlar bilan yaratish.
  *     requestBody:
  *       required: true
@@ -61,7 +61,7 @@ group_stuff.post(
  * /group_stuff/get:
  *   get:
  *     summary: Barcha Group_Stuff larni olish
- *     tags: [Group_Stuff]
+ *     tags: [Group_Stuff-7]
  *     description: Barcha Group_Stuff lar ro‘yxatini olish.
  *     responses:
  *       200:
@@ -76,7 +76,7 @@ group_stuff.get("/get", getGroup_Stuff);
  * /group_stuff/getById/{id}:
  *   get:
  *     summary: Group_Stuff ni ID bo‘yicha olish
- *     tags: [Group_Stuff]
+ *     tags: [Group_Stuff-7]
  *     description: Group_Stuff ni uning ID si bo‘yicha olish.
  *     parameters:
  *       - in: path
@@ -100,7 +100,7 @@ group_stuff.get("/getById/:id", getGroup_StuffById);
  * /group_stuff/delete/{id}:
  *   delete:
  *     summary: Group_Stuff ni ID bo‘yicha o‘chirish
- *     tags: [Group_Stuff]
+ *     tags: [Group_Stuff-7]
  *     description: Group_Stuff ni uning ID si bo‘yicha o‘chirish.
  *     parameters:
  *       - in: path

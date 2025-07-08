@@ -30,7 +30,7 @@ const stageValidation = (schema) => (req, res, next) => {
  * /stage/post:
  *   post:
  *     summary: Yangi Stage yozuvini yaratish
- *     tags: [Stage]
+ *     tags: [Stage-4]
  *     description: Kiritilgan ma'lumotlar asosida yangi Stage yozuvini yaratish.
  *     requestBody:
  *       required: true
@@ -57,7 +57,7 @@ stage.post("/post", stageValidation(postStageValidationSchema), postStage);
  * /stage/get:
  *   get:
  *     summary: Barcha Stage yozuvlarini olish
- *     tags: [Stage]
+ *     tags: [Stage-4]
  *     description: Tizimdagi barcha Stage yozuvlarini olish.
  *     responses:
  *       200:
@@ -72,7 +72,7 @@ stage.get("/get", getStage);
  * /stage/getById/{id}:
  *   get:
  *     summary: ID orqali Stage yozuvini olish
- *     tags: [Stage]
+ *     tags: [Stage-4]
  *     description: Ko‘rsatilgan ID orqali Stage yozuvini olish.
  *     parameters:
  *       - in: path
@@ -96,7 +96,7 @@ stage.get("/getById/:id", getStageById);
  * /stage/update/{id}:
  *   patch:
  *     summary: ID orqali Stage yozuvini yangilash
- *     tags: [Stage]
+ *     tags: [Stage-4]
  *     description: Berilgan ID asosida Stage yozuvini yangilash.
  *     parameters:
  *       - in: path
@@ -134,7 +134,7 @@ stage.patch(
  * /stage/delete/{id}:
  *   delete:
  *     summary: ID orqali Stage yozuvini o‘chirish
- *     tags: [Stage]
+ *     tags: [Stage-4]
  *     description: Ko‘rsatilgan ID orqali Stage yozuvini o‘chirish.
  *     parameters:
  *       - in: path

@@ -30,7 +30,7 @@ const paymentValidation = (schema) => (req, res, next) => {
  * /payment/post:
  *   post:
  *     summary: Yangi Payment yozuvini yaratish
- *     tags: [Payment]
+ *     tags: [Payment-15]
  *     description: Kiritilgan ma'lumotlar asosida yangi Payment yozuvini yaratish.
  *     requestBody:
  *       required: true
@@ -78,7 +78,7 @@ payment.post(
  * /payment/get:
  *   get:
  *     summary: Barcha Payment yozuvlarini olish
- *     tags: [Payment]
+ *     tags: [Payment-15]
  *     description: Tizimdagi barcha Payment yozuvlarini olish.
  *     responses:
  *       200:
@@ -93,7 +93,7 @@ payment.get("/get", getPayment);
  * /payment/getById/{id}:
  *   get:
  *     summary: ID orqali Payment yozuvini olish
- *     tags: [Payment]
+ *     tags: [Payment-15]
  *     description: Ko‘rsatilgan ID orqali Payment yozuvini olish.
  *     parameters:
  *       - in: path
@@ -117,7 +117,7 @@ payment.get("/getById/:id", getPaymentById);
  * /payment/update/{id}:
  *   patch:
  *     summary: ID orqali Payment yozuvini yangilash
- *     tags: [Payment]
+ *     tags: [Payment-15]
  *     description: Berilgan ID asosida Payment yozuvini yangilash.
  *     parameters:
  *       - in: path
@@ -172,7 +172,7 @@ payment.patch(
  * /payment/delete/{id}:
  *   delete:
  *     summary: ID orqali Payment yozuvini o‘chirish
- *     tags: [Payment]
+ *     tags: [Payment-15]
  *     description: Ko‘rsatilgan ID orqali Payment yozuvini o‘chirish.
  *     parameters:
  *       - in: path

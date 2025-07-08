@@ -29,7 +29,7 @@ const branchValidation = (schema) => (req, res, next) => {
  * /branch/post:
  *   post:
  *     summary: Yangi Branch yaratish
- *     tags: [Branch]
+ *     tags: [Branch-5]
  *     description: Yangi Branch ni berilgan ma'lumotlar bilan yaratish.
  *     requestBody:
  *       required: true
@@ -60,7 +60,7 @@ branch.post("/post", branchValidation(postBranchValidationSchema), postBranch);
  * /branch/get:
  *   get:
  *     summary: Barcha Branch larni olish
- *     tags: [Branch]
+ *     tags: [Branch-5]
  *     description: Barcha Branch lar ro‘yxatini olish.
  *     responses:
  *       200:
@@ -75,7 +75,7 @@ branch.get("/get", getBranch);
  * /branch/getById/{id}:
  *   get:
  *     summary: Branch ni ID bo‘yicha olish
- *     tags: [Branch]
+ *     tags: [Branch-5]
  *     description: Branch ni uning ID si bo‘yicha olish.
  *     parameters:
  *       - in: path
@@ -99,7 +99,7 @@ branch.get("/getById/:id", getBranchById);
  * /branch/update/{id}:
  *   put:
  *     summary: Branch ni ID bo‘yicha yangilash
- *     tags: [Branch]
+ *     tags: [Branch-5]
  *     description: Branch ma'lumotlarini uning ID si bo‘yicha yangilash.
  *     parameters:
  *       - in: path
@@ -143,7 +143,7 @@ branch.put(
  * /branch/delete/{id}:
  *   delete:
  *     summary: Branch ni ID bo‘yicha o‘chirish
- *     tags: [Branch]
+ *     tags: [Branch-5]
  *     description: Branch ni uning ID si bo‘yicha o‘chirish.
  *     parameters:
  *       - in: path

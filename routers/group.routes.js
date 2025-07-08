@@ -30,7 +30,7 @@ const groupValidation = (schema) => (req, res, next) => {
  * /group/post:
  *   post:
  *     summary: Yangi Group yozuvini yaratish
- *     tags: [Group]
+ *     tags: [Group-6]
  *     description: Kiritilgan ma'lumotlar asosida yangi Group yozuvini yaratish.
  *     requestBody:
  *       required: true
@@ -84,7 +84,7 @@ group.post("/post", groupValidation(postGroupValidationSchema), postGroup);
  * /group/get:
  *   get:
  *     summary: Barcha Group yozuvlarini olish
- *     tags: [Group]
+ *     tags: [Group-6]
  *     description: Tizimdagi barcha Group yozuvlarini olish.
  *     responses:
  *       200:
@@ -99,7 +99,7 @@ group.get("/get", getGroup);
  * /group/getById/{id}:
  *   get:
  *     summary: ID orqali Group yozuvini olish
- *     tags: [Group]
+ *     tags: [Group-6]
  *     description: Ko‘rsatilgan ID orqali Group yozuvini olish.
  *     parameters:
  *       - in: path
@@ -123,7 +123,7 @@ group.get("/getById/:id", getGroupById);
  * /group/update/{id}:
  *   patch:
  *     summary: ID orqali Group yozuvini yangilash
- *     tags: [Group]
+ *     tags: [Group-6]
  *     description: Berilgan ID asosida Group yozuvini yangilash.
  *     parameters:
  *       - in: path
@@ -184,7 +184,7 @@ group.patch(
  * /group/delete/{id}:
  *   delete:
  *     summary: ID orqali Group yozuvini o‘chirish
- *     tags: [Group]
+ *     tags: [Group-6]
  *     description: Ko‘rsatilgan ID orqali Group yozuvini o‘chirish.
  *     parameters:
  *       - in: path

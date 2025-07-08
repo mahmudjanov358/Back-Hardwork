@@ -30,7 +30,7 @@ const lidStatusValidation = (schema) => (req, res, next) => {
  * /lid_status/post:
  *   post:
  *     summary: Yangi Lid_Status yozuvini yaratish
- *     tags: [Lid_Status]
+ *     tags: [Lid_Status-9]
  *     description: Kiritilgan ma'lumotlar asosida yangi Lid_Status yozuvini yaratish.
  *     requestBody:
  *       required: true
@@ -61,7 +61,7 @@ lid_status.post(
  * /lid_status/get:
  *   get:
  *     summary: Barcha Lid_Status yozuvlarini olish
- *     tags: [Lid_Status]
+ *     tags: [Lid_Status-9]
  *     description: Tizimdagi barcha Lid_Status yozuvlarini olish.
  *     responses:
  *       200:
@@ -76,7 +76,7 @@ lid_status.get("/get", getLid_Status);
  * /lid_status/getById/{id}:
  *   get:
  *     summary: ID orqali Lid_Status yozuvini olish
- *     tags: [Lid_Status]
+ *     tags: [Lid_Status-9]
  *     description: Ko‘rsatilgan ID orqali Lid_Status yozuvini olish.
  *     parameters:
  *       - in: path
@@ -100,7 +100,7 @@ lid_status.get("/getById/:id", getLid_StatusById);
  * /lid_status/update/{id}:
  *   patch:
  *     summary: ID orqali Lid_Status yozuvini yangilash
- *     tags: [Lid_Status]
+ *     tags: [Lid_Status-9]
  *     description: Berilgan ID asosida Lid_Status yozuvini yangilash.
  *     parameters:
  *       - in: path
@@ -140,7 +140,7 @@ lid_status.patch(
  * /lid_status/delete/{id}:
  *   delete:
  *     summary: ID orqali Lid_Status yozuvini o‘chirish
- *     tags: [Lid_Status]
+ *     tags: [Lid_Status-9]
  *     description: Ko‘rsatilgan ID orqali Lid_Status yozuvini o‘chirish.
  *     parameters:
  *       - in: path

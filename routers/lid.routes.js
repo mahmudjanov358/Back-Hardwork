@@ -30,7 +30,7 @@ const lidValidation = (schema) => (req, res, next) => {
  * /lid/post:
  *   post:
  *     summary: Yangi Lid yozuvini yaratish
- *     tags: [Lid]
+ *     tags: [Lid-11]
  *     description: Kiritilgan ma'lumotlar asosida yangi Lid yozuvini yaratish.
  *     requestBody:
  *       required: true
@@ -85,7 +85,7 @@ lid.post("/post", lidValidation(postLidValidationSchema), postLid);
  * /lid/get:
  *   get:
  *     summary: Barcha Lid yozuvlarini olish
- *     tags: [Lid]
+ *     tags: [Lid-11]
  *     description: Tizimdagi barcha Lid yozuvlarini olish.
  *     responses:
  *       200:
@@ -100,7 +100,7 @@ lid.get("/get", getLid);
  * /lid/getById/{id}:
  *   get:
  *     summary: ID orqali Lid yozuvini olish
- *     tags: [Lid]
+ *     tags: [Lid-11]
  *     description: Ko‘rsatilgan ID orqali Lid yozuvini olish.
  *     parameters:
  *       - in: path
@@ -124,7 +124,7 @@ lid.get("/getById/:id", getLidById);
  * /lid/update/{id}:
  *   patch:
  *     summary: ID orqali Lid yozuvini yangilash
- *     tags: [Lid]
+ *     tags: [Lid-11]
  *     description: Berilgan ID asosida Lid yozuvini yangilash.
  *     parameters:
  *       - in: path
@@ -176,7 +176,7 @@ lid.patch("/update/:id", lidValidation(updateLidValidationSchema), updateLid);
  * /lid/delete/{id}:
  *   delete:
  *     summary: ID orqali Lid yozuvini o‘chirish
- *     tags: [Lid]
+ *     tags: [Lid-11]
  *     description: Ko‘rsatilgan ID orqali Lid yozuvini o‘chirish.
  *     parameters:
  *       - in: path
