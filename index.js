@@ -110,5 +110,5 @@ app.use("/payment", payment);
 // ----Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server http://localhost:${PORT} URLda ishga tushdi`);
+  console.log(`Server http://localhost:${PORT} URLda ishga tushdi!`);
 });
