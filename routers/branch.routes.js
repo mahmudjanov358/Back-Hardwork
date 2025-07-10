@@ -59,9 +59,9 @@ branch.post("/post", branchValidation(postBranchValidationSchema), postBranch);
  * @swagger
  * /branch/get:
  *   get:
- *     summary: Barcha Branch larni olish
+ *     summary: Barcha Branchlarni olish
  *     tags: [Branch-5]
- *     description: Barcha Branch lar ro‘yxatini olish.
+ *     description: Barcha Branchlar ro‘yxatini olish.
  *     responses:
  *       200:
  *         description: Branch lar muvaffaqiyatli olindi.
